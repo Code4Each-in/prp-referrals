@@ -138,4 +138,10 @@ nav.navbar.navbar-light {
 .form-check label.col-form-label {
    font-size: 15px;
 }
+
+ol li {
+    border-bottom: 1px dashed #cecece;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
 /* ----header design css end----- */
