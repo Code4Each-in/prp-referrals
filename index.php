@@ -1801,10 +1801,10 @@ $referringCredentials = Secret::referringCredentials();
                     your answer and move to the next question.
                 </p>
 
-                <!-- <p class="mb-0">Once you have filled all the details, click on the 'Next' button to continue.</p> -->
+                 <p class="mb-0">Once you have filled all the details, click on the 'Next' button to continue.</p> -->
             <!-- <button type="button" class="btn-close" data-bs-dismiss="alert"></button> -->
-        </div> -->
-    </div>
+            <!-- </div>  -->
+        </div>
     </div>
     </div>
 
