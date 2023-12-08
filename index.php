@@ -439,12 +439,12 @@ $referringCredentials = Secret::referringCredentials();
                                     of age)?<span class="text-danger"> *</span></label>
                                 <div class="col-sm-4 form-check">
                                     <div class="row row-cols">
-                                        <div class="col-sm-3 form-check mt-2">
+                                        <div class="col-sm-4 form-check mt-2">
                                             <label for="minorYes" class="col-form-label">Yes</label>
                                             <input class="form-check-input mt-2" type="radio" id="minorYes"
                                                 name="minorAge" value="yes">
                                         </div>
-                                        <div class="col-sm-9 form-check mt-2">
+                                        <div class="col-sm-8 form-check mt-2">
                                             <label for="minorNo" class="col-form-label">No</label>
                                             <input class="form-check-input mt-2" type="radio" id="minorNo"
                                                 name="minorAge" value="no">
@@ -455,23 +455,6 @@ $referringCredentials = Secret::referringCredentials();
 
                             <div class="listing">
                                 <ol class="oreder-listing">
-                                    <!-- <li>
-                                        <label class="col-sm-8 col-form-label">Is the client homeless?<span
-                                                class="text-danger"> *</span></label>
-
-                                        <div class="row row-cols">
-                                            <div class="col-sm-3 form-check mt-2">
-                                                <label for="clientHomelessYes" class="col-form-label">Yes</label>
-                                                <input class="form-check-input mt-2" type="radio" id="clientHomelessYes"
-                                                    name="clientHomeless" value="yes">
-                                            </div>
-                                            <div class="col-sm-9 form-check mt-2">
-                                                <label for="clientHomelessNo" class="col-form-label">No</label>
-                                                <input class="form-check-input mt-2" type="radio" id="clientHomelessNo"
-                                                    name="clientHomeless" value="no">
-                                            </div>
-                                        </div>
-                                    </li> -->
                                     <li>
                                         <div class="row-list">
 
@@ -480,13 +463,13 @@ $referringCredentials = Secret::referringCredentials();
                                                     class="text-danger"> *</span></p>
                                             <div class="col-sm-4 form-check">
                                                 <div class="row row-cols">
-                                                    <div class="col-sm-3 form-check mt-2">
+                                                    <div class="col-sm-4 form-check mt-2">
                                                         <label for="clientHomelessYes"
                                                             class="col-form-label">Yes</label>
                                                         <input class="form-check-input mt-2" type="radio"
                                                             id="clientHomelessYes" name="clientHomeless" value="yes">
                                                     </div>
-                                                    <div class="col-sm-9 form-check mt-2">
+                                                    <div class="col-sm-8 form-check mt-2">
                                                         <label for="clientHomelessNo" class="col-form-label">No</label>
                                                         <input class="form-check-input mt-2" type="radio"
                                                             id="clientHomelessNo" name="clientHomeless" value="no">
@@ -507,12 +490,12 @@ $referringCredentials = Secret::referringCredentials();
                                                     *</span></p>
                                             <div class="col-sm-4 form-check">
                                                 <div class="row  row-cols">
-                                                    <div class="col-sm-3 form-check mt-2">
+                                                    <div class="col-sm-4 form-check mt-2">
                                                         <label for="disorderYes" class="    col-form-label">Yes</label>
                                                         <input class="form-check-input mt-2" type="radio"
                                                             id="disorderYes" name="disorder" value="yes">
                                                     </div>
-                                                    <div class="col-sm-9 form-check mt-2">
+                                                    <div class="col-sm-8 form-check mt-2">
                                                         <label for="disorderNo" class="col-form-label">No</label>
                                                         <input class="form-check-input mt-2" type="radio"
                                                             id="disorderNo" name="disorder" value="no">
@@ -530,7 +513,7 @@ $referringCredentials = Secret::referringCredentials();
                                                 etc.)?<span class="text-danger"> *</span></p>
                                             <div class="col-sm-4 form-check">
                                                 <div class="row  row-cols">
-                                                    <div class="col-sm-3 form-check mt-2">
+                                                    <div class="col-sm-4 form-check mt-2">
                                                         <label for="communicableDiseasesYes"
                                                             class="col-form-label">Yes</label>
                                                         <input class="form-check-input mt-2" type="radio"
@@ -544,7 +527,7 @@ $referringCredentials = Secret::referringCredentials();
                                                             id="communicableDiseasesNo" name="communicableDiseases"
                                                             value="no">
                                                     </div>
-                                                    <div class="col-sm-6 form-check mt-2">
+                                                    <div class="col-sm-5 form-check mt-2">
                                                         <label for="communicableDiseasesUnknown"
                                                             class="col-form-label">Unknown</label>
                                                         <input class="form-check-input mt-2" type="radio"
@@ -563,7 +546,7 @@ $referringCredentials = Secret::referringCredentials();
                                             </p>
                                             <div class="col-sm-4 form-check">
                                                 <div class="row  row-cols">
-                                                    <div class="col-sm-3 form-check mt-2">
+                                                    <div class="col-sm-4 form-check mt-2">
                                                         <label for="medicationsYes" class="col-form-label">Yes</label>
                                                         <input class="form-check-input mt-2" type="radio"
                                                             id="medicationsYes" name="medications" value="yes">
@@ -573,7 +556,7 @@ $referringCredentials = Secret::referringCredentials();
                                                         <input class="form-check-input mt-2" type="radio"
                                                             id="medicationsNo" name="medications" value="no">
                                                     </div>
-                                                    <div class="col-sm-6 form-check mt-2">
+                                                    <div class="col-sm-5 form-check mt-2">
                                                         <label for="medicationsUnknown"
                                                             class="col-form-label">Unknown</label>
                                                         <input class="form-check-input mt-2" type="radio"
@@ -661,7 +644,7 @@ $referringCredentials = Secret::referringCredentials();
                                                     class="text-danger"> *</span></p>
                                             <div class="col-sm-4 form-check">
                                                 <div class="row  row-cols">
-                                                    <div class="col-sm-3 form-check mt-2">
+                                                    <div class="col-sm-4 form-check mt-2">
                                                         <label for="dischargedYes" class="col-form-label">Yes</label>
                                                         <input class="form-check-input mt-2" type="radio"
                                                             id="dischargedYes" name="discharged" value="yes">
@@ -671,7 +654,7 @@ $referringCredentials = Secret::referringCredentials();
                                                         <input class="form-check-input mt-2" type="radio"
                                                             id="dischargedNo" name="discharged" value="no">
                                                     </div>
-                                                    <div class="col-sm-6 form-check mt-2">
+                                                    <div class="col-sm-5 form-check mt-2">
                                                         <label for="dischargedUnknown"
                                                             class="col-form-label">Unknown</label>
                                                         <input class="form-check-input mt-2" type="radio"
@@ -687,13 +670,13 @@ $referringCredentials = Secret::referringCredentials();
                                             Bipolar?</label>
 
                                         <div class="row row-cols">
-                                            <div class="col-sm-3 form-check mt-2">
+                                            <div class="col-sm-4 form-check mt-2">
                                                 <label for="medicationsPrescribedYes" class="col-form-label">Yes</label>
                                                 <input class="form-check-input mt-2" type="radio"
                                                     id="medicationsPrescribedYes" name="medicationsPrescribed"
                                                     value="yes">
                                             </div>
-                                            <div class="col-sm-9 form-check mt-2">
+                                            <div class="col-sm-8 form-check mt-2">
                                                 <label for="medicationsPrescribedNo" class="col-form-label">No</label>
                                                 <input class="form-check-input mt-2" type="radio"
                                                     id="medicationsPrescribedNo" name="medicationsPrescribed"
@@ -708,7 +691,7 @@ $referringCredentials = Secret::referringCredentials();
                                                 months?<span class="text-danger"> *</span></p>
                                             <div class="col-sm-4 form-check">
                                                 <div class="row  row-cols">
-                                                    <div class="col-sm-3 form-check mt-2">
+                                                    <div class="col-sm-4 form-check mt-2">
                                                         <label for="arrestedYes" class="col-form-label">Yes</label>
                                                         <input class="form-check-input mt-2" type="radio"
                                                             id="arrestedYes" name="arrested" value="yes">
@@ -718,7 +701,7 @@ $referringCredentials = Secret::referringCredentials();
                                                         <input class="form-check-input mt-2" type="radio"
                                                             id="arrestedNo" name="arrested" value="no">
                                                     </div>
-                                                    <div class="col-sm-6 form-check mt-2">
+                                                    <div class="col-sm-5 form-check mt-2">
                                                         <label for="arrestedUnknown"
                                                             class="col-form-label">Unknown</label>
                                                         <input class="form-check-input mt-2" type="radio"
@@ -747,7 +730,7 @@ $referringCredentials = Secret::referringCredentials();
                                                     class="text-danger"> *</span></p>
                                             <div class="col-sm-4 form-check">
                                                 <div class="row row-cols">
-                                                    <div class="col-sm-3 form-check mt-2">
+                                                    <div class="col-sm-4 form-check mt-2">
                                                         <label for="employedYes" class="col-form-label">Yes</label>
                                                         <input class="form-check-input mt-2" type="radio"
                                                             id="employedYes" name="employed" value="yes">
@@ -757,7 +740,7 @@ $referringCredentials = Secret::referringCredentials();
                                                         <input class="form-check-input mt-2" type="radio"
                                                             id="employedNo" name="employed" value="no">
                                                     </div>
-                                                    <div class="col-sm-6 form-check mt-2">
+                                                    <div class="col-sm-5 form-check mt-2">
                                                         <label for="employedUnknown"
                                                             class="col-form-label">Unknown</label>
                                                         <input class="form-check-input mt-2" type="radio"
@@ -775,14 +758,14 @@ $referringCredentials = Secret::referringCredentials();
                                                     class="text-danger"> *</span></p>
                                             <div class="col-sm-4 form-check">
                                                 <div class="row row-cols">
-                                                    <div class="col-sm-3 form-check mt-2">
+                                                    <div class="col-sm-4 form-check mt-2">
                                                         <label for="receivingTreatmentYes"
                                                             class="col-form-label">Yes</label>
                                                         <input class="form-check-input mt-2" type="radio"
                                                             id="receivingTreatmentYes" name="receivingTreatment"
                                                             value="yes">
                                                     </div>
-                                                    <div class="col-sm-9 form-check mt-2">
+                                                    <div class="col-sm-8 form-check mt-2">
                                                         <label for="receivingTreatmentNo"
                                                             class="col-form-label">No</label>
                                                         <input class="form-check-input mt-2" type="radio"
@@ -801,7 +784,7 @@ $referringCredentials = Secret::referringCredentials();
                                                 or SSDI?<span class="text-danger"> *</span></p>
                                             <div class="col-sm-4 form-check">
                                                 <div class="row row-cols">
-                                                    <div class="col-sm-3 form-check mt-2">
+                                                    <div class="col-sm-4 form-check mt-2">
                                                         <label for="currentlyEnrolledYes"
                                                             class="col-form-label">Yes</label>
                                                         <input class="form-check-input mt-2" type="radio"
@@ -815,7 +798,7 @@ $referringCredentials = Secret::referringCredentials();
                                                             id="currentlyEnrolledNo" name="currentlyEnrolled"
                                                             value="no">
                                                     </div>
-                                                    <div class="col-sm-6 form-check mt-2">
+                                                    <div class="col-sm-5 form-check mt-2">
                                                         <label for="currentlyEnrolledUnknown"
                                                             class="col-form-label">Unknown</label>
                                                         <input class="form-check-input mt-2" type="radio"
@@ -837,7 +820,7 @@ $referringCredentials = Secret::referringCredentials();
                                                 recovery? <span class="text-danger"> *</span></p>
                                             <div class="col-sm-4 form-check">
                                                 <div class="row row-cols">
-                                                    <div class="col-sm-3 form-check mt-2">
+                                                    <div class="col-sm-4 form-check mt-2">
                                                         <label for="individualNatureYes"
                                                             class="col-form-label">Yes</label>
                                                         <input class="form-check-input mt-2" type="radio"
@@ -850,7 +833,7 @@ $referringCredentials = Secret::referringCredentials();
                                                         <input class="form-check-input mt-2" type="radio"
                                                             id="individualNatureNo" name="individualNature" value="no">
                                                     </div>
-                                                    <div class="col-sm-6 form-check mt-2">
+                                                    <div class="col-sm-5 form-check mt-2">
                                                         <label for="individualNatureUnknown"
                                                             class="col-form-label">Unknown</label>
                                                         <input class="form-check-input mt-2" type="radio"
@@ -868,7 +851,7 @@ $referringCredentials = Secret::referringCredentials();
                                                 level of care?<span class="text-danger"> *</span></label>
                                             <div class="col-sm-4 form-check">
                                                 <div class="row  row-cols">
-                                                    <div class="col-sm-3 form-check mt-2">
+                                                    <div class="col-sm-4 form-check mt-2">
                                                         <label for="individualIntensiveCareYes"
                                                             class="col-form-label">Yes</label>
                                                         <input class="form-check-input mt-2" type="radio"
@@ -882,7 +865,7 @@ $referringCredentials = Secret::referringCredentials();
                                                             id="individualIntensiveCareNo"
                                                             name="individualIntensiveCare" value="no">
                                                     </div>
-                                                    <div class="col-sm-6 form-check mt-2">
+                                                    <div class="col-sm-5 form-check mt-2">
                                                         <label for="individualIntensiveCareUnknown"
                                                             class="col-form-label">Unknown</label>
                                                         <input class="form-check-input mt-2" type="radio"
@@ -903,7 +886,7 @@ $referringCredentials = Secret::referringCredentials();
                                                     *</span></p>
                                             <div class="col-sm-4 form-check">
                                                 <div class="row row-cols">
-                                                    <div class="col-sm-3 form-check mt-2">
+                                                    <div class="col-sm-4 form-check mt-2">
                                                         <label for="individualIntensivelevelYes"
                                                             class="col-form-label">Yes</label>
                                                         <input class="form-check-input mt-2" type="radio"
@@ -917,7 +900,7 @@ $referringCredentials = Secret::referringCredentials();
                                                             id="individualIntensivelevelNo"
                                                             name="individualIntensivelevel" value="no">
                                                     </div>
-                                                    <div class="col-sm-6 form-check mt-2">
+                                                    <div class="col-sm-5 form-check mt-2">
                                                         <label for="individualIntensivelevelUnknown"
                                                             class="col-form-label">Unknown</label>
                                                         <input class="form-check-input mt-2" type="radio"
@@ -939,7 +922,7 @@ $referringCredentials = Secret::referringCredentials();
                                             </p>
                                             <div class="col-sm-4 form-check">
                                                 <div class="row  row-cols">
-                                                    <div class="col-sm-3 form-check mt-2">
+                                                    <div class="col-sm-4 form-check mt-2">
                                                         <label for="supportConsideredYes"
                                                             class="col-form-label">Yes</label>
                                                         <input class="form-check-input mt-2" type="radio"
@@ -953,7 +936,7 @@ $referringCredentials = Secret::referringCredentials();
                                                             id="supportConsideredNo" name="supportConsidered"
                                                             value="no">
                                                     </div>
-                                                    <div class="col-sm-6 form-check mt-2">
+                                                    <div class="col-sm-5 form-check mt-2">
                                                         <label for="supportConsideredUnknown"
                                                             class="col-form-label">Unknown</label>
                                                         <input class="form-check-input mt-2" type="radio"
@@ -972,7 +955,7 @@ $referringCredentials = Secret::referringCredentials();
                                             </p>
                                             <div class="col-sm-4 form-check">
                                                 <div class="row row-cols">
-                                                    <div class="col-sm-3 form-check mt-2">
+                                                    <div class="col-sm-4 form-check mt-2">
                                                         <label for="eligibleDisableAdminServiceYes"
                                                             class="col-form-label">Yes</label>
                                                         <input class="form-check-input mt-2" type="radio"
@@ -986,7 +969,7 @@ $referringCredentials = Secret::referringCredentials();
                                                             id="eligibleDisableAdminServiceNo"
                                                             name="eligibleDisableAdminService" value="no">
                                                     </div>
-                                                    <div class="col-sm-6 form-check mt-2">
+                                                    <div class="col-sm-5 form-check mt-2">
                                                         <label for="eligibleDisableAdminServiceUnknown"
                                                             class="col-form-label">Unknown</label>
                                                         <input class="form-check-input mt-2" type="radio"
@@ -1008,7 +991,7 @@ $referringCredentials = Secret::referringCredentials();
                                             </p>
                                             <div class="col-sm-4 form-check">
                                                 <div class="row  row-cols">
-                                                    <div class="col-sm-3 form-check mt-2">
+                                                    <div class="col-sm-4 form-check mt-2">
                                                         <label for="organicProcessOrSyndromeYes"
                                                             class="col-form-label">Yes</label>
                                                         <input class="form-check-input mt-2" type="radio"
@@ -1022,7 +1005,7 @@ $referringCredentials = Secret::referringCredentials();
                                                             id="organicProcessOrSyndromeNo"
                                                             name="organicProcessOrSyndrome" value="no">
                                                     </div>
-                                                    <div class="col-sm-6 form-check mt-2">
+                                                    <div class="col-sm-5 form-check mt-2">
                                                         <label for="organicProcessOrSyndromeUnknown"
                                                             class="col-form-label">Unknown</label>
                                                         <input class="form-check-input mt-2" type="radio"
@@ -1042,7 +1025,7 @@ $referringCredentials = Secret::referringCredentials();
                                             </p>
                                             <div class="col-sm-4 form-check">
                                                 <div class="row   row-cols">
-                                                    <div class="col-sm-3 form-check mt-2">
+                                                    <div class="col-sm-4 form-check mt-2">
                                                         <label for="behavioralControlYes"
                                                             class="col-form-label">Yes</label>
                                                         <input class="form-check-input mt-2" type="radio"
@@ -1056,7 +1039,7 @@ $referringCredentials = Secret::referringCredentials();
                                                             id="behavioralControlNo" name="behavioralControl"
                                                             value="no">
                                                     </div>
-                                                    <div class="col-sm-6 form-check mt-2">
+                                                    <div class="col-sm-5 form-check mt-2">
                                                         <label for="behavioralControlUnknown"
                                                             class="col-form-label">Unknown</label>
                                                         <input class="form-check-input mt-2" type="radio"
@@ -1078,7 +1061,7 @@ $referringCredentials = Secret::referringCredentials();
                                             </p>
                                             <div class="col-sm-4 form-check">
                                                 <div class="row row-cols">
-                                                    <div class="col-sm-3 form-check mt-2">
+                                                    <div class="col-sm-4 form-check mt-2">
                                                         <label for="lacksCapacityForPRPYes"
                                                             class="col-form-label">Yes</label>
                                                         <input class="form-check-input mt-2" type="radio"
@@ -1092,7 +1075,7 @@ $referringCredentials = Secret::referringCredentials();
                                                             id="lacksCapacityForPRPNo" name="lacksCapacityForPRP"
                                                             value="no">
                                                     </div>
-                                                    <div class="col-sm-6 form-check mt-2">
+                                                    <div class="col-sm-5 form-check mt-2">
                                                         <label for="lacksCapacityForPRPUnknown"
                                                             class="col-form-label">Unknown</label>
                                                         <input class="form-check-input mt-2" type="radio"
@@ -1112,7 +1095,7 @@ $referringCredentials = Secret::referringCredentials();
                                             </p>
                                             <div class="col-sm-4 form-check">
                                                 <div class="row row-cols">
-                                                    <div class="col-sm-3 form-check mt-2">
+                                                    <div class="col-sm-4 form-check mt-2">
                                                         <label for="referralSourcePaidYes"
                                                             class="col-form-label">Yes</label>
                                                         <input class="form-check-input mt-2" type="radio"
@@ -1126,7 +1109,7 @@ $referringCredentials = Secret::referringCredentials();
                                                             id="referralSourcePaidNo" name="referralSourcePaid"
                                                             value="no">
                                                     </div>
-                                                    <div class="col-sm-6 form-check mt-2">
+                                                    <div class="col-sm-5 form-check mt-2">
                                                         <label for="referralSourcePaidUnknown"
                                                             class="col-form-label">Unknown</label>
                                                         <input class="form-check-input mt-2" type="radio"
@@ -1182,577 +1165,6 @@ $referringCredentials = Secret::referringCredentials();
                                     </li>
                                 </ol>
                             </div>
-                            <!-- <div class="mb-3 row row-age">
-                                <label class="col-sm-8 col-form-label">Is the client homeless?<span class="text-danger"> *</span></label>
-                                <div class="col-sm-4 form-check">
-                                    <div class="row row-cols">
-                                        <div class="col-sm-3 form-check mt-2">
-                                            <label for="clientHomelessYes" class="col-form-label">Yes</label>
-                                            <input class="form-check-input mt-2" type="radio" id="clientHomelessYes" name="clientHomeless"
-                                            value="yes">
-                                        </div>
-                                        <div class="col-sm-9 form-check mt-2">
-                                            <label for="clientHomelessNo" class="col-form-label">No</label>
-                                            <input class="form-check-input mt-2" type="radio" id="clientHomelessNo" name="clientHomeless"
-                                                value="no">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> -->
-
-                            <!-- 
-                            <div class="mb-3 row">
-                                <label class="col-sm-8 col-form-label">2. Is the Primary reason for the individual'
-                                    impairment due to an organic process or syndrome intellectual disability, a
-                                    neurodevelopment disorder or neurocoginitive disorder?<span class="text-danger">
-                                        *</span></label>
-                                <div class="col-sm-4 form-check">
-                                    <div class="row">
-                                        <div class="col-sm-3 form-check mt-2">
-                                            <label for="disorderYes" class="    col-form-label">Yes</label>
-                                            <input class="form-check-input mt-2" type="radio" id="disorderYes"
-                                                name="disorder" value="yes">
-                                        </div>
-                                        <div class="col-sm-9 form-check mt-2">
-                                            <label for="disorderNo" class="col-form-label">No</label>
-                                            <input class="form-check-input mt-2" type="radio" id="disorderNo"
-                                                name="disorder" value="no">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> -->
-
-
-                            <!-- <div class="mb-3 row">
-                                <label class="col-sm-8 col-form-label">3. To the best of your knowledge does the client
-                                    suffer from any communicable diseases (HIV, Hepatitis, TB, MMRV, etc.)?<span
-                                        class="text-danger"> *</span></label>
-                                <div class="col-sm-4 form-check">
-                                    <div class="row">
-                                        <div class="col-sm-3 form-check mt-2">
-                                            <label for="communicableDiseasesYes" class="col-form-label">Yes</label>
-                                            <input class="form-check-input mt-2" type="radio"
-                                                id="communicableDiseasesYes" name="communicableDiseases" value="yes">
-                                        </div>
-                                        <div class="col-sm-3 form-check mt-2">
-                                            <label for="communicableDiseasesNo" class="col-form-label">No</label>
-                                            <input class="form-check-input mt-2" type="radio"
-                                                id="communicableDiseasesNo" name="communicableDiseases" value="no">
-                                        </div>
-                                        <div class="col-sm-6 form-check mt-2">
-                                            <label for="communicableDiseasesUnknown"
-                                                class="col-form-label">Unknown</label>
-                                            <input class="form-check-input mt-2" type="radio"
-                                                id="communicableDiseasesUnknown" name="communicableDiseases"
-                                                value="unknown">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> -->
-                            <!-- 
-                            <div class="mb-3 row">
-                                <label class="col-sm-8 col-form-label">4. Is the client on any medications to include
-                                    psychotropic and somatic medications?<span class="text-danger"> *</span></label>
-                                <div class="col-sm-4 form-check">
-                                    <div class="row">
-                                        <div class="col-sm-3 form-check mt-2">
-                                            <label for="medicationsYes" class="col-form-label">Yes</label>
-                                            <input class="form-check-input mt-2" type="radio" id="medicationsYes"
-                                                name="medications" value="yes">
-                                        </div>
-                                        <div class="col-sm-3 form-check mt-2">
-                                            <label for="medicationsNo" class="col-form-label">No</label>
-                                            <input class="form-check-input mt-2" type="radio" id="medicationsNo"
-                                                name="medications" value="no">
-                                        </div>
-                                        <div class="col-sm-6 form-check mt-2">
-                                            <label for="medicationsUnknown" class="col-form-label">Unknown</label>
-                                            <input class="form-check-input mt-2" type="radio" id="medicationsUnknown"
-                                                name="medications" value="unknown">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> -->
-                            <!-- <div id="medicationsYesRadioDiv" class="hidden">
-                                <label class="col-sm-8 col-form-label">Are any of the medications prescribed for MDD or
-                                    Bipolar?</label>
-
-                                <div class="row row-cols">
-                                    <div class="col-sm-3 form-check mt-2">
-                                        <label for="medicationsPrescribedYes" class="col-form-label">Yes</label>
-                                        <input class="form-check-input mt-2" type="radio" id="medicationsPrescribedYes"
-                                            name="medicationsPrescribed" value="yes">
-                                    </div>
-                                    <div class="col-sm-9 form-check mt-2">
-                                        <label for="medicationsPrescribedNo" class="col-form-label">No</label>
-                                        <input class="form-check-input mt-2" type="radio" id="medicationsPrescribedNo"
-                                            name="medicationsPrescribed" value="no">
-                                    </div>
-                                </div>
-                            </div>
-                            <table class="table hidden" id="medicationTable">
-                                <thead class="table-light">
-                                    <tr>
-
-                                        <th scope="col">Medication name</th>
-                                        <th scope="col">Dosage</th>
-                                        <th scope="col">Frequency</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    for ($i = 1; $i <= 4; $i++) {
-                                    ?>
-                                    <tr>
-                                        <td> <select class="form-select" aria-label="Default select example"
-                                                name="medicationName<?php echo $i; ?>"
-                                                id="medicationName<?php echo $i; ?>">
-                                                <option value=""></option>
-                                                <?php
-                                                foreach ($medicationName as $name) {
-                                                    echo '<option value="' . htmlspecialchars($name['name']) . '" >' . $name['name'] . '</option>';
-                                                }
-                                                ?>
-                                            </select></td>
-                                        <td> <select class="form-select" aria-label="Default select example"
-                                                name="medicationDosage<?php echo $i; ?>"
-                                                id="medicationDosage<?php echo $i; ?>">
-                                                <option value=""></option>
-                                                <?php
-                                                foreach ($medicationDosage as $dosage) {
-                                                    echo '<option value="' . htmlspecialchars($dosage['medication_dosage']) . '" >' . $dosage['medication_dosage'] . '</option>';
-                                                }
-                                                ?>
-                                            </select></td>
-                                        <td> <select class="form-select" aria-label="Default select example"
-                                                name="medicationFrequency<?php echo $i; ?>"
-                                                id="medicationFrequency<?php echo $i; ?>">
-                                                <option value=""></option>
-
-                                                <?php
-                                                foreach ($medicationFrequency as $dosage) {
-                                                    echo '<option value="' . htmlspecialchars($dosage['frequency']) . '" >' . $dosage['frequency'] . '</option>';
-                                                }
-                                                ?>
-                                            </select></td>
-                                    </tr>
-                                    <?php
-                                    }
-                                    ?>
-                                </tbody>
-                            </table>
-                            <div class="mb-3 row hidden" id="medicationTreatmentDiv">
-                                <label for="medicationTreatment" class="col-sm-5 col-form-label">Why are medications not
-                                    part of the treatment?
-                                    <span class="text-danger"> *</span></label>
-                                <div class="col-sm-7">
-                                    <textarea class="form-control" id="medicationTreatment" name="medicationTreatment"
-                                        required></textarea>
-                                </div>
-                            </div>
-                            <div class="mb-3 row hidden" id="medicationsNoRadioDiv">
-                                <label for="medicationsNoRadio" class="col-sm-4 col-form-label">Please explain why the
-                                    participant is not on medication:</label>
-                                <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="medicationsNoRadio"
-                                        name="medicationsNoRadio">
-                                </div>
-                            </div>
-                            <div class="mb-3 row">
-                                <label class="col-sm-8 col-form-label">5. Has the client within the past year been
-                                    discharged from an inpatient psychiatric facility or hospital?<span
-                                        class="text-danger"> *</span></label>
-                                <div class="col-sm-4 form-check">
-                                    <div class="row">
-                                        <div class="col-sm-3 form-check mt-2">
-                                            <label for="dischargedYes" class="col-form-label">Yes</label>
-                                            <input class="form-check-input mt-2" type="radio" id="dischargedYes"
-                                                name="discharged" value="yes">
-                                        </div>
-                                        <div class="col-sm-3 form-check mt-2">
-                                            <label for="dischargedNo" class="col-form-label">No</label>
-                                            <input class="form-check-input mt-2" type="radio" id="dischargedNo"
-                                                name="discharged" value="no">
-                                        </div>
-                                        <div class="col-sm-6 form-check mt-2">
-                                            <label for="dischargedUnknown" class="col-form-label">Unknown</label>
-                                            <input class="form-check-input mt-2" type="radio" id="dischargedUnknown"
-                                                name="discharged" value="unknown">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mb-3 row">
-                                <label class="col-sm-8 col-form-label">6. Has the client been arrested in the past six
-                                    months?<span class="text-danger"> *</span></label>
-                                <div class="col-sm-4 form-check">
-                                    <div class="row">
-                                        <div class="col-sm-3 form-check mt-2">
-                                            <label for="arrestedYes" class="col-form-label">Yes</label>
-                                            <input class="form-check-input mt-2" type="radio" id="arrestedYes"
-                                                name="arrested" value="yes">
-                                        </div>
-                                        <div class="col-sm-3 form-check mt-2">
-                                            <label for="arrestedNo" class="col-form-label">No</label>
-                                            <input class="form-check-input mt-2" type="radio" id="arrestedNo"
-                                                name="arrested" value="no">
-                                        </div>
-                                        <div class="col-sm-6 form-check mt-2">
-                                            <label for="arrestedUnknown" class="col-form-label">Unknown</label>
-                                            <input class="form-check-input mt-2" type="radio" id="arrestedUnknown"
-                                                name="arrested" value="unknown">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mb-3 row">
-                                <label for="clientGrade" class="col-sm-8 col-form-label">7. What is the highest grade of
-                                    school completed by the client?<span class="text-danger"> *</span></label>
-                                <div class="col-sm-4">
-                                    <input type="text" class="form-control" id="clientGrade" name="clientGrade"
-                                        required>
-                                </div>
-                            </div>
-                            <div class="mb-3 row">
-                                <label class="col-sm-8 col-form-label">8. Is the client currently employed? <span
-                                        class="text-danger"> *</span></label>
-                                <div class="col-sm-4 form-check">
-                                    <div class="row">
-                                        <div class="col-sm-3 form-check mt-2">
-                                            <label for="employedYes" class="col-form-label">Yes</label>
-                                            <input class="form-check-input mt-2" type="radio" id="employedYes"
-                                                name="employed" value="yes">
-                                        </div>
-                                        <div class="col-sm-3 form-check mt-2">
-                                            <label for="employedNo" class="col-form-label">No</label>
-                                            <input class="form-check-input mt-2" type="radio" id="employedNo"
-                                                name="employed" value="no">
-                                        </div>
-                                        <div class="col-sm-6 form-check mt-2">
-                                            <label for="employedUnknown" class="col-form-label">Unknown</label>
-                                            <input class="form-check-input mt-2" type="radio" id="employedUnknown"
-                                                name="employed" value="unknown">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mb-3 row">
-                                <label class="col-sm-8 col-form-label">9. Is the client currently receiving mental
-                                    health treatment or psychotherapy from a therapist or psychiatrist?<span
-                                        class="text-danger"> *</span></label>
-                                <div class="col-sm-4 form-check">
-                                    <div class="row">
-                                        <div class="col-sm-3 form-check mt-2">
-                                            <label for="receivingTreatmentYes" class="col-form-label">Yes</label>
-                                            <input class="form-check-input mt-2" type="radio" id="receivingTreatmentYes"
-                                                name="receivingTreatment" value="yes">
-                                        </div>
-                                        <div class="col-sm-9 form-check mt-2">
-                                            <label for="receivingTreatmentNo" class="col-form-label">No</label>
-                                            <input class="form-check-input mt-2" type="radio" id="receivingTreatmentNo"
-                                                name="receivingTreatment" value="no">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mb-3 row">
-                                <label class="col-sm-8 col-form-label">10. Is the individual currently enrolled in SSI
-                                    or SSDI?<span class="text-danger"> *</span></label>
-                                <div class="col-sm-4 form-check">
-                                    <div class="row">
-                                        <div class="col-sm-3 form-check mt-2">
-                                            <label for="currentlyEnrolledYes" class="col-form-label">Yes</label>
-                                            <input class="form-check-input mt-2" type="radio" id="currentlyEnrolledYes"
-                                                name="currentlyEnrolled" value="yes">
-                                        </div>
-                                        <div class="col-sm-3 form-check mt-2">
-                                            <label for="currentlyEnrolledNo" class="col-form-label">No</label>
-                                            <input class="form-check-input mt-2" type="radio" id="currentlyEnrolledNo"
-                                                name="currentlyEnrolled" value="no">
-                                        </div>
-                                        <div class="col-sm-6 form-check mt-2">
-                                            <label for="currentlyEnrolledUnknown" class="col-form-label">Unknown</label>
-                                            <input class="form-check-input mt-2" type="radio"
-                                                id="currentlyEnrolledUnknown" name="currentlyEnrolled" value="unknown">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mb-3 row">
-                                <label class="col-sm-8 col-form-label">11. Does the nature of the individual’s
-                                    functional impairments and/or skill deficits can be effectively remediated through
-                                    specific, focused skills-training activities designed to develop and restore (and
-                                    maintain) independent living skills to support the individual’s recovery? <span
-                                        class="text-danger"> *</span></label>
-                                <div class="col-sm-4 form-check">
-                                    <div class="row">
-                                        <div class="col-sm-3 form-check mt-2">
-                                            <label for="individualNatureYes" class="col-form-label">Yes</label>
-                                            <input class="form-check-input mt-2" type="radio" id="individualNatureYes"
-                                                name="individualNature" value="yes">
-                                        </div>
-                                        <div class="col-sm-3 form-check mt-2">
-                                            <label for="individualNatureNo" class="col-form-label">No</label>
-                                            <input class="form-check-input mt-2" type="radio" id="individualNatureNo"
-                                                name="individualNature" value="no">
-                                        </div>
-                                        <div class="col-sm-6 form-check mt-2">
-                                            <label for="individualNatureUnknown" class="col-form-label">Unknown</label>
-                                            <input class="form-check-input mt-2" type="radio"
-                                                id="individualNatureUnknown" name="individualNature" value="unknown">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mb-3 row">
-                                <label class="col-sm-8 col-form-label">12. Does the Individual require a more intensive
-                                    level of care?<span class="text-danger"> *</span></label>
-                                <div class="col-sm-4 form-check">
-                                    <div class="row">
-                                        <div class="col-sm-3 form-check mt-2">
-                                            <label for="individualIntensiveCareYes" class="col-form-label">Yes</label>
-                                            <input class="form-check-input mt-2" type="radio"
-                                                id="individualIntensiveCareYes" name="individualIntensiveCare"
-                                                value="yes">
-                                        </div>
-                                        <div class="col-sm-3 form-check mt-2">
-                                            <label for="individualIntensiveCareNo" class="col-form-label">No</label>
-                                            <input class="form-check-input mt-2" type="radio"
-                                                id="individualIntensiveCareNo" name="individualIntensiveCare"
-                                                value="no">
-                                        </div>
-                                        <div class="col-sm-6 form-check mt-2">
-                                            <label for="individualIntensiveCareUnknown"
-                                                class="col-form-label">Unknown</label>
-                                            <input class="form-check-input mt-2" type="radio"
-                                                id="individualIntensiveCareUnknown" name="individualIntensiveCare"
-                                                value="unknown">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mb-3 row">
-                                <label class="col-sm-8 col-form-label">13. Have all less intensive levels of treatment
-                                    have been determined to be unsafe or unsuccessful?<span class="text-danger">
-                                        *</span></label>
-                                <div class="col-sm-4 form-check">
-                                    <div class="row">
-                                        <div class="col-sm-3 form-check mt-2">
-                                            <label for="individualIntensivelevelYes" class="col-form-label">Yes</label>
-                                            <input class="form-check-input mt-2" type="radio"
-                                                id="individualIntensivelevelYes" name="individualIntensivelevel"
-                                                value="yes">
-                                        </div>
-                                        <div class="col-sm-3 form-check mt-2">
-                                            <label for="individualIntensivelevelNo" class="col-form-label">No</label>
-                                            <input class="form-check-input mt-2" type="radio"
-                                                id="individualIntensivelevelNo" name="individualIntensivelevel"
-                                                value="no">
-                                        </div>
-                                        <div class="col-sm-6 form-check mt-2">
-                                            <label for="individualIntensivelevelUnknown"
-                                                class="col-form-label">Unknown</label>
-                                            <input class="form-check-input mt-2" type="radio"
-                                                id="individualIntensivelevelUnknown" name="individualIntensivelevel"
-                                                value="unknown">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mb-3 row">
-                                <label class="col-sm-8 col-form-label">14. Have peer or natural support alternatives
-                                    been considered or attempted, and/or are insufficient to meet the need for specific,
-                                    focused skills training to function effectively?
-                                    <span class="text-danger"> *</span></label>
-                                <div class="col-sm-4 form-check">
-                                    <div class="row">
-                                        <div class="col-sm-3 form-check mt-2">
-                                            <label for="supportConsideredYes" class="col-form-label">Yes</label>
-                                            <input class="form-check-input mt-2" type="radio" id="supportConsideredYes"
-                                                name="supportConsidered" value="yes">
-                                        </div>
-                                        <div class="col-sm-3 form-check mt-2">
-                                            <label for="supportConsideredNo" class="col-form-label">No</label>
-                                            <input class="form-check-input mt-2" type="radio" id="supportConsideredNo"
-                                                name="supportConsidered" value="no">
-                                        </div>
-                                        <div class="col-sm-6 form-check mt-2">
-                                            <label for="supportConsideredUnknown" class="col-form-label">Unknown</label>
-                                            <input class="form-check-input mt-2" type="radio"
-                                                id="supportConsideredUnknown" name="supportConsidered" value="unknown">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mb-3 row">
-                                <label class="col-sm-8 col-form-label">15. Participant is fully eligible for
-                                    Developmental Disabilities Administration funded services?
-                                    <span class="text-danger"> *</span></label>
-                                <div class="col-sm-4 form-check">
-                                    <div class="row">
-                                        <div class="col-sm-3 form-check mt-2">
-                                            <label for="eligibleDisableAdminServiceYes"
-                                                class="col-form-label">Yes</label>
-                                            <input class="form-check-input mt-2" type="radio"
-                                                id="eligibleDisableAdminServiceYes" name="eligibleDisableAdminService"
-                                                value="yes">
-                                        </div>
-                                        <div class="col-sm-3 form-check mt-2">
-                                            <label for="eligibleDisableAdminServiceNo" class="col-form-label">No</label>
-                                            <input class="form-check-input mt-2" type="radio"
-                                                id="eligibleDisableAdminServiceNo" name="eligibleDisableAdminService"
-                                                value="no">
-                                        </div>
-                                        <div class="col-sm-6 form-check mt-2">
-                                            <label for="eligibleDisableAdminServiceUnknown"
-                                                class="col-form-label">Unknown</label>
-                                            <input class="form-check-input mt-2" type="radio"
-                                                id="eligibleDisableAdminServiceUnknown"
-                                                name="eligibleDisableAdminService" value="unknown">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mb-3 row">
-                                <label class="col-sm-8 col-form-label">16. Primary reason for the participant’s
-                                    impairment is due to an organic process or syndrome, intellectual disability, a
-                                    neurodevelopmental disorder, or neurocognitive disorder?
-                                    <span class="text-danger"> *</span></label>
-                                <div class="col-sm-4 form-check">
-                                    <div class="row">
-                                        <div class="col-sm-3 form-check mt-2">
-                                            <label for="organicProcessOrSyndromeYes" class="col-form-label">Yes</label>
-                                            <input class="form-check-input mt-2" type="radio"
-                                                id="organicProcessOrSyndromeYes" name="organicProcessOrSyndrome"
-                                                value="yes">
-                                        </div>
-                                        <div class="col-sm-3 form-check mt-2">
-                                            <label for="organicProcessOrSyndromeNo" class="col-form-label">No</label>
-                                            <input class="form-check-input mt-2" type="radio"
-                                                id="organicProcessOrSyndromeNo" name="organicProcessOrSyndrome"
-                                                value="no">
-                                        </div>
-                                        <div class="col-sm-6 form-check mt-2">
-                                            <label for="organicProcessOrSyndromeUnknown"
-                                                class="col-form-label">Unknown</label>
-                                            <input class="form-check-input mt-2" type="radio"
-                                                id="organicProcessOrSyndromeUnknown" name="organicProcessOrSyndrome"
-                                                value="unknown">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mb-3 row">
-                                <label class="col-sm-8 col-form-label">17. The participant has been judged not to be in
-                                    sufficient behavioral control to be safely or effectively served in PRP?
-                                    <span class="text-danger"> *</span></label>
-                                <div class="col-sm-4 form-check">
-                                    <div class="row">
-                                        <div class="col-sm-3 form-check mt-2">
-                                            <label for="behavioralControlYes" class="col-form-label">Yes</label>
-                                            <input class="form-check-input mt-2" type="radio" id="behavioralControlYes"
-                                                name="behavioralControl" value="yes">
-                                        </div>
-                                        <div class="col-sm-3 form-check mt-2">
-                                            <label for="behavioralControlNo" class="col-form-label">No</label>
-                                            <input class="form-check-input mt-2" type="radio" id="behavioralControlNo"
-                                                name="behavioralControl" value="no">
-                                        </div>
-                                        <div class="col-sm-6 form-check mt-2">
-                                            <label for="behavioralControlUnknown" class="col-form-label">Unknown</label>
-                                            <input class="form-check-input mt-2" type="radio"
-                                                id="behavioralControlUnknown" name="behavioralControl" value="unknown">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mb-3 row">
-                                <label class="col-sm-8 col-form-label">18. The participant lacks capacity to benefit
-                                    from PRP as a result of the level of cognitive impairment, current mental status or
-                                    developmental level which cannot be reasonably accommodated within the PRP?
-                                    <span class="text-danger"> *</span></label>
-                                <div class="col-sm-4 form-check">
-                                    <div class="row">
-                                        <div class="col-sm-3 form-check mt-2">
-                                            <label for="lacksCapacityForPRPYes" class="col-form-label">Yes</label>
-                                            <input class="form-check-input mt-2" type="radio"
-                                                id="lacksCapacityForPRPYes" name="lacksCapacityForPRP" value="yes">
-                                        </div>
-                                        <div class="col-sm-3 form-check mt-2">
-                                            <label for="lacksCapacityForPRPNo" class="col-form-label">No</label>
-                                            <input class="form-check-input mt-2" type="radio" id="lacksCapacityForPRPNo"
-                                                name="lacksCapacityForPRP" value="no">
-                                        </div>
-                                        <div class="col-sm-6 form-check mt-2">
-                                            <label for="lacksCapacityForPRPUnknown"
-                                                class="col-form-label">Unknown</label>
-                                            <input class="form-check-input mt-2" type="radio"
-                                                id="lacksCapacityForPRPUnknown" name="lacksCapacityForPRP"
-                                                value="unknown">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mb-3 row">
-                                <label class="col-sm-8 col-form-label">19. The referral source is in some way is paid by
-                                    the PRP program or receives other benefit from PRP program?
-                                    <span class="text-danger"> *</span></label>
-                                <div class="col-sm-4 form-check">
-                                    <div class="row">
-                                        <div class="col-sm-3 form-check mt-2">
-                                            <label for="referralSourcePaidYes" class="col-form-label">Yes</label>
-                                            <input class="form-check-input mt-2" type="radio" id="referralSourcePaidYes"
-                                                name="referralSourcePaid" value="yes">
-                                        </div>
-                                        <div class="col-sm-3 form-check mt-2">
-                                            <label for="referralSourcePaidNo" class="col-form-label">No</label>
-                                            <input class="form-check-input mt-2" type="radio" id="referralSourcePaidNo"
-                                                name="referralSourcePaid" value="no">
-                                        </div>
-                                        <div class="col-sm-6 form-check mt-2">
-                                            <label for="referralSourcePaidUnknown"
-                                                class="col-form-label">Unknown</label>
-                                            <input class="form-check-input mt-2" type="radio"
-                                                id="referralSourcePaidUnknown" name="referralSourcePaid"
-                                                value="unknown">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mb-3 row">
-                                <label class="col-sm-4 col-form-label">20. Is the participant being referred from:
-                                </label>
-                                <div class="col-sm-8 form-check">
-                                    <div class="row">
-                                        <div class="col-sm-6 form-check mt-2">
-                                            <label for="referralSourceDigital" class="col-form-label">IP/ Crisis Res/
-                                                Mobile/ ACT/ RTC/ Incarceration</label>
-                                            <input class="form-check-input mt-2" type="radio" id="referralSourceDigital"
-                                                name="referralSource" value="yes">
-                                        </div>
-                                        <div class="col-sm-3 form-check mt-2">
-                                            <label for="referralSourceOutpatient"
-                                                class="col-form-label">Outpatient</label>
-                                            <input class="form-check-input mt-2" type="radio"
-                                                id="referralSourceOutpatient" name="referralSource" value="no">
-                                        </div>
-                                        <div class="col-sm-3 form-check mt-2">
-                                            <label for="referralSourceNeither" class="col-form-label">Neither</label>
-                                            <input class="form-check-input mt-2" type="radio" id="referralSourceNeither"
-                                                name="referralSource" value="unknown">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mb-3 row">
-                                <label for="clientAddress" class="col-sm-5 col-form-label">21. Why is ongoing outpatient
-                                    treatment not sufficient to address concerns?
-                                    <span class="text-danger"> *</span></label>
-                                <div class="col-sm-7">
-                                    <textarea class="form-control" id="reasonForInsufficientTreatment"
-                                        name="reasonForInsufficientTreatment" required></textarea>
-                                </div>
-                            </div> -->
 
                         </div>
                     </div>
@@ -1770,9 +1182,9 @@ $referringCredentials = Secret::referringCredentials();
                                     <label for="credentials" class="form-label">Credentials: <span class="text-danger">*</span></label>
                                     <select class="form-select" aria-label="Default select example" name="credentials" id="credentials">
                                         <?php
-                                        foreach ($referringCredentials as $eachVal) {
-                                            echo '<option value="' . htmlspecialchars(trim($eachVal)) . '" >' . $eachVal . '</option>';
-                                        }
+                                        // foreach ($referringCredentials as $eachVal) {
+                                        //     echo '<option value="' . htmlspecialchars(trim($eachVal)) . '" >' . $eachVal . '</option>';
+                                        // }
                                         ?>
                                     </select>
 
