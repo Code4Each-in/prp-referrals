@@ -565,6 +565,29 @@ $referringCredentials = Secret::referringCredentials();
                                                 </div>
                                             </div>
                                         </div>
+                                        <div id="medicationsYesRadioDiv" class="hidden">
+                                            <label class="col-sm-8 col-form-label">Are any of the medications prescribed
+                                                for
+                                                MDD or
+                                                Bipolar?</label>
+
+                                            <div class="row row-cols">
+                                                <div class="col-sm-4 form-check mt-2">
+                                                    <label for="medicationsPrescribedYes"
+                                                        class="col-form-label">Yes</label>
+                                                    <input class="form-check-input mt-2" type="radio"
+                                                        id="medicationsPrescribedYes" name="medicationsPrescribed"
+                                                        value="yes">
+                                                </div>
+                                                <div class="col-sm-8 form-check mt-2">
+                                                    <label for="medicationsPrescribedNo"
+                                                        class="col-form-label">No</label>
+                                                    <input class="form-check-input mt-2" type="radio"
+                                                        id="medicationsPrescribedNo" name="medicationsPrescribed"
+                                                        value="no">
+                                                </div>
+                                            </div>
+                                        </div>
                                         <table class="table hidden" id="medicationTable">
                                             <thead class="table-light">
                                                 <tr>
@@ -636,6 +659,7 @@ $referringCredentials = Secret::referringCredentials();
                                                     name="medicationsNoRadio">
                                             </div>
                                         </div>
+
                                     </li>
                                     <li>
                                         <div class="row-list">
@@ -664,26 +688,6 @@ $referringCredentials = Secret::referringCredentials();
                                             </div>
                                         </div>
                                     </li>
-                                    <div id="medicationsYesRadioDiv" class="hidden">
-                                        <label class="col-sm-8 col-form-label">Are any of the medications prescribed for
-                                            MDD or
-                                            Bipolar?</label>
-
-                                        <div class="row row-cols">
-                                            <div class="col-sm-4 form-check mt-2">
-                                                <label for="medicationsPrescribedYes" class="col-form-label">Yes</label>
-                                                <input class="form-check-input mt-2" type="radio"
-                                                    id="medicationsPrescribedYes" name="medicationsPrescribed"
-                                                    value="yes">
-                                            </div>
-                                            <div class="col-sm-8 form-check mt-2">
-                                                <label for="medicationsPrescribedNo" class="col-form-label">No</label>
-                                                <input class="form-check-input mt-2" type="radio"
-                                                    id="medicationsPrescribedNo" name="medicationsPrescribed"
-                                                    value="no">
-                                            </div>
-                                        </div>
-                                    </div>
                                     <li>
                                         <div class="row-list">
                                             <p class="col-sm-8 col-form-label">Has the client been arrested in the past
