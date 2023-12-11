@@ -98,7 +98,7 @@ nav.navbar.navbar-light{
 }
     
 header.header {
-    padding: 5px 0px;
+    padding: 5px 0px;   
     background: #1d2b64;
 }
 ul.nav {
@@ -139,7 +139,7 @@ nav.navbar.navbar-light {
    font-size: 15px;
 }
 
-ol li {
+ol li, #checkboxContainer .row {
     border-bottom: 1px dashed #cecece;
     padding-bottom: 10px;
     padding-top: 10px;
