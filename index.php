@@ -349,15 +349,14 @@ function showAlert(){
                                         <label for="gender1" class="col-sm-8 col-form-label">Male </label>
                                         <input class="form-check-input" type="radio" id="gender1" name="clientGender" value="Male">
                                     </div>
-
-
-
+                                </div>
+                                <div class="row row-jhk">
                                     <div class="col-sm-2 form-check mt-2">
                                         <label for="gender2" class="col-sm-8 col-form-label">Female </label>
                                         <input class="form-check-input" type="radio" id="gender2" name="clientGender" value="Female">
                                     </div>
-
                                 </div>
+
                                 <div class="row row-jhk">
 
                                     <div class="col-sm-6 form-check mt-2">
@@ -366,7 +365,8 @@ function showAlert(){
                                             Male/Trans Man</label>
                                         <input class="form-check-input" type="radio" id="gender3" name="clientGender" value="Female-to-Male (FTM)/Transgender Male/Trans Man">
                                     </div>
-
+                                </div>
+                                <div class="row row-jhk">                                
 
                                     <div class="col-sm-6 form-check mt-2">
                                         <label for="gender4" class="col-sm-8 col-form-label">Male-to-Female
@@ -383,7 +383,8 @@ function showAlert(){
                                             male nor female</label>
                                         <input class="form-check-input" type="radio" id="gender5" name="clientGender" value="Genderqueer, neither exclusively male nor female">
                                     </div>
-
+                                </div>
+                                <div class="row row-jhk">
 
                                     <div class="col-sm-6 form-check mt-2">
                                         <label for="gender6" class="col-sm-8 col-form-label">Additional gender category
@@ -391,8 +392,8 @@ function showAlert(){
                                             other, please specify</label>
                                         <input class="form-check-input" type="radio" id="gender6" name="clientGender" value="Additional gender category or other, please specify">
                                     </div>
-
-
+                                </div>
+                                <div class="row row-jhk">
 
                                     <div class="col-sm-12 form-check mt-2">
                                         <label for="gender7" class="col-sm-8 col-form-label">Choose not to
@@ -1031,7 +1032,7 @@ function showAlert(){
                                             <span class="text-danger"> *</span>
                                         </p>
                                         <div class="col-sm-7">
-                                            <textarea class="form-control" id="reasonForInsufficientTreatment" name="reasonForInsufficientTreatment" required></textarea>
+                                            <textarea class="form-control" id="reasonForInsufficientTreatment" name="reasonForInsufficientTreatment" required><?php echo $saticText['ansOfQuestion21']; ?></textarea>
                                         </div>
                                     </li>
                                 </ol>
@@ -1423,7 +1424,7 @@ participation in community life.</p>
                 });
                 $('#checkboxContainer').empty();
                 $.each(adultCheckobox, function (index, item) {
-                    var createRow = '<div class="row"><label for="functionalImpairment" class="col-sm-8 col-form-label">'+ item +'</label><div class="col-sm-2 form-check mt-2"><input class="form-check-input functionalImpairment" type="checkbox" id="functionalImpairment" name="functionalImpairment[]" value="'+ item +'"></div></div>';
+                    var createRow = '<div class="row"><label for="functionalImpairment-'+index+'" class="col-sm-8 col-form-label">'+ item +'</label><div class="col-sm-2 form-check mt-2"><input class="form-check-input functionalImpairment" type="checkbox" id="functionalImpairment-'+index+'" name="functionalImpairment[]" value="'+ item +'"></div></div>';
 
                     // checkboxDiv.append(createRow);
                     $('#checkboxContainer').append(createRow);
