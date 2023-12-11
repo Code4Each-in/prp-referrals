@@ -368,7 +368,7 @@ function showAlert(){
                                 </div>
                                 <div class="row row-jhk">                                
 
-                                    <div class="col-sm-6 form-check mt-2">
+                                    <div class="col-sm-8 form-check mt-2">
                                         <label for="gender4" class="col-sm-8 col-form-label">Male-to-Female
                                             (MTF)/Transgender
                                             Female/Trans Woman</label>
