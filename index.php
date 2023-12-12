@@ -556,7 +556,7 @@ function showAlert(){
                                                         <label for="medicationsUnknown" class="col-form-label">Unknown</label>
                                                         <input class="form-check-input mt-2" type="radio" id="medicationsUnknown" name="medications" value="unknown">
                                                     </div>
-                                                    <div class="col-sm-5 form-check mt-2">
+                                                    <div class="col-sm-8 form-check mt-2">
                                                         <label for="medicationsNone" class="col-form-label">No Medications</label>
                                                         <input class="form-check-input mt-2" type="radio" id="medicationsNone" name="medications" value="medicationsNone">
                                                     </div>
