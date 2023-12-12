@@ -61,7 +61,18 @@ function showAlert(){
         .hidden {
             display: none;
         }
-
+        #scrollToTopBtn {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            cursor: pointer;
+        }
         /* Custom CSS for adding border to Bootstrap inputs */
         /* #contactForm .form-control {
         border: 1px solid #a9a6a6;
@@ -177,7 +188,22 @@ function showAlert(){
                             <h5>Referring Professional Information</h5>
                         </div>
                         <div class="card-body">
-
+                        <div class="mb-3 row row-radio">
+                                <label class="col-sm-12 col-form-label">Is this is an initial referral or a concurrent referral?</label>
+                                <div class="row row-jhk">
+                                    <div class="col-sm-2 form-check mt-2">
+                                        <label for="initial" class="col-sm-8 col-form-label">Initial Referral </label>
+                                        <input class="form-check-input" type="radio" id="initial" name="referral" value="Male">
+                                    </div>
+                                </div>
+                                <div class="row row-jhk">
+                                    <div class="col-sm-4 form-check mt-2">
+                                        <label for="concurrent" class="col-sm-8 col-form-label">Concurrent Referral </label>
+                                        <input class="form-check-input" type="radio" id="concurrent" name="referral" value="Female">
+                                    </div>
+                                </div>
+                            </div>
+                      
                             <div class="mb-3 row">
                                 <label for="refDate" class="col-sm-4 col-form-label">Referral date:</label>
                                 <div class="col-sm-4">
@@ -391,7 +417,7 @@ function showAlert(){
                                             or
                                             other, please specify</label>
                                         <input class="form-check-input" type="radio" id="gender6" name="clientGender" value="Additional gender category or other, please specify">
-                                    </div>
+                                    </div> 
                                 </div>
                                 <div class="row row-jhk">
 
@@ -529,6 +555,10 @@ function showAlert(){
                                                     <div class="col-sm-5 form-check mt-2">
                                                         <label for="medicationsUnknown" class="col-form-label">Unknown</label>
                                                         <input class="form-check-input mt-2" type="radio" id="medicationsUnknown" name="medications" value="unknown">
+                                                    </div>
+                                                    <div class="col-sm-5 form-check mt-2">
+                                                        <label for="medicationsNone" class="col-form-label">No Medications</label>
+                                                        <input class="form-check-input mt-2" type="radio" id="medicationsNone" name="medications" value="medicationsNone">
                                                     </div>
                                                 </div>
                                             </div>
@@ -1106,6 +1136,90 @@ participation in community life.</p>
                                     </select>
 
                                 </div>
+
+                                <div class="mb-3 row">
+                                <label for="experienced" class="col-sm-4 col-form-label">[Client], has experienced [Symptom of diagnosis] since [Onset date]:<span class="text-danger"> *</span></label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" id="experienced" name="experienced" required>
+                                </div>
+                            </div>
+
+                        <div class="mb-3 row">
+                            <label for="clientIssue" class="form-label">7. Client presents with issues regarding... <span class="text-danger">*</span></label>
+                                    <select class="form-select" aria-label="Default select example" name="clientIssue" id="clientIssue">
+                                    <option value="">--Select--</option>
+
+                                    <?php
+                                        foreach ($clientIssue as $issue) {
+                                            echo '<option value="' . htmlspecialchars(trim($issue['issue'])) . '" data-issueId="'.$issue['id'].'" >' . $issue['issue'] . '</option>';
+                                        }
+                                        ?>
+                                    </select>
+
+                                </div>
+                                <div class="mb-3 row">
+                            <label for="namely" class="form-label">8. Namely, the client's ... <span class="text-danger">*</span></label>
+                                    <select class="form-select" aria-label="Default select example" name="namely" id="namely">
+                                    <option value="">--Select--</option>
+                                    </select>
+                                   
+                                </div>
+                                <div class="mb-3 row">
+                            <label for="specifically" class="form-label">9. Specifically... <span class="text-danger">*</span></label>
+                                    <select class="form-select" aria-label="Default select example" name="specifically" id="specifically">
+                                    <option value="">--Select--</option>
+                                    </select>
+
+                                </div>
+
+                                <div class="mb-3 row">
+                            <label for="clientAdditionalInformation" class="form-label">10. Additional information on the client's need in this area: <span class="text-danger">*</span></label>
+                            <select class="form-select" aria-label="Default select example" name="clientAdditionalInformation" id="clientAdditionalInformation">
+                                    <option value="">--Select--</option>
+                                    </select>
+
+                                </div>
+                                <div class="mb-3 row">
+                            <label for="intervention" class="form-label">11. The following intervention was implemented:<span class="text-danger">*</span></label>
+                                    <select class="form-select" aria-label="Default select example" name="intervention" id="intervention">
+                                    <option value="">--Select--</option>
+                                    </select>
+
+                                </div>
+                                
+
+                                <div class="mb-3 row">
+                            <label for="specificallyIntervention" class="form-label">12. Specifically, an example for a planned intervention is to:<span class="text-danger">*</span></label>
+                                    <select class="form-select" aria-label="Default select example" name="specificallyIntervention" id="specificallyIntervention">
+                                    <option value="">--Select--</option>
+                                    </select>
+
+                                </div>
+
+
+                                <div class="mb-3 row">
+                            <label for="serviceAdditionalInformation" class="form-label">13. Additional information on services to address this specific need area: <span class="text-danger">*</span></label>
+                            <select class="form-select" aria-label="Default select example" name="serviceAdditionalInformation" id="serviceAdditionalInformation">
+                                    <option value="">--Select--</option>
+                                    </select>
+
+                                </div>
+
+                                <div class="mb-3 row">
+                            <label for="clientLongTermGoal" class="form-label">14. Client's long term goal to address this impairment is..<span class="text-danger">*</span></label>
+                                    <select class="form-select" aria-label="Default select example" name="clientLongTermGoal" id="clientLongTermGoal">
+                                    <option value="">--Select--</option>
+                                    </select>
+
+                                </div>
+
+                                <div class="mb-3 row">
+                            <label for="clientShortTermGoal" class="form-label">15. Client's short term goal to address this impairment is..<span class="text-danger">*</span></label>
+                                    <select class="form-select" aria-label="Default select example" name="clientShortTermGoal" id="clientShortTermGoal">
+                                    <option value="">--Select--</option>
+                                    </select>
+
+                                </div>
                                 </div>
 
                             </div>
@@ -1125,6 +1239,8 @@ participation in community life.</p>
                     </div>
 
                 </form>
+
+                <button id="scrollToTopBtn"><i class="fa fa-arrow-up"></i></button>
             </div>
             <!-- <div class="alert alert-danger alert-dismissible fade show">
 
@@ -1363,18 +1479,15 @@ participation in community life.</p>
             $('[name="medications"]').change(function() {
                 var value = $(this).val();
                 if (value === 'yes') {
-                    console.log("yes");
                     $('#medicationsYesRadioDiv').removeClass('hidden');
                     $('#medicationsNoRadioDiv').addClass('hidden');
                 } else if (value === 'no') {
-                    console.log("no");
                     $('#medicationsNoRadioDiv').removeClass('hidden');
                     $('#medicationsYesRadioDiv').addClass('hidden');
                     $('#medicationTreatmentDiv').addClass('hidden');
                     $('#medicationTable').addClass('hidden');
                     $('input[name="medicationsPrescribed"]').prop('checked', false);
-                } else if (value === 'unknown') {
-                    console.log("unknown");
+                } else if (value === 'unknown' || value === 'medicationsNone') {
                     $('#medicationsYesRadioDiv').addClass('hidden');
                     $('#medicationsNoRadioDiv').addClass('hidden');
                     $('#medicationTreatmentDiv').addClass('hidden');
@@ -1387,11 +1500,9 @@ participation in community life.</p>
             $('[name="medicationsPrescribed"]').change(function() {
                 var value = $(this).val();
                 if (value === 'yes') {
-                    console.log("yes");
                     $('#medicationTable').removeClass('hidden');
                     $('#medicationTreatmentDiv').addClass('hidden');
                 } else if (value === 'no') {
-                    console.log("no");
                     $('#medicationTreatmentDiv').removeClass('hidden');
                     $('#medicationTable').addClass('hidden');
                 }
@@ -1549,6 +1660,152 @@ participation in community life.</p>
                 });
             });
         
+            $(document).on("change", '#clientIssue', function () {
+                var selectedValue = $(this).val();
+                var selectedOption = $(this).find(':selected');
+                var clientIssueId = selectedOption.data('issueid');
+    
+                $.ajax({
+                    url: 'functions/getClientNamely.php',
+                    type: 'POST',
+                        data: {
+                            clientIssueId: clientIssueId
+                    }, 
+                    success: function(response) {
+                        var responseData = JSON.parse(response);
+                        $('#namely').empty();
+                        $('#namely').append(firstOption);
+                        $('#intervention').empty();
+                        $('#intervention').append(firstOption);
+                        $('#clientLongTermGoal').empty();
+                        $('#clientLongTermGoal').append(firstOption);
+                        $('#clientShortTermGoal').empty();
+                        $('#clientShortTermGoal').append(firstOption);
+                        $('#specifically').empty();
+                        $('#specificallyIntervention').empty();
+                        $('#clientAdditionalInformation').empty();
+                        $('#clientAdditionalInformation').append(firstOption);
+                        $('#serviceAdditionalInformation').empty();
+                        $('#serviceAdditionalInformation').append(firstOption);
+                        if(responseData.clientNamelyData.length > 0){
+                            $.each(responseData.clientNamelyData, function (index, option) {
+                    $('#namely').append('<option value="' + option.name + '" data-namelyid="' + option.id + '" data-issueid="' + option.issue_id + '">' + option.name + '</option> ');
+                });
+                        }
+
+                        if(responseData.interventionData.length > 0){
+                            $.each(responseData.interventionData, function (index, option) {
+                    $('#intervention').append('<option value="' + option.name + '" data-interventionid="' + option.id + '" data-issueid="' + option.issue_id + '">' + option.name + '</option> ');
+                });
+                        }
+
+                        if(responseData.clientLongTermGoalData.length > 0){
+                            $.each(responseData.clientLongTermGoalData, function (index, option) {
+                    $('#clientLongTermGoal').append('<option value="' + option.name + '" data-clientlongtermgoalid="' + option.id + '" data-issueid="' + option.issue_id + '">' + option.name + '</option> ');
+                });
+                        }
+
+
+                        if(responseData.clientShortTermGoalData.length > 0){
+                            $.each(responseData.clientShortTermGoalData, function (index, option) {
+                    $('#clientShortTermGoal').append('<option value="' + option.name + '" data-clientshorttermgoalid="' + option.id + '" data-issueid="' + option.issue_id + '">' + option.name + '</option> ');
+                });
+                        }
+
+                        if(responseData.additionalInformationClientData.length > 0){
+                            $.each(responseData.additionalInformationClientData, function (index, option) {
+                    $('#clientAdditionalInformation').append('<option value="' + option.name + '" data-clientAdditionalInformationid="' + option.id + '" data-issueid="' + option.issue_id + '">' + option.name + '</option> ');
+                });
+                        }
+
+                        if(responseData.additionalInformationServiceData.length > 0){
+                            $.each(responseData.additionalInformationServiceData, function (index, option) {
+                    $('#serviceAdditionalInformation').append('<option value="' + option.name + '" data-serviceAdditionalInformationid="' + option.id + '" data-issueid="' + option.issue_id + '">' + option.name + '</option> ');
+                });
+                        }
+                        
+                    },
+                    error: function() {
+                        $('#result').html('Error loading data.');
+                    }
+                });
+            });
+
+
+            $(document).on("change", '#namely', function () {
+                var selectedValue = $(this).val();
+                var selectedOption = $(this).find(':selected');
+                var clientIssueId = selectedOption.data('issueid');
+                var clientNameleyId = selectedOption.data('namelyid');
+                $.ajax({
+                    url: 'functions/getClientSpecifically.php',
+                    type: 'POST',
+                        data: {
+                            clientIssueId: clientIssueId,
+                            clientNameleyId: clientNameleyId,
+
+                    }, 
+                    success: function(response) {
+                        var responseData = JSON.parse(response);
+                        $('#specifically').empty();
+                        $('#specifically').append(firstOption);
+                        if(responseData.length > 0){
+                            $.each(responseData, function (index, option) {
+                    $('#specifically').append('<option value="' + option.name + '" data-specificallyid="' + option.id + '">' + option.name + '</option> ');
+                });
+                        }else{
+                        $('#specifically').empty();
+                        $('#specifically').append(firstOption);
+                        }
+                    },
+                    error: function() {
+                    }
+                });
+            });
+
+            $(document).on("change", '#intervention', function () {
+                var selectedValue = $(this).val();
+                var selectedOption = $(this).find(':selected');
+                var clientIssueId = selectedOption.data('issueid');
+                var interventionId = selectedOption.data('interventionid');
+                $.ajax({
+                    url: 'functions/getClientSpecificallyIntervention.php',
+                    type: 'POST',
+                        data: {
+                            clientIssueId: clientIssueId,
+                            interventionId: interventionId,
+
+                    }, 
+                    success: function(response) {
+                        var responseData = JSON.parse(response);
+                        $('#specificallyIntervention').empty();
+                        $('#specificallyIntervention').append(firstOption);
+                        if(responseData.length > 0){
+                            $.each(responseData, function (index, option) {
+                    $('#specificallyIntervention').append('<option value="' + option.name + '" data-specificallyInterventionid="' + option.id + '">' + option.name + '</option> ');
+                });
+                        }else{
+                        $('#specificallyIntervention').empty();
+                        $('#specificallyIntervention').append(firstOption);
+                        }
+                    },
+                    error: function() {
+                    }
+                });
+            });
+
+            $(window).scroll(function () {
+            if ($(this).scrollTop() > 100) {
+                $('#scrollToTopBtn').fadeIn();
+            } else {
+                $('#scrollToTopBtn').fadeOut();
+            }
+        });
+
+        // Scroll to the top when the button is clicked
+        $('#scrollToTopBtn').click(function () {
+            $('html, body').animate({scrollTop: 0}, 300);
+        });
         });
     </script>
 </body>

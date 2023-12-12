@@ -6,6 +6,9 @@ require_once  'databseConnection/db_connection.php';
 
     $medicationFrequency =$db->query('SELECT * FROM medication_frequency')->fetchAll();
 
+    $clientIssue =$db->query('SELECT * FROM client_issue')->fetchAll();
+
+
     // print_r($medication_dosage );
     // die;
 ?>
