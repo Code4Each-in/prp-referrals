@@ -152,8 +152,6 @@ function showAlert(){
                                         <input class="form-check-input" type="radio" id="concurrent" name="referralType" value="concurrent">
                                     </div>
                                 </div>
-                                 <!-- <div class="invalid-feedback">Please enter the Referring Clinician First Name.
-                                    </div> -->
                             </div>
                       
                             <div class="mb-3 row">
@@ -1287,30 +1285,12 @@ participation in community life.</p>
 
             var form = document.getElementById('contactForm');
             form.addEventListener('submit', function(event) {
-                // if (!form.checkValidity()) {
-                //     event.preventDefault();
-                //     event.stopPropagation();
-                // }
-                // form.classList.add('was-validated');
-     // Handle radio button validation separately
-     var radioGroup = form.querySelector('input[name="radio"]:checked');
-
-if (!radioGroup) {
-    event.preventDefault();
-    event.stopPropagation();
-    form.querySelector('.invalid-feedback').style.display = 'block';
-} else {
-    form.querySelector('.invalid-feedback').style.display = 'none';
-}
-
-// Handle other input validation
-if (!form.checkValidity()) {
-    event.preventDefault();
-    event.stopPropagation();
-}
-
-form.classList.add('was-validated');
-
+                if (!form.checkValidity()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+                
             }, false);
 
             // Show validation feedback on blur
