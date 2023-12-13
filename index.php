@@ -66,95 +66,45 @@ function showAlert(){
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background-color: #007BFF;
-            color: #fff;
+            /* background-color: #007BFF;
+            color: #fff; */
             border: none;
             border-radius: 5px;
             padding: 10px 15px;
             cursor: pointer;
         }
-        /* Custom CSS for adding border to Bootstrap inputs */
-        /* #contactForm .form-control {
-        border: 1px solid #a9a6a6;
-    }
+     
 
-    .form-check-input {
-        border: 1px solid #a9a6a6;
-    }
+        /* ///////////////// */
 
-    i.fa.fa-hand-o-right {
-        color: #ff0000;
-        font-family: 'FontAwesome';
-    }
 
-    .mb-3.row.row-age {
-        display: block;
-    }
+        /* .container {
+            width: 80%;
+            margin: 20px auto;
+            position: relative;
+        } */
+/* 
+        form {
+            background-color: #f4f4f4;
+            padding: 20px;
+            border-radius: 5px;
+        } */
 
-    .row-radio label.col-sm-8.col-form-label {
-        color: #444444;
-        text-align: justify;
-        font-size: 15px;
-        font-weight: 500;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-    }
-
-    .mb-3.row.row-radio {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .row.row-cols {
-        display: flex;
-        justify-content: flex-start;
-        margin: 0px auto;
-        align-items: center;
-    }
-
-    .row.row-jhk {
-        display: flex;
-        justify-content: flex-start;
-        margin: 0px auto 10px;
-        align-items: center;
-        padding-left: 30px;
-    }
-
-    .row.row-jhk label.col-sm-8.col-form-label {
-        color: #444444;
-        text-align: justify;
-        font-size: 14px;
-        font-weight: 400;
-        display: inline;
-    }
-
-    .row.row-cols label.col-form-label {
-        padding-top: 5px;
-    }
-
-    ol.oreder-listing {
-        padding-left: 1rem;
-    }
-
-    .alert.alert-danger.alert-dismissible.fade.show {
-        padding-right: 1rem;
-        text-align: center;
-    }
-
-    .alert.alert-danger.alert-dismissible.fade.show p {
-        font-size: 14px;
-    }
-
-    .alert.alert-danger.alert-dismissible.fade.show {
-        padding-right: 1rem;
-        text-align: center;
-        position: absolute;
-        bottom: -65rem;
-        right: 15px;
-        width: 20%;
-    } */
+        .submit-btn {
+            position: sticky;
+            bottom: 20px;
+            /* background-color: #4CAF50; */
+            /* color: white; */
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            margin-left: -20px; /* Offset to align with the form's left edge */
+            z-index: 1; /* Ensure the button appears on top of the form */
+            float: right;
+            top: 20px; 
+        }
     </style>
 </head>
 
@@ -182,7 +132,7 @@ function showAlert(){
 
         <div class="row justify-content-center  position: relative;">
             <div class="col-md-8 mb-5">
-                <form action="process_form.php" method="post" id="contactForm" novalidate>
+                <form action="functions/submit_form.php" method="post" id="contactForm" novalidate>
                     <div class="card mb-4">
                         <div class="card-header">
                             <h5>Referring Professional Information</h5>
@@ -193,15 +143,17 @@ function showAlert(){
                                 <div class="row row-jhk">
                                     <div class="col-sm-2 form-check mt-2">
                                         <label for="initial" class="col-sm-8 col-form-label">Initial Referral </label>
-                                        <input class="form-check-input" type="radio" id="initial" name="referral" value="Male">
+                                        <input class="form-check-input" type="radio" id="initial" name="referralType" value="initial">
                                     </div>
                                 </div>
                                 <div class="row row-jhk">
                                     <div class="col-sm-4 form-check mt-2">
                                         <label for="concurrent" class="col-sm-8 col-form-label">Concurrent Referral </label>
-                                        <input class="form-check-input" type="radio" id="concurrent" name="referral" value="Female">
+                                        <input class="form-check-input" type="radio" id="concurrent" name="referralType" value="concurrent">
                                     </div>
                                 </div>
+                                 <!-- <div class="invalid-feedback">Please enter the Referring Clinician First Name.
+                                    </div> -->
                             </div>
                       
                             <div class="mb-3 row">
@@ -233,7 +185,7 @@ function showAlert(){
                                 </div>
                                 <div class="col">
                                     <label for="credentials" class="form-label">Credentials: <span class="text-danger">*</span></label>
-                                    <select class="form-select" aria-label="Default select example" name="credentials" id="credentials">
+                                    <select class="form-select" aria-label="Default select example" name="credentials" id="credentials" required>
                                         <?php
                                         foreach ($referringCredentials as $eachVal) {
                                             echo '<option value="' . htmlspecialchars(trim($eachVal)) . '" >' . $eachVal . '</option>';
@@ -248,6 +200,7 @@ function showAlert(){
                                     Referring Organization:<span class="text-danger"> *</span></label>
                                 <div class="col-sm-6">
                                     <input type="text" class="form-control" id="affiliatedRefOrganization" name="affiliatedRefOrganization" required>
+                                    <div class="invalid-feedback">Please enter the Affiliated Referring Organization.</div>
                                 </div>
                             </div>
                             <div class="mb-3 row">
@@ -256,6 +209,9 @@ function showAlert(){
                                     No:<span class="text-danger"> *</span></label>
                                 <div class="col-sm-6">
                                     <input type="text" class="form-control" id="refClinicianPhone" name="refClinicianPhone" required>
+                                    <div class="invalid-feedback">Please enter Referring Clinician
+                                    Phone
+                                    No.</div>
                                 </div>
                             </div>
                             <div class="mb-3 row">
@@ -264,6 +220,9 @@ function showAlert(){
                                     Address:<span class="text-danger"> *</span></label>
                                 <div class="col-sm-6">
                                     <input type="email" class="form-control" id="refClinicianEmail" name="refClinicianEmail" required>
+                                    <div class="invalid-feedback">Please enter Referring Clinician
+                                    Email
+                                    Address.</div>
                                 </div>
                             </div>
                             <div class="mb-3 row">
@@ -288,7 +247,7 @@ function showAlert(){
                                         services
                                         - 24/7 supervision</label>
                                     <div class="col-sm-2 form-check mt-2">
-                                        <input class="form-check-input" type="checkbox" id="service1" name="services[]" value="housing - assisted living services - 24/7 supervision" required>
+                                        <input class="form-check-input checkbox-group" type="checkbox" id="service1" name="services1" value="housing - assisted living services - 24/7 supervision" >
                                     </div>
                                 </div>
                                 <div class="row">
@@ -297,13 +256,13 @@ function showAlert(){
                                         housing
                                         services - day time supervision</label>
                                     <div class="col-sm-2 form-check mt-2">
-                                        <input class="form-check-input" type="checkbox" id="service2" name="services[]" value="housing - supportive housing services - day time supervision" required>
+                                        <input class="form-check-input checkbox-group" type="checkbox" id="service2" name="services2" value="housing - supportive housing services - day time supervision" >
                                     </div>
                                 </div>
                                 <div class="row">
                                     <label for="service3" class="col-sm-8 col-form-label"><i class="fa fa-hand-o-right" aria-hidden="true"></i> Psychiatry</label>
                                     <div class="col-sm-2 form-check mt-2">
-                                        <input class="form-check-input" type="checkbox" id="service3" name="services[]" value="psychiatry" required>
+                                        <input class="form-check-input checkbox-group" type="checkbox" id="service3" name="services3" value="psychiatry" >
                                     </div>
                                 </div>
 
@@ -312,23 +271,24 @@ function showAlert(){
                                         <i class="fa fa-hand-o-right" aria-hidden="true"></i>Medication
                                         management</label>
                                     <div class="col-sm-2 form-check mt-2">
-                                        <input class="form-check-input" type="checkbox" id="service4" name="services[]" value="medication management" required>
+                                        <input class="form-check-input checkbox-group" type="checkbox" id="service4" name="services4" value="medication management" >
                                     </div>
                                 </div>
                                 <div class="row">
                                     <label for="service5" class="col-sm-8 col-form-label"><i class="fa fa-hand-o-right" aria-hidden="true"></i> Mental health
                                         counseling</label>
                                     <div class="col-sm-2 form-check mt-2">
-                                        <input class="form-check-input" type="checkbox" id="service5" name="services[]" value="mental health counseling" required>
+                                        <input class="form-check-input checkbox-group" type="checkbox" id="service5" name="services5" value="mental health counseling" >
                                     </div>
                                 </div>
                                 <div class="row">
                                     <label for="service6" class="col-sm-8 col-form-label">
                                         <i class="fa fa-hand-o-right" aria-hidden="true"></i> Primary care</label>
                                     <div class="col-sm-2 form-check mt-2">
-                                        <input class="form-check-input" type="checkbox" id="service6" name="services[]" value="primary care" required>
+                                        <input class="form-check-input checkbox-group" type="checkbox" id="service6" name="services6" value="primary care" >
                                     </div>
                                 </div>
+                                <!-- <div class="invalid-feedback">Please select at least one service.</div> -->
                                 <div class="invalid-feedback">Please select at least one service.</div>
                             </div>
                         </div>
@@ -457,28 +417,55 @@ function showAlert(){
                                     <div class="row row-cols">
                                         <div class="col-sm-4 form-check mt-2">
                                             <label for="minorYes" class="col-form-label">Yes</label>
-                                            <input class="form-check-input mt-2" type="radio" id="minorYes" name="minorAge" value="yes">
+                                            <input class="form-check-input mt-2" type="radio" id="minorYes" name="minorAge" value="yes" required>
                                         </div>
                                         <div class="col-sm-8 form-check mt-2">
                                             <label for="minorNo" class="col-form-label">No</label>
                                             <input class="form-check-input mt-2" type="radio" id="minorNo" name="minorAge" value="no">
+                                    
                                         </div>
                                     </div>
                                 </div>
+                                <div class="invalid-feedback">Please choose one 
+                                    </div>
                             </div>
+
+                            <!-- <div class="mb-3 row row-radio">
+            <label class="col-sm-12 col-form-label">Select one of the following options: <span class="text-danger">*</span></label>
+
+            <div class="row">
+                <div class="col-sm-8">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="options" id="option1" value="option1" required>
+                        Option 1
+                    </label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-8">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="options" id="option2" value="option2">
+                        Option 2
+                    </label>
+                </div>
+            </div>
+
+       
+
+            <div class="invalid-feedback">Please select one option.</div>
+        </div> -->
 
                             <div class="listing">
                                 <ol class="oreder-listing">
                                     <li>
                                         <div class="row-list">
-
-
                                             <p class="col-sm-8 col-form-label">Is the client homeless?<span class="text-danger"> *</span></p>
                                             <div class="col-sm-4 form-check">
                                                 <div class="row row-cols">
                                                     <div class="col-sm-4 form-check mt-2">
                                                         <label for="clientHomelessYes" class="col-form-label">Yes</label>
-                                                        <input class="form-check-input mt-2" type="radio" id="clientHomelessYes" name="clientHomeless" value="yes">
+                                                        <input class="form-check-input mt-2" type="radio" id="clientHomelessYes" name="clientHomeless" value="yes" required>
                                                     </div>
                                                     <div class="col-sm-8 form-check mt-2">
                                                         <label for="clientHomelessNo" class="col-form-label">No</label>
@@ -486,9 +473,7 @@ function showAlert(){
                                                     </div>
                                                 </div>
                                             </div>
-
-
-
+                                            <div class="invalid-feedback">Please select one option.</div>
                                     </li>
                                     <li>
                                         <div class="row-list">
@@ -501,7 +486,7 @@ function showAlert(){
                                                 <div class="row  row-cols">
                                                     <div class="col-sm-4 form-check mt-2">
                                                         <label for="disorderYes" class="    col-form-label">Yes</label>
-                                                        <input class="form-check-input mt-2" type="radio" id="disorderYes" name="disorder" value="yes">
+                                                        <input class="form-check-input mt-2" type="radio" id="disorderYes" name="disorder" value="yes" required>
                                                     </div>
                                                     <div class="col-sm-8 form-check mt-2">
                                                         <label for="disorderNo" class="col-form-label">No</label>
@@ -522,7 +507,7 @@ function showAlert(){
                                                 <div class="row  row-cols">
                                                     <div class="col-sm-4 form-check mt-2">
                                                         <label for="communicableDiseasesYes" class="col-form-label">Yes</label>
-                                                        <input class="form-check-input mt-2" type="radio" id="communicableDiseasesYes" name="communicableDiseases" value="yes">
+                                                        <input class="form-check-input mt-2" type="radio" id="communicableDiseasesYes" name="communicableDiseases" value="yes" required>
                                                     </div>
                                                     <div class="col-sm-3 form-check mt-2">
                                                         <label for="communicableDiseasesNo" class="col-form-label">No</label>
@@ -546,7 +531,7 @@ function showAlert(){
                                                 <div class="row  row-cols">
                                                     <div class="col-sm-4 form-check mt-2">
                                                         <label for="medicationsYes" class="col-form-label">Yes</label>
-                                                        <input class="form-check-input mt-2" type="radio" id="medicationsYes" name="medications" value="yes">
+                                                        <input class="form-check-input mt-2" type="radio" id="medicationsYes" name="medications" value="yes" required>
                                                     </div>
                                                     <div class="col-sm-3 form-check mt-2">
                                                         <label for="medicationsNo" class="col-form-label">No</label>
@@ -657,7 +642,7 @@ function showAlert(){
                                                 <div class="row  row-cols">
                                                     <div class="col-sm-4 form-check mt-2">
                                                         <label for="dischargedYes" class="col-form-label">Yes</label>
-                                                        <input class="form-check-input mt-2" type="radio" id="dischargedYes" name="discharged" value="yes">
+                                                        <input class="form-check-input mt-2" type="radio" id="dischargedYes" name="discharged" value="yes" required>
                                                     </div>
                                                     <div class="col-sm-3 form-check mt-2">
                                                         <label for="dischargedNo" class="col-form-label">No</label>
@@ -680,7 +665,7 @@ function showAlert(){
                                                 <div class="row  row-cols">
                                                     <div class="col-sm-4 form-check mt-2">
                                                         <label for="arrestedYes" class="col-form-label">Yes</label>
-                                                        <input class="form-check-input mt-2" type="radio" id="arrestedYes" name="arrested" value="yes">
+                                                        <input class="form-check-input mt-2" type="radio" id="arrestedYes" name="arrested" value="yes" required>
                                                     </div>
                                                     <div class="col-sm-3 form-check mt-2">
                                                         <label for="arrestedNo" class="col-form-label">No</label>
@@ -702,6 +687,9 @@ function showAlert(){
 
                                             <div class="col-sm-4">
                                                 <input type="text" class="form-control" id="clientGrade" name="clientGrade" required>
+                                                <div class="invalid-feedback">Please enter the  School Grade.
+                                                </div>
+                                                
                                             </div>
                                         </div>
 
@@ -713,7 +701,7 @@ function showAlert(){
                                                 <div class="row row-cols">
                                                     <div class="col-sm-4 form-check mt-2">
                                                         <label for="employedYes" class="col-form-label">Yes</label>
-                                                        <input class="form-check-input mt-2" type="radio" id="employedYes" name="employed" value="yes">
+                                                        <input class="form-check-input mt-2" type="radio" id="employedYes" name="employed" value="yes" required>
                                                     </div>
                                                     <div class="col-sm-3 form-check mt-2">
                                                         <label for="employedNo" class="col-form-label">No</label>
@@ -736,7 +724,7 @@ function showAlert(){
                                                 <div class="row row-cols">
                                                     <div class="col-sm-4 form-check mt-2">
                                                         <label for="receivingTreatmentYes" class="col-form-label">Yes</label>
-                                                        <input class="form-check-input mt-2" type="radio" id="receivingTreatmentYes" name="receivingTreatment" value="yes">
+                                                        <input class="form-check-input mt-2" type="radio" id="receivingTreatmentYes" name="receivingTreatment" value="yes" required> 
                                                     </div>
                                                     <div class="col-sm-8 form-check mt-2">
                                                         <label for="receivingTreatmentNo" class="col-form-label">No</label>
@@ -756,7 +744,7 @@ function showAlert(){
                                                 <div class="row row-cols">
                                                     <div class="col-sm-4 form-check mt-2">
                                                         <label for="currentlyEnrolledYes" class="col-form-label">Yes</label>
-                                                        <input class="form-check-input mt-2" type="radio" id="currentlyEnrolledYes" name="currentlyEnrolled" value="yes">
+                                                        <input class="form-check-input mt-2" type="radio" id="currentlyEnrolledYes" name="currentlyEnrolled" value="yes" required>
                                                     </div>
                                                     <div class="col-sm-3 form-check mt-2">
                                                         <label for="currentlyEnrolledNo" class="col-form-label">No</label>
@@ -783,7 +771,7 @@ function showAlert(){
                                                 <div class="row row-cols">
                                                     <div class="col-sm-4 form-check mt-2">
                                                         <label for="individualNatureYes" class="col-form-label">Yes</label>
-                                                        <input class="form-check-input mt-2" type="radio" id="individualNatureYes" name="individualNature" value="yes">
+                                                        <input class="form-check-input mt-2" type="radio" id="individualNatureYes" name="individualNature" value="yes" required>
                                                     </div>
                                                     <div class="col-sm-3 form-check mt-2">
                                                         <label for="individualNatureNo" class="col-form-label">No</label>
@@ -810,7 +798,7 @@ function showAlert(){
                                                 <div class="row  row-cols">
                                                     <div class="col-sm-4 form-check mt-2">
                                                         <label for="individualIntensiveCareYes" class="col-form-label">Yes</label>
-                                                        <input class="form-check-input mt-2" type="radio" id="individualIntensiveCareYes" name="individualIntensiveCare" value="yes">
+                                                        <input class="form-check-input mt-2" type="radio" id="individualIntensiveCareYes" name="individualIntensiveCare" value="yes" required>
                                                     </div>
                                                     <div class="col-sm-3 form-check mt-2">
                                                         <label for="individualIntensiveCareNo" class="col-form-label">No</label>
@@ -838,7 +826,7 @@ function showAlert(){
                                                 <div class="row row-cols">
                                                     <div class="col-sm-4 form-check mt-2">
                                                         <label for="individualIntensivelevelYes" class="col-form-label">Yes</label>
-                                                        <input class="form-check-input mt-2" type="radio" id="individualIntensivelevelYes" name="individualIntensivelevel" value="yes">
+                                                        <input class="form-check-input mt-2" type="radio" id="individualIntensivelevelYes" name="individualIntensivelevel" value="yes" required>
                                                     </div>
                                                     <div class="col-sm-3 form-check mt-2">
                                                         <label for="individualIntensivelevelNo" class="col-form-label">No</label>
@@ -868,7 +856,7 @@ function showAlert(){
                                                 <div class="row  row-cols">
                                                     <div class="col-sm-4 form-check mt-2">
                                                         <label for="supportConsideredYes" class="col-form-label">Yes</label>
-                                                        <input class="form-check-input mt-2" type="radio" id="supportConsideredYes" name="supportConsidered" value="yes">
+                                                        <input class="form-check-input mt-2" type="radio" id="supportConsideredYes" name="supportConsidered" value="yes" required required>
                                                     </div>
                                                     <div class="col-sm-3 form-check mt-2">
                                                         <label for="supportConsideredNo" class="col-form-label">No</label>
@@ -895,7 +883,7 @@ function showAlert(){
                                                 <div class="row row-cols">
                                                     <div class="col-sm-4 form-check mt-2">
                                                         <label for="eligibleDisableAdminServiceYes" class="col-form-label">Yes</label>
-                                                        <input class="form-check-input mt-2" type="radio" id="eligibleDisableAdminServiceYes" name="eligibleDisableAdminService" value="yes">
+                                                        <input class="form-check-input mt-2" type="radio" id="eligibleDisableAdminServiceYes" name="eligibleDisableAdminService" value="yes" required>
                                                     </div>
                                                     <div class="col-sm-3 form-check mt-2">
                                                         <label for="eligibleDisableAdminServiceNo" class="col-form-label">No</label>
@@ -925,7 +913,7 @@ function showAlert(){
                                                 <div class="row  row-cols">
                                                     <div class="col-sm-4 form-check mt-2">
                                                         <label for="organicProcessOrSyndromeYes" class="col-form-label">Yes</label>
-                                                        <input class="form-check-input mt-2" type="radio" id="organicProcessOrSyndromeYes" name="organicProcessOrSyndrome" value="yes">
+                                                        <input class="form-check-input mt-2" type="radio" id="organicProcessOrSyndromeYes" name="organicProcessOrSyndrome" value="yes" required>
                                                     </div>
                                                     <div class="col-sm-3 form-check mt-2">
                                                         <label for="organicProcessOrSyndromeNo" class="col-form-label">No</label>
@@ -953,7 +941,7 @@ function showAlert(){
                                                 <div class="row   row-cols">
                                                     <div class="col-sm-4 form-check mt-2">
                                                         <label for="behavioralControlYes" class="col-form-label">Yes</label>
-                                                        <input class="form-check-input mt-2" type="radio" id="behavioralControlYes" name="behavioralControl" value="yes">
+                                                        <input class="form-check-input mt-2" type="radio" id="behavioralControlYes" name="behavioralControl" value="yes" required>
                                                     </div>
                                                     <div class="col-sm-3 form-check mt-2">
                                                         <label for="behavioralControlNo" class="col-form-label">No</label>
@@ -983,7 +971,7 @@ function showAlert(){
                                                 <div class="row row-cols">
                                                     <div class="col-sm-4 form-check mt-2">
                                                         <label for="lacksCapacityForPRPYes" class="col-form-label">Yes</label>
-                                                        <input class="form-check-input mt-2" type="radio" id="lacksCapacityForPRPYes" name="lacksCapacityForPRP" value="yes">
+                                                        <input class="form-check-input mt-2" type="radio" id="lacksCapacityForPRPYes" name="lacksCapacityForPRP" value="yes" required>
                                                     </div>
                                                     <div class="col-sm-3 form-check mt-2">
                                                         <label for="lacksCapacityForPRPNo" class="col-form-label">No</label>
@@ -1011,7 +999,7 @@ function showAlert(){
                                                 <div class="row row-cols">
                                                     <div class="col-sm-4 form-check mt-2">
                                                         <label for="referralSourcePaidYes" class="col-form-label">Yes</label>
-                                                        <input class="form-check-input mt-2" type="radio" id="referralSourcePaidYes" name="referralSourcePaid" value="yes">
+                                                        <input class="form-check-input mt-2" type="radio" id="referralSourcePaidYes" name="referralSourcePaid" value="yes" required>
                                                     </div>
                                                     <div class="col-sm-3 form-check mt-2">
                                                         <label for="referralSourcePaidNo" class="col-form-label">No</label>
@@ -1038,7 +1026,7 @@ function showAlert(){
                                                         <label for="referralSourceDigital" class="col-form-label">IP/
                                                             Crisis Res/
                                                             Mobile/ ACT/ RTC/ Incarceration</label>
-                                                        <input class="form-check-input mt-2" type="radio" id="referralSourceDigital" name="referralSource" value="yes">
+                                                        <input class="form-check-input mt-2" type="radio" id="referralSourceDigital" name="referralSource" value="yes" required>
                                                     </div>
                                                     <div class="col-sm-3 form-check mt-2">
                                                         <label for="referralSourceOutpatient" class="col-form-label">Outpatient</label>
@@ -1063,6 +1051,8 @@ function showAlert(){
                                         </p>
                                         <div class="col-sm-7">
                                             <textarea class="form-control" id="reasonForInsufficientTreatment" name="reasonForInsufficientTreatment" required><?php echo $saticText['ansOfQuestion21']; ?></textarea>
+                                            <div class="invalid-feedback">Please enter the Value
+                                    </div>
                                         </div>
                                     </li>
                                 </ol>
@@ -1124,13 +1114,13 @@ participation in community life.</p>
 <p>Marked inability to establish or maintain independent competitive employment characterized by an established pattern of unemployment; underemployment; or sporadic employment that is primarily attributable to a diagnosed serious mental illness; which requires intervention by the behavioral health system beyond what is available to the individual from by mainstream workforce development; educational; faith-based; community or social service organizations. This does not include limitations due to factors such as geographic location; poverty; lack of education; availability of transportation; or loss of driver's license due to legal problems.</p>
 
 <div class="mb-3 row">
-                                <label for="mentalDiagnosis" class="col-sm-4 col-form-label">Client's mental health diagnosis is:<span class="text-danger"> *</span></label>
+                                <label for="mentalDiagnosis" class="col-sm-4 col-form-label">Client's mental health diagnosis is:</label>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="mentalDiagnosis" name="mentalDiagnosis" required>
+                                    <input type="text" class="form-control" id="mentalDiagnosis" name="mentalDiagnosis">
                                 </div>
                             </div>
                             <div class="mb-3 row">
-                            <label for="symptom" class="form-label">Which symptom of the above diagnosis impairs the client's functioning in this domain? <span class="text-danger">*</span></label>
+                            <label for="symptom" class="form-label">Which symptom of the above diagnosis impairs the client's functioning in this domain?</label>
                                     <select class="form-select" aria-label="Default select example" name="symptom" id="symptom">
                                        
                                     </select>
@@ -1138,14 +1128,14 @@ participation in community life.</p>
                                 </div>
 
                                 <div class="mb-3 row">
-                                <label for="experienced" class="col-sm-4 col-form-label">[Client], has experienced [Symptom of diagnosis] since [Onset date]:<span class="text-danger"> *</span></label>
+                                <label for="experienced" class="col-sm-4 col-form-label">[Client], has experienced [Symptom of diagnosis] since [Onset date]:</label>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="experienced" name="experienced" required>
+                                    <input type="text" class="form-control" id="experienced" name="experienced">
                                 </div>
                             </div>
 
                         <div class="mb-3 row">
-                            <label for="clientIssue" class="form-label">7. Client presents with issues regarding... <span class="text-danger">*</span></label>
+                            <label for="clientIssue" class="form-label">7. Client presents with issues regarding...</label>
                                     <select class="form-select" aria-label="Default select example" name="clientIssue" id="clientIssue">
                                     <option value="">--Select--</option>
 
@@ -1158,14 +1148,14 @@ participation in community life.</p>
 
                                 </div>
                                 <div class="mb-3 row">
-                            <label for="namely" class="form-label">8. Namely, the client's ... <span class="text-danger">*</span></label>
+                            <label for="namely" class="form-label">8. Namely, the client's ...</label>
                                     <select class="form-select" aria-label="Default select example" name="namely" id="namely">
                                     <option value="">--Select--</option>
                                     </select>
                                    
                                 </div>
                                 <div class="mb-3 row">
-                            <label for="specifically" class="form-label">9. Specifically... <span class="text-danger">*</span></label>
+                            <label for="specifically" class="form-label">9. Specifically...</label>
                                     <select class="form-select" aria-label="Default select example" name="specifically" id="specifically">
                                     <option value="">--Select--</option>
                                     </select>
@@ -1173,14 +1163,14 @@ participation in community life.</p>
                                 </div>
 
                                 <div class="mb-3 row">
-                            <label for="clientAdditionalInformation" class="form-label">10. Additional information on the client's need in this area: <span class="text-danger">*</span></label>
+                            <label for="clientAdditionalInformation" class="form-label">10. Additional information on the client's need in this area:</label>
                             <select class="form-select" aria-label="Default select example" name="clientAdditionalInformation" id="clientAdditionalInformation">
                                     <option value="">--Select--</option>
                                     </select>
 
                                 </div>
                                 <div class="mb-3 row">
-                            <label for="intervention" class="form-label">11. The following intervention was implemented:<span class="text-danger">*</span></label>
+                            <label for="intervention" class="form-label">11. The following intervention was implemented:</label>
                                     <select class="form-select" aria-label="Default select example" name="intervention" id="intervention">
                                     <option value="">--Select--</option>
                                     </select>
@@ -1189,7 +1179,7 @@ participation in community life.</p>
                                 
 
                                 <div class="mb-3 row">
-                            <label for="specificallyIntervention" class="form-label">12. Specifically, an example for a planned intervention is to:<span class="text-danger">*</span></label>
+                            <label for="specificallyIntervention" class="form-label">12. Specifically, an example for a planned intervention is to:</label>
                                     <select class="form-select" aria-label="Default select example" name="specificallyIntervention" id="specificallyIntervention">
                                     <option value="">--Select--</option>
                                     </select>
@@ -1198,7 +1188,7 @@ participation in community life.</p>
 
 
                                 <div class="mb-3 row">
-                            <label for="serviceAdditionalInformation" class="form-label">13. Additional information on services to address this specific need area: <span class="text-danger">*</span></label>
+                            <label for="serviceAdditionalInformation" class="form-label">13. Additional information on services to address this specific need area:</label>
                             <select class="form-select" aria-label="Default select example" name="serviceAdditionalInformation" id="serviceAdditionalInformation">
                                     <option value="">--Select--</option>
                                     </select>
@@ -1206,7 +1196,7 @@ participation in community life.</p>
                                 </div>
 
                                 <div class="mb-3 row">
-                            <label for="clientLongTermGoal" class="form-label">14. Client's long term goal to address this impairment is..<span class="text-danger">*</span></label>
+                            <label for="clientLongTermGoal" class="form-label">14. Client's long term goal to address this impairment is..</label>
                                     <select class="form-select" aria-label="Default select example" name="clientLongTermGoal" id="clientLongTermGoal">
                                     <option value="">--Select--</option>
                                     </select>
@@ -1214,7 +1204,7 @@ participation in community life.</p>
                                 </div>
 
                                 <div class="mb-3 row">
-                            <label for="clientShortTermGoal" class="form-label">15. Client's short term goal to address this impairment is..<span class="text-danger">*</span></label>
+                            <label for="clientShortTermGoal" class="form-label">15. Client's short term goal to address this impairment is..</label>
                                     <select class="form-select" aria-label="Default select example" name="clientShortTermGoal" id="clientShortTermGoal">
                                     <option value="">--Select--</option>
                                     </select>
@@ -1235,12 +1225,12 @@ participation in community life.</p>
 
                     </div>
                     <div class="mt-4">
-                        <button type="submit" disabled class="btn btn-primary">Submit</button>
+                        <!-- <button type="submit" class="btn btn-primary submit-btn">Submit</button> -->
                     </div>
-
+ <button type="submit" class="btn btn-primary submit-btn me-4">Submit</button>
                 </form>
 
-                <button id="scrollToTopBtn"><i class="fa fa-arrow-up"></i></button>
+                <button id="scrollToTopBtn" class="btn btn-secondary"><i class="fa fa-arrow-up"></i></button>
             </div>
             <!-- <div class="alert alert-danger alert-dismissible fade show">
 
@@ -1297,26 +1287,131 @@ participation in community life.</p>
 
             var form = document.getElementById('contactForm');
             form.addEventListener('submit', function(event) {
-                if (!form.checkValidity()) {
-                    event.preventDefault();
-                    event.stopPropagation();
-                }
-                form.classList.add('was-validated');
+                // if (!form.checkValidity()) {
+                //     event.preventDefault();
+                //     event.stopPropagation();
+                // }
+                // form.classList.add('was-validated');
+     // Handle radio button validation separately
+     var radioGroup = form.querySelector('input[name="radio"]:checked');
+
+if (!radioGroup) {
+    event.preventDefault();
+    event.stopPropagation();
+    form.querySelector('.invalid-feedback').style.display = 'block';
+} else {
+    form.querySelector('.invalid-feedback').style.display = 'none';
+}
+
+// Handle other input validation
+if (!form.checkValidity()) {
+    event.preventDefault();
+    event.stopPropagation();
+}
+
+form.classList.add('was-validated');
+
             }, false);
 
             // Show validation feedback on blur
             form.addEventListener('blur', function(event) {
-                if (event.target.tagName === 'INPUT') {
+                // if (event.target.tagName === 'INPUT') {
                     if (!event.target.checkValidity()) {
                         event.target.classList.add('is-invalid');
                     } else {
                         event.target.classList.remove('is-invalid');
                     }
-                }
+                // }
             }, true);
         })();
 
 
+    // (function() {
+    //     'use strict';
+
+    //     var form = document.getElementById('contactForm');
+    //     form.addEventListener('submit', function(event) {
+    //         var checkboxes = form.querySelectorAll('input.checkbox-group[type="checkbox"]');
+    //         var atLeastOneChecked = Array.from(checkboxes).some(function(checkbox) {
+    //             return checkbox.checked;
+    //         });
+    //         console.log(atLeastOneChecked, 'oooooooooooo');
+
+    //         if (!atLeastOneChecked) {
+    //         console.log(atLeastOneChecked, 'oooooooooooo');
+
+    //             event.preventDefault();
+    //             event.stopPropagation();
+    //             form.querySelector('.invalid-feedback').style.display = 'block';
+    //         } else {
+    //             form.querySelector('.invalid-feedback').style.display = 'none';
+    //         }
+
+    //         if (!form.checkValidity()) {
+    //             event.preventDefault();
+    //             event.stopPropagation();
+    //         }
+
+    //         form.classList.add('was-validated');
+    //     }, false);
+
+    //     // Show validation feedback on blur for checkboxes
+    //     form.addEventListener('blur', function(event) {
+    //         if (event.target.type === 'checkbox') {
+    //             var atLeastOneChecked = Array.from(form.querySelectorAll('input.checkbox-group[type="checkbox"]')).some(function(checkbox) {
+    //                 return checkbox.checked;
+    //             });
+
+    //             if (!atLeastOneChecked) {
+    //                 form.querySelector('.invalid-feedback').style.display = 'block';
+    //             } else {
+    //                 form.querySelector('.invalid-feedback').style.display = 'none';
+    //             }
+    //         } else if (event.target.tagName === 'INPUT') {
+    //             if (!event.target.checkValidity()) {
+    //                 event.target.classList.add('is-invalid');
+    //             } else {
+    //                 event.target.classList.remove('is-invalid');
+    //             }
+    //         }
+    //     }, true);
+    // })();
+    // (function() {
+    //     'use strict';
+
+    //     var form = document.getElementById('contactForm');
+    //     form.addEventListener('submit', function(event) {
+    //         var radioGroup = form.querySelector('input[name="options"]:checked');
+
+    //         if (!radioGroup) {
+    //             event.preventDefault();
+    //             event.stopPropagation();
+    //             form.querySelector('.invalid-feedback').style.display = 'block';
+    //         } else {
+    //             form.querySelector('.invalid-feedback').style.display = 'none';
+    //         }
+
+    //         if (!form.checkValidity()) {
+    //             event.preventDefault();
+    //             event.stopPropagation();
+    //         }
+
+    //         form.classList.add('was-validated');
+    //     }, false);
+
+    //     // Show validation feedback on blur for radio buttons
+    //     form.addEventListener('blur', function(event) {
+    //         if (event.target.type === 'radio' && event.target.name === 'options') {
+    //             var radioGroup = form.querySelector('input[name="options"]:checked');
+
+    //             if (!radioGroup) {
+    //                 form.querySelector('.invalid-feedback').style.display = 'block';
+    //             } else {
+    //                 form.querySelector('.invalid-feedback').style.display = 'none';
+    //             }
+    //         }
+    //     }, true);
+    // })();
         // on change first name of Referring Professional Information form 
         var refFirstName = document.getElementById('refFirstName');
         refFirstName.addEventListener('input', function() {
@@ -1807,6 +1902,18 @@ participation in community life.</p>
             $('html, body').animate({scrollTop: 0}, 300);
         });
         });
+
+
+        window.onscroll = function() {
+            var submitButton = document.querySelector('.submit-btn');
+            var form = document.querySelector('form');
+            
+            if (window.pageYOffset > form.offsetTop + form.offsetHeight) {
+                submitButton.style.position = 'fixed';
+            } else {
+                submitButton.style.position = 'sticky';
+            }
+        };
     </script>
 </body>
 
