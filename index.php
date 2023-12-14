@@ -28,20 +28,27 @@ $saticText = Secret::saticText();
 // echo $saticText['medicationNoRadio'];die;
 // print_r($getClientSheetData);
 // $settings = $db->query('SELECT * FROM Settings WHERE VariableDescription = "DelayMinutesToConfirmAirbnbMessageDelivery"')->fetchArray();
-function showAlert(){
+function showAlert($first, $second, $third){
    echo  '<div class="alert alert-danger d-flex align-items-center " role="alert">
     <div>
-    <i class="bi-exclamation-octagon-fill"></i> Answering "no" or "unknown" to this question
+    <i class="bi-exclamation-octagon-fill"></i> Answering "'.$first.'" or "'.$second.'" to this question
       automatically disqualifies
       the individual from being eligible for PRP services. If the answer is
-      "no" or "unknown", you will not be able to complete this form and the
-      submission buttion will be disabled. If you answer "no" or "unknown" in
-      error and intended to answer the question with "yes", simply correct
+      "'.$first.'" or "'.$second.'", you will not be able to complete this form and the
+      submission buttion will be disabled. If you answer "'.$first.'" or "'.$second.'" in
+      error and intended to answer the question with "'.$third.'", simply correct
       your answer and move to the next question.
     </div>
   </div>';
 }
 
+function showAlertParticipant(){
+    echo  '<div class="alert alert-danger d-flex align-items-center " role="alert">
+     <div>
+     <i class="bi-exclamation-octagon-fill"></i> Answering "neither" to this question automatically disqualifies the individual from being eligible for PRP services.  If the answer is "neither", you will not be able to complete this form and the submission buttion will be disabled.  If you answered "neither" in error, simply correct your answer and move to the next question.
+     </div>
+   </div>';
+ }
 ?>
 
 <!DOCTYPE html>
@@ -74,7 +81,10 @@ function showAlert(){
             cursor: pointer;
         }
      
+.commenHidden{
+    display: none;
 
+}
         /* ///////////////// */
 
 
@@ -756,7 +766,7 @@ function showAlert(){
                                             </div>
                                         </div>
                                     </li>
-                                    <li>
+                                    <li class="outerRadio">
                                         <div class="row-list">
                                             <p class="col-sm-8 col-form-label">Does the nature of the individual’s
                                                 functional impairments and/or skill deficits can be effectively
@@ -769,25 +779,25 @@ function showAlert(){
                                                 <div class="row row-cols">
                                                     <div class="col-sm-4 form-check mt-2">
                                                         <label for="individualNatureYes" class="col-form-label">Yes</label>
-                                                        <input class="form-check-input mt-2" type="radio" id="individualNatureYes" name="individualNature" value="yes" required>
+                                                        <input class="form-check-input mt-2" type="radio" id="individualNatureYes" name="individualNature" value="yes" onchange="handleInputChange(this, 'yes')"required>
                                                     </div>
                                                     <div class="col-sm-3 form-check mt-2">
                                                         <label for="individualNatureNo" class="col-form-label">No</label>
-                                                        <input class="form-check-input mt-2" type="radio" id="individualNatureNo" name="individualNature" value="no">
+                                                        <input class="form-check-input mt-2" type="radio" id="individualNatureNo" name="individualNature" value="no" onchange="handleInputChange(this, 'yes')">
                                                     </div>
                                                     <div class="col-sm-5 form-check mt-2">
                                                         <label for="individualNatureUnknown" class="col-form-label">Unknown</label>
-                                                        <input class="form-check-input mt-2" type="radio" id="individualNatureUnknown" name="individualNature" value="unknown">
+                                                        <input class="form-check-input mt-2" type="radio" id="individualNatureUnknown" name="individualNature" value="unknown" onchange="handleInputChange(this, 'yes')">
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="individualNatureWarning hidden">
-                                            <?php showAlert();?>
+                                        <div class="commonClass commenHidden">
+                                            <?php showAlert("no", "unknown", "yes");?>
                                         </div>
 
                                     </li>
-                                    <li>
+                                    <li class="outerRadio">
                                         <div class="row-list">
                                             <label class="col-sm-8 col-form-label">Does the Individual require a more
                                                 intensive
@@ -796,24 +806,24 @@ function showAlert(){
                                                 <div class="row  row-cols">
                                                     <div class="col-sm-4 form-check mt-2">
                                                         <label for="individualIntensiveCareYes" class="col-form-label">Yes</label>
-                                                        <input class="form-check-input mt-2" type="radio" id="individualIntensiveCareYes" name="individualIntensiveCare" value="yes" required>
+                                                        <input class="form-check-input mt-2" type="radio" id="individualIntensiveCareYes" name="individualIntensiveCare" value="yes" required onchange="handleInputChange(this, 'no')">
                                                     </div>
                                                     <div class="col-sm-3 form-check mt-2">
                                                         <label for="individualIntensiveCareNo" class="col-form-label">No</label>
-                                                        <input class="form-check-input mt-2" type="radio" id="individualIntensiveCareNo" name="individualIntensiveCare" value="no">
+                                                        <input class="form-check-input mt-2" type="radio" id="individualIntensiveCareNo" name="individualIntensiveCare" value="no" onchange="handleInputChange(this, 'no')">
                                                     </div>
                                                     <div class="col-sm-5 form-check mt-2">
                                                         <label for="individualIntensiveCareUnknown" class="col-form-label">Unknown</label>
-                                                        <input class="form-check-input mt-2" type="radio" id="individualIntensiveCareUnknown" name="individualIntensiveCare" value="unknown">
+                                                        <input class="form-check-input mt-2" type="radio" id="individualIntensiveCareUnknown" name="individualIntensiveCare" value="unknown" onchange="handleInputChange(this, 'no')">
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="individualIntensiveCareWarning hidden">
-                                            <?php showAlert();?>
+                                        <div class="individualIntensiveCareWarning commonClass commenHidden">
+                                            <?php showAlert("yes", "unknown", "no");?>
                                         </div>
                                     </li>
-                                    <li>
+                                    <li class="outerRadio">
                                         <div class="row-list">
 
                                             <p class="col-sm-8 col-form-label">Have all less intensive levels of
@@ -824,25 +834,25 @@ function showAlert(){
                                                 <div class="row row-cols">
                                                     <div class="col-sm-4 form-check mt-2">
                                                         <label for="individualIntensivelevelYes" class="col-form-label">Yes</label>
-                                                        <input class="form-check-input mt-2" type="radio" id="individualIntensivelevelYes" name="individualIntensivelevel" value="yes" required>
+                                                        <input class="form-check-input mt-2" type="radio" id="individualIntensivelevelYes" name="individualIntensivelevel" value="yes" required onchange="handleInputChange(this, 'yes')">
                                                     </div>
                                                     <div class="col-sm-3 form-check mt-2">
                                                         <label for="individualIntensivelevelNo" class="col-form-label">No</label>
-                                                        <input class="form-check-input mt-2" type="radio" id="individualIntensivelevelNo" name="individualIntensivelevel" value="no">
+                                                        <input class="form-check-input mt-2" type="radio" id="individualIntensivelevelNo" name="individualIntensivelevel" value="no" onchange="handleInputChange(this, 'yes')">
                                                     </div>
                                                     <div class="col-sm-5 form-check mt-2">
                                                         <label for="individualIntensivelevelUnknown" class="col-form-label">Unknown</label>
-                                                        <input class="form-check-input mt-2" type="radio" id="individualIntensivelevelUnknown" name="individualIntensivelevel" value="unknown">
+                                                        <input class="form-check-input mt-2" type="radio" id="individualIntensivelevelUnknown" name="individualIntensivelevel" value="unknown" onchange="handleInputChange(this, 'yes')">
                                                     </div>
                                                 </div>
                                             </div>
 
                                         </div>
-                                        <div class="individualIntensivelevelWarning hidden">
-                                            <?php showAlert();?>
+                                        <div class="individualIntensivelevelWarning commonClass commenHidden">
+                                            <?php showAlert("no", "unknown", "yes");?>
                                         </div>
                                     </li>
-                                    <li>
+                                    <li class="outerRadio">
                                         <div class="row-list">
                                             <p class="col-sm-8 col-form-label">Have peer or natural support alternatives
                                                 been considered or attempted, and/or are insufficient to meet the need
@@ -854,24 +864,24 @@ function showAlert(){
                                                 <div class="row  row-cols">
                                                     <div class="col-sm-4 form-check mt-2">
                                                         <label for="supportConsideredYes" class="col-form-label">Yes</label>
-                                                        <input class="form-check-input mt-2" type="radio" id="supportConsideredYes" name="supportConsidered" value="yes" required required>
+                                                        <input class="form-check-input mt-2" type="radio" id="supportConsideredYes" name="supportConsidered" value="yes" required required onchange="handleInputChange(this, 'yes')">
                                                     </div>
                                                     <div class="col-sm-3 form-check mt-2">
                                                         <label for="supportConsideredNo" class="col-form-label">No</label>
-                                                        <input class="form-check-input mt-2" type="radio" id="supportConsideredNo" name="supportConsidered" value="no">
+                                                        <input class="form-check-input mt-2" type="radio" id="supportConsideredNo" name="supportConsidered" value="no" onchange="handleInputChange(this, 'yes')">
                                                     </div>
                                                     <div class="col-sm-5 form-check mt-2">
                                                         <label for="supportConsideredUnknown" class="col-form-label">Unknown</label>
-                                                        <input class="form-check-input mt-2" type="radio" id="supportConsideredUnknown" name="supportConsidered" value="unknown">
+                                                        <input class="form-check-input mt-2" type="radio" id="supportConsideredUnknown" name="supportConsidered" value="unknown" onchange="handleInputChange(this, 'yes')">
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="supportConsideredWarning hidden">
-                                            <?php showAlert();?>
+                                        <div class="supportConsideredWarning commonClass commenHidden">
+                                            <?php showAlert("no", "unknown", "yes");?>
                                         </div>
                                     </li>
-                                    <li>
+                                    <li class="outerRadio">
                                         <div class="row-list">
                                             <p class="col-sm-8 col-form-label">Participant is fully eligible for
                                                 Developmental Disabilities Administration funded services?
@@ -881,25 +891,25 @@ function showAlert(){
                                                 <div class="row row-cols">
                                                     <div class="col-sm-4 form-check mt-2">
                                                         <label for="eligibleDisableAdminServiceYes" class="col-form-label">Yes</label>
-                                                        <input class="form-check-input mt-2" type="radio" id="eligibleDisableAdminServiceYes" name="eligibleDisableAdminService" value="yes" required>
+                                                        <input class="form-check-input mt-2" type="radio" id="eligibleDisableAdminServiceYes" name="eligibleDisableAdminService" value="yes" required onchange="handleInputChange(this, 'no')">
                                                     </div>
                                                     <div class="col-sm-3 form-check mt-2">
                                                         <label for="eligibleDisableAdminServiceNo" class="col-form-label">No</label>
-                                                        <input class="form-check-input mt-2" type="radio" id="eligibleDisableAdminServiceNo" name="eligibleDisableAdminService" value="no">
+                                                        <input class="form-check-input mt-2" type="radio" id="eligibleDisableAdminServiceNo" name="eligibleDisableAdminService" value="no" onchange="handleInputChange(this, 'no')">
                                                     </div>
                                                     <div class="col-sm-5 form-check mt-2">
                                                         <label for="eligibleDisableAdminServiceUnknown" class="col-form-label">Unknown</label>
-                                                        <input class="form-check-input mt-2" type="radio" id="eligibleDisableAdminServiceUnknown" name="eligibleDisableAdminService" value="unknown">
+                                                        <input class="form-check-input mt-2" type="radio" id="eligibleDisableAdminServiceUnknown" name="eligibleDisableAdminService" value="unknown" onchange="handleInputChange(this, 'no')">
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="eligibleDisableAdminServiceWarning hidden">
-                                            <?php showAlert();?>
+                                        <div class="eligibleDisableAdminServiceWarning commonClass commenHidden">
+                                            <?php showAlert("yes", "unknown", "no");?>
                                         </div>
                                     </li>
 
-                                    <li>
+                                    <li class="outerRadio">
                                         <div class="row-list">
                                             <p class="col-sm-8 col-form-label">Primary reason for the participant’s
                                                 impairment is due to an organic process or syndrome, intellectual
@@ -911,24 +921,24 @@ function showAlert(){
                                                 <div class="row  row-cols">
                                                     <div class="col-sm-4 form-check mt-2">
                                                         <label for="organicProcessOrSyndromeYes" class="col-form-label">Yes</label>
-                                                        <input class="form-check-input mt-2" type="radio" id="organicProcessOrSyndromeYes" name="organicProcessOrSyndrome" value="yes" required>
+                                                        <input class="form-check-input mt-2" type="radio" id="organicProcessOrSyndromeYes" name="organicProcessOrSyndrome" value="yes" required onchange="handleInputChange(this, 'no')">
                                                     </div>
                                                     <div class="col-sm-3 form-check mt-2">
                                                         <label for="organicProcessOrSyndromeNo" class="col-form-label">No</label>
-                                                        <input class="form-check-input mt-2" type="radio" id="organicProcessOrSyndromeNo" name="organicProcessOrSyndrome" value="no">
+                                                        <input class="form-check-input mt-2" type="radio" id="organicProcessOrSyndromeNo" name="organicProcessOrSyndrome" value="no" onchange="handleInputChange(this, 'no')">
                                                     </div>
                                                     <div class="col-sm-5 form-check mt-2">
                                                         <label for="organicProcessOrSyndromeUnknown" class="col-form-label">Unknown</label>
-                                                        <input class="form-check-input mt-2" type="radio" id="organicProcessOrSyndromeUnknown" name="organicProcessOrSyndrome" value="unknown">
+                                                        <input class="form-check-input mt-2" type="radio" id="organicProcessOrSyndromeUnknown" name="organicProcessOrSyndrome" value="unknown" onchange="handleInputChange(this, 'no')">
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="organicProcessOrSyndromeWarning hidden">
-                                            <?php showAlert();?>
+                                        <div class="organicProcessOrSyndromeWarning commonClass commenHidden">
+                                            <?php showAlert("yes", "unknown", "no");?>
                                         </div>
                                     </li>
-                                    <li>
+                                    <li class="outerRadio">
                                         <div class="row-list">
                                             <p class="col-sm-8 col-form-label">The participant has been judged not to be
                                                 in
@@ -939,24 +949,24 @@ function showAlert(){
                                                 <div class="row   row-cols">
                                                     <div class="col-sm-4 form-check mt-2">
                                                         <label for="behavioralControlYes" class="col-form-label">Yes</label>
-                                                        <input class="form-check-input mt-2" type="radio" id="behavioralControlYes" name="behavioralControl" value="yes" required>
+                                                        <input class="form-check-input mt-2" type="radio" id="behavioralControlYes" name="behavioralControl" value="yes" required onchange="handleInputChange(this, 'no')">
                                                     </div>
                                                     <div class="col-sm-3 form-check mt-2">
                                                         <label for="behavioralControlNo" class="col-form-label">No</label>
-                                                        <input class="form-check-input mt-2" type="radio" id="behavioralControlNo" name="behavioralControl" value="no">
+                                                        <input class="form-check-input mt-2" type="radio" id="behavioralControlNo" name="behavioralControl" value="no" onchange="handleInputChange(this, 'no')">
                                                     </div>
                                                     <div class="col-sm-5 form-check mt-2">
                                                         <label for="behavioralControlUnknown" class="col-form-label">Unknown</label>
-                                                        <input class="form-check-input mt-2" type="radio" id="behavioralControlUnknown" name="behavioralControl" value="unknown">
+                                                        <input class="form-check-input mt-2" type="radio" id="behavioralControlUnknown" name="behavioralControl" value="unknown" onchange="handleInputChange(this, 'no')">
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="behavioralControlWarning hidden">
-                                            <?php showAlert();?>
+                                        <div class="behavioralControlWarning commonClass commenHidden">
+                                            <?php showAlert("yes", "unknown", "no");?>
                                         </div>
                                     </li>
-                                    <li>
+                                    <li class="outerRadio">
                                         <div class="row-list">
                                             <p class="col-sm-8 col-form-label">The participant lacks capacity to benefit
                                                 from PRP as a result of the level of cognitive impairment, current
@@ -969,24 +979,24 @@ function showAlert(){
                                                 <div class="row row-cols">
                                                     <div class="col-sm-4 form-check mt-2">
                                                         <label for="lacksCapacityForPRPYes" class="col-form-label">Yes</label>
-                                                        <input class="form-check-input mt-2" type="radio" id="lacksCapacityForPRPYes" name="lacksCapacityForPRP" value="yes" required>
+                                                        <input class="form-check-input mt-2" type="radio" id="lacksCapacityForPRPYes" name="lacksCapacityForPRP" value="yes" required onchange="handleInputChange(this, 'no')">
                                                     </div>
                                                     <div class="col-sm-3 form-check mt-2">
                                                         <label for="lacksCapacityForPRPNo" class="col-form-label">No</label>
-                                                        <input class="form-check-input mt-2" type="radio" id="lacksCapacityForPRPNo" name="lacksCapacityForPRP" value="no">
+                                                        <input class="form-check-input mt-2" type="radio" id="lacksCapacityForPRPNo" name="lacksCapacityForPRP" value="no" onchange="handleInputChange(this, 'no')">
                                                     </div>
                                                     <div class="col-sm-5 form-check mt-2">
                                                         <label for="lacksCapacityForPRPUnknown" class="col-form-label">Unknown</label>
-                                                        <input class="form-check-input mt-2" type="radio" id="lacksCapacityForPRPUnknown" name="lacksCapacityForPRP" value="unknown">
+                                                        <input class="form-check-input mt-2" type="radio" id="lacksCapacityForPRPUnknown" name="lacksCapacityForPRP" value="unknown" onchange="handleInputChange(this, 'no')">
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="lacksCapacityForPRPWarning hidden">
-                                            <?php showAlert();?>
+                                        <div class="lacksCapacityForPRPWarning commonClass commenHidden">
+                                            <?php showAlert("yes", "unknown", "no");?>
                                         </div>
                                     </li>
-                                    <li>
+                                    <li class="outerRadio">
                                         <div class="row-list">
                                             <p class="col-sm-8 col-form-label">The referral source is in some way is
                                                 paid by
@@ -997,24 +1007,24 @@ function showAlert(){
                                                 <div class="row row-cols">
                                                     <div class="col-sm-4 form-check mt-2">
                                                         <label for="referralSourcePaidYes" class="col-form-label">Yes</label>
-                                                        <input class="form-check-input mt-2" type="radio" id="referralSourcePaidYes" name="referralSourcePaid" value="yes" required>
+                                                        <input class="form-check-input mt-2" type="radio" id="referralSourcePaidYes" name="referralSourcePaid" value="yes" required onchange="handleInputChange(this, 'no')">
                                                     </div>
                                                     <div class="col-sm-3 form-check mt-2">
                                                         <label for="referralSourcePaidNo" class="col-form-label">No</label>
-                                                        <input class="form-check-input mt-2" type="radio" id="referralSourcePaidNo" name="referralSourcePaid" value="no">
+                                                        <input class="form-check-input mt-2" type="radio" id="referralSourcePaidNo" name="referralSourcePaid" value="no" onchange="handleInputChange(this, 'no')">
                                                     </div>
                                                     <div class="col-sm-5 form-check mt-2">
                                                         <label for="referralSourcePaidUnknown" class="col-form-label">Unknown</label>
-                                                        <input class="form-check-input mt-2" type="radio" id="referralSourcePaidUnknown" name="referralSourcePaid" value="unknown">
+                                                        <input class="form-check-input mt-2" type="radio" id="referralSourcePaidUnknown" name="referralSourcePaid" value="unknown" onchange="handleInputChange(this, 'no')">
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="referralSourcePaidWarning hidden">
-                                            <?php showAlert();?>
+                                        <div class="referralSourcePaidWarning commonClass commenHidden">
+                                            <?php showAlert("yes", "unknown", "no");?>
                                         </div>
                                     </li>
-                                    <li>
+                                    <li class="outerRadio">
                                         <div class="row-list">
                                             <p class="col-sm-4 col-form-label">Is the participant being referred from:
                                             </p>
@@ -1024,21 +1034,23 @@ function showAlert(){
                                                         <label for="referralSourceDigital" class="col-form-label">IP/
                                                             Crisis Res/
                                                             Mobile/ ACT/ RTC/ Incarceration</label>
-                                                        <input class="form-check-input mt-2" type="radio" id="referralSourceDigital" name="referralSource" value="yes" required>
+                                                        <input class="form-check-input mt-2" type="radio" id="referralSourceDigital" name="referralSource" value="IP/
+                                                            Crisis Res/
+                                                            Mobile/ ACT/ RTC/ Incarceration" required >
                                                     </div>
                                                     <div class="col-sm-3 form-check mt-2">
                                                         <label for="referralSourceOutpatient" class="col-form-label">Outpatient</label>
-                                                        <input class="form-check-input mt-2" type="radio" id="referralSourceOutpatient" name="referralSource" value="no">
+                                                        <input class="form-check-input mt-2" type="radio" id="referralSourceOutpatient" name="referralSource" value="Outpatient" >
                                                     </div>
                                                     <div class="col-sm-3 form-check mt-2">
                                                         <label for="referralSourceNeither" class="col-form-label">Neither</label>
-                                                        <input class="form-check-input mt-2" type="radio" id="referralSourceNeither" name="referralSource" value="unknown">
+                                                        <input class="form-check-input mt-2" type="radio" id="referralSourceNeither" name="referralSource" value="neither" >
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="referralSourceWarning hidden">
-                                            <?php showAlert();?>
+                                        <div class="referralSourceWarning commonClass commenHidden">
+                                            <?php showAlertParticipant();?>
                                         </div>
                                     </li>
                                     <li>
@@ -1225,7 +1237,7 @@ participation in community life.</p>
                     <div class="mt-4">
                         <!-- <button type="submit" class="btn btn-primary submit-btn">Submit</button> -->
                     </div>
- <button type="submit" class="btn btn-primary submit-btn me-4">Submit</button>
+ <button type="submit" class="btn btn-primary submit-btn me-4" id="submitButton">Submit</button>
                 </form>
 
                 <button id="scrollToTopBtn" class="btn btn-secondary"><i class="fa fa-arrow-up"></i></button>
@@ -1258,7 +1270,7 @@ participation in community life.</p>
         var diagnosisMinorArray = <?php echo json_encode($diagnosisMinorArray); ?>;
         var adultCheckobox = <?php echo json_encode($saticText['adultCheckobox']); ?>;
 
-
+        var submitButton = $('#submitButton');
         var diagnosisHeadingSpan = $('#diagnosisHeadingSpan');
         var firstOption = '<option value="">-Select-</option>';
         // Input elemets for Referring Professional Information form
@@ -1622,93 +1634,6 @@ participation in community life.</p>
                $('.FunctionalImpairmentNarrative').removeClass('hidden');
             });
 
-            
-            $('[name="individualNature"]').change(function() {
-                var value = $(this).val();
-                if (value === 'unknown') {
-                    $('.individualNatureWarning').removeClass('hidden');
-                }else{
-                    $('.individualNatureWarning').addClass('hidden'); 
-                } 
-            });
-
-            $('[name="individualIntensiveCare"]').change(function() {
-                var value = $(this).val();
-                if (value === 'unknown') {
-                    $('.individualIntensiveCareWarning').removeClass('hidden');
-                }else{
-                    $('.individualIntensiveCareWarning').addClass('hidden'); 
-                } 
-            });
-
-
-            $('[name="individualIntensivelevel"]').change(function() {
-                var value = $(this).val();
-                if (value === 'unknown') {
-                    $('.individualIntensivelevelWarning').removeClass('hidden');
-                }else{
-                    $('.individualIntensivelevelWarning').addClass('hidden'); 
-                } 
-            });
-
-
-            $('[name="supportConsidered"]').change(function() {
-                var value = $(this).val();
-                if (value === 'unknown') {
-                    $('.supportConsideredWarning').removeClass('hidden');
-                }else{
-                    $('.supportConsideredWarning').addClass('hidden'); 
-                } 
-            });
-
-
-            $('[name="eligibleDisableAdminService"]').change(function() {
-                var value = $(this).val();
-                if (value === 'unknown') {
-                    $('.eligibleDisableAdminServiceWarning').removeClass('hidden');
-                }else{
-                    $('.eligibleDisableAdminServiceWarning').addClass('hidden'); 
-                } 
-            });
-
-            $('[name="organicProcessOrSyndrome"]').change(function() {
-                var value = $(this).val();
-                if (value === 'unknown') {
-                    $('.organicProcessOrSyndromeWarning').removeClass('hidden');
-                }else{
-                    $('.organicProcessOrSyndromeWarning').addClass('hidden'); 
-                } 
-            });
-
-
-            $('[name="behavioralControl"]').change(function() {
-                var value = $(this).val();
-                if (value === 'unknown') {
-                    $('.behavioralControlWarning').removeClass('hidden');
-                }else{
-                    $('.behavioralControlWarning').addClass('hidden'); 
-                } 
-            });
-            
-
-            $('[name="lacksCapacityForPRP"]').change(function() {
-                var value = $(this).val();
-                if (value === 'unknown') {
-                    $('.lacksCapacityForPRPWarning').removeClass('hidden');
-                }else{
-                    $('.lacksCapacityForPRPWarning').addClass('hidden'); 
-                } 
-            });
-
-            $('[name="referralSourcePaid"]').change(function() {
-                var value = $(this).val();
-                if (value === 'unknown') {
-                    $('.referralSourcePaidWarning').removeClass('hidden');
-                }else{
-                    $('.referralSourcePaidWarning').addClass('hidden'); 
-                } 
-            });
-
             $('#diagnosis').change(function () {
                 var selectedValue = $(this).val();
                 $('#mentalDiagnosis').val(selectedValue);
@@ -1894,6 +1819,24 @@ participation in community life.</p>
                 submitButton.style.position = 'sticky';
             }
         };
+        function handleInputChange(element, removeClassRadio) {
+            var value = element.value;
+            var hiddenElement = $(element).closest('.outerRadio').find('.commonClass');
+            if (value != removeClassRadio) {
+                hiddenElement.removeClass('commenHidden');
+                // submitButton.prop('disabled', true);
+            } else {
+                hiddenElement.addClass('commenHidden');
+                // submitButton.prop('disabled', false);
+            }
+
+
+            if ($('body:has(.commenHidden)').length > 0) {
+                     submitButton.prop('disabled', true);
+                } else {
+                     submitButton.prop('disabled', false);
+                }
+        }
     </script>
 </body>
 

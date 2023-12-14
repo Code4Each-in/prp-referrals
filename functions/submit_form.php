@@ -3,8 +3,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 require_once  'databseConnection/db_connection.php';
-
-
+require_once  'insertData.php';
 ?>
 
 <!DOCTYPE html>
@@ -39,18 +38,50 @@ require_once  'databseConnection/db_connection.php';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $submittedData = [];
     foreach ($_POST as $key => $value) {
-        if($value != ''){
+        if($value == ''){
+            $value = null;
+        }
+        // if($value != ''){
             if(is_array($value)){
                 $submittedData[addUnderscoreBeforeCapital($key)]= implode(', ', $value);
             }else{
                 $submittedData[addUnderscoreBeforeCapital($key)] = $value;
             }
-        }
+        // }
        
     }
 
     $fieldsToInsert = ['referral_type', 'ref_date', 'ref_first_name', 'ref_last_name', 'credentials','affiliated_ref_organization','ref_clinician_phone','ref_clinician_email','ref_npi','services1','client_first_name','client_last_name','client_birth_date','client_gender','client_address','minor_age','services2','services3','services4', 'services5', 'services6','client_homeless','disorder','communicable_diseases','medications','discharged','arrested','client_grade','employed','receiving_treatment','currently_enrolled','individual_nature','individual_intensive_care','individual_intensivelevel','support_considered','eligible_disable_admin_service','organic_process_or_syndrome','behavioral_control','lacks_capacity_for_prp','referral_source_paid','referral_source','reason_for_insufficient_treatment' ];
 
+    $keyMapping = [
+        'services1' => 'housing - assisted living services - 24/7 supervision',
+        'services2' => 'housing - supportive housing services - day time supervision',
+        'services3' => 'psychiatry',
+        'services4' => 'medication management',
+        'services5' => 'mental health counseling',
+        'services6' => 'primary care',
+    ];
+    
+            $newArray = [];
+        foreach ($fieldsToInsert as $key) {
+            if (isset($submittedData[$key])) {
+                $newKey = $key;
+                $value = $submittedData[$key];
+                if(isset($keyMapping[$key])){
+                    $newKey = $keyMapping[$key];
+                    $value = 'yes';
+                }
+                $newKey = str_replace('_', ' ',$newKey);
+                $newArray[$newKey] = $value;
+
+            } else {
+                if(isset($keyMapping[$key])){
+                    $newKey = $keyMapping[$key];
+                }
+                $newKey = str_replace('_', ' ',$newKey);
+                $newArray[$newKey] = 'NA'; 
+            }
+        }
     $filteredArray = array_filter(
         $submittedData,
         function ($key) use ($fieldsToInsert) {
@@ -59,7 +90,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         ARRAY_FILTER_USE_KEY
     );
 
-    // echo '<pre>' ; print_r(array_keys($filteredArray)); echo '</pre>' ;
+    // echo '<pre>' ; print_r($newArray); echo '</pre>' ;
 
  $colName = implode(', ', array_keys($filteredArray));
  $colValues = array_values($filteredArray);
@@ -73,6 +104,10 @@ for ($i = 1; $i <= $limit; $i++) {
 $questionMark = implode(', ', $dynamicStrings);
 $insertData =  $db->query("INSERT INTO submit_form_data ($colName ) VALUES ( $questionMark )" , $colValues);
 
+// insert in sheet 
+$googleSheetsHandler = new GoogleSheetsHandler();
+$result = $googleSheetsHandler->insertData($newArray);
+$insertData = true;
     if($insertData){
         ?>
 <div class="container mt-4">
