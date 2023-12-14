@@ -1049,7 +1049,7 @@ function showAlertParticipant(){
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="referralSourceWarning commonClass commenHidden">
+                                        <div class="referralSourceWarning commonClass">
                                             <?php showAlertParticipant();?>
                                         </div>
                                     </li>
@@ -1832,9 +1832,10 @@ participation in community life.</p>
 
 
             if ($('body:has(.commenHidden)').length > 0) {
-                     submitButton.prop('disabled', true);
+                    //  submitButton.prop('disabled', true);
+
                 } else {
-                     submitButton.prop('disabled', false);
+                    //  submitButton.prop('disabled', false);
                 }
         }
     </script>
