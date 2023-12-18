@@ -4,6 +4,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 require_once  'databseConnection/db_connection.php';
 require_once  'insertData.php';
+require_once  'config.php';
 ?>
 
 <!DOCTYPE html>
@@ -36,22 +37,59 @@ require_once  'insertData.php';
 <body>
 <?php 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // echo '<pre>' ; print_r($_POST); echo '</pre>' ;
+
     $submittedData = [];
+    $questionnaireData = [];
+    $medicationFormData = [];
+    $submittedData['medications_description'] = null;
+    $submittedData['intenseServices'] = null;
+    $submittedData['diagnosis'] = null;
+    $submittedData['refDate'] = null;
+    $submittedData['refDate'] = null;
     foreach ($_POST as $key => $value) {
         if($value == ''){
             $value = null;
         }
         // if($value != ''){
-            if(is_array($value)){
-                $submittedData[addUnderscoreBeforeCapital($key)]= implode(', ', $value);
-            }else{
-                $submittedData[addUnderscoreBeforeCapital($key)] = $value;
+
+            if($key === 'questionnaire'){
+                $questionnaireData[] = $value;
             }
+            elseif(is_array($value)){
+                if(isset($submittedData['medications']) && $submittedData['medications'] === 'yes' && $key === 'medication'){
+
+                    $medicationFormData[] = $value ;
+                }
+
+                if(isset($submittedData['individual_intensivelevel']) && $submittedData['individual_intensivelevel'] === 'yes' && $key === 'intenseServices'){
+                    $submittedData[addUnderscoreBeforeCapital($key)]= implode(', ', $value);
+
+                }
+
+            }else{
+                // if($key === 'medicationsNoRadio' && $value != ''){
+                //     $submittedData['medications_description'] = $value;
+                // }elseif ($key === 'medicationsNoRadio' && $value != ''){
+
+                // }
+                
+                if (isset($submittedData['medications'])){
+                    if ($submittedData['medications'] === 'no' && $key === 'medicationsNoRadio') {
+                        $submittedData['medications_description'] = $value;
+                    }elseif($submittedData['medications'] === 'yes' && $key === 'medicationTreatment'){
+                        $submittedData['medications_description'] = $value;
+                    }
+                }
+
+             
         // }
-       
+        $submittedData[addUnderscoreBeforeCapital($key)] = $value;
+
+            }
     }
 
-    $fieldsToInsert = ['referral_type', 'ref_date', 'ref_first_name', 'ref_last_name', 'credentials','affiliated_ref_organization','ref_clinician_phone','ref_clinician_email','ref_npi','services1','client_first_name','client_last_name','client_birth_date','client_gender','client_address','minor_age','services2','services3','services4', 'services5', 'services6','client_homeless','disorder','communicable_diseases','medications','discharged','arrested','client_grade','employed','receiving_treatment','currently_enrolled','individual_nature','individual_intensive_care','individual_intensivelevel','support_considered','eligible_disable_admin_service','organic_process_or_syndrome','behavioral_control','lacks_capacity_for_prp','referral_source_paid','referral_source','reason_for_insufficient_treatment' ];
+    $fieldsToInsert = ['referral_type', 'ref_date', 'ref_first_name', 'ref_last_name', 'credentials','affiliated_ref_organization','ref_clinician_phone','ref_clinician_email','ref_npi','services1','client_first_name','client_last_name','client_birth_date','client_gender','client_address','minor_age','services2','services3','services4', 'services5', 'services6','client_homeless','disorder','communicable_diseases','medications','discharged','arrested','client_grade','employed','receiving_treatment','currently_enrolled','individual_nature','individual_intensive_care','individual_intensivelevel','support_considered','eligible_disable_admin_service','organic_process_or_syndrome','behavioral_control','lacks_capacity_for_prp','referral_source_paid','referral_source','reason_for_insufficient_treatment' , 'diagnosis', 'medications_description', 'intense_services'];
 
     $keyMapping = [
         'services1' => 'housing - assisted living services - 24/7 supervision',
@@ -90,7 +128,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         ARRAY_FILTER_USE_KEY
     );
 
-    // echo '<pre>' ; print_r($newArray); echo '</pre>' ;
+    // echo '<pre>' ; print_r($filteredArray); echo '</pre>' ;
 
  $colName = implode(', ', array_keys($filteredArray));
  $colValues = array_values($filteredArray);
@@ -103,6 +141,65 @@ for ($i = 1; $i <= $limit; $i++) {
 
 $questionMark = implode(', ', $dynamicStrings);
 $insertData =  $db->query("INSERT INTO submit_form_data ($colName ) VALUES ( $questionMark )" , $colValues);
+$submit_fromId = $db->lastInsertID();
+
+// insert questionnaire Data 
+
+// Get client Sheet data 
+$saticText = Secret::saticText();
+$questionnaireValue = [];
+$questionnaireDataSheet = [];
+foreach ($questionnaireData as $key => $value) {
+$ageCheckbox = '';
+    foreach ($value as $impairment_questionnaire_name => $impairment_questionnaire_data) {
+        $ageCheckbox = $impairment_questionnaire_name;
+        // echo '<pre>' ; print_r($value); echo '</pre>' ;
+        $questionnaireDataSheet[] = $impairment_questionnaire_data;
+       $insertData =  $db->query("INSERT INTO submitted_impairment_questionnaire (submit_form_id,  impairment_questionnaire_name ) VALUES ( ?, ? )" , $submit_fromId, $impairment_questionnaire_name);
+        $impairment_questionnaire_id = $db->lastInsertID();
+
+        $insertData =  $db->query("INSERT INTO submitted_impairment_questionnaire_data (impairment_questionnaire_id, mental_health_diagnosis,  symptom, Symptom_experience_date, client_issue, namely, specifically, client_need, intervention, intervention_specifically, specific_need_area, long_term_goal, short_term_goal ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )" , $impairment_questionnaire_id, $impairment_questionnaire_data['mentalDiagnosis'], $impairment_questionnaire_data['symptom'], $impairment_questionnaire_data['experienced'], $impairment_questionnaire_data['clientIssue'], $impairment_questionnaire_data['namely'], $impairment_questionnaire_data['specifically'], $impairment_questionnaire_data['clientAdditionalInformation'], $impairment_questionnaire_data['intervention'], $impairment_questionnaire_data['specificallyIntervention'], $impairment_questionnaire_data['serviceAdditionalInformation'], $impairment_questionnaire_data['clientLongTermGoal'], $impairment_questionnaire_data['clientShortTermGoal']);
+
+    ///for sheet 
+    $checkbox = [];
+    if (strpos($ageCheckbox, "adult") !== false) {
+        $checkbox = $saticText['adultCheckobox'];
+       
+    } elseif (strpos($ageCheckbox, "minor") !== false) {
+        $checkbox = $saticText['minorCheckobox'];
+    }
+
+
+    if (isset($checkbox[$ageCheckbox])) {
+      $questionnaireValue[] = $checkbox[$ageCheckbox];
+  } 
+    }
+}
+
+$medicationFormDataSheet = [];
+if(count($medicationFormData) > 0){
+foreach ($medicationFormData as $key => $medicationFormValue) {
+    $ageCheckbox = '';
+        foreach ($medicationFormValue as $eachcol => $eachValue) {
+           $insertData =  $db->query("INSERT INTO medication_form_data (submit_form_id,  name, dosage, frequency ) VALUES ( ?, ? , ?, ?)" , $submit_fromId, $eachValue['name'], $eachValue['dosage'], $eachValue['frequency']);
+
+   // insert insheet 
+
+   $medicationFormDataSheet[]= $eachValue;
+        }
+    }
+}
+
+$newArray['medication Detail'] = json_encode($medicationFormDataSheet, JSON_PRETTY_PRINT);
+
+$questionnaireValue = json_encode($questionnaireValue, JSON_PRETTY_PRINT);
+$newArray['Functional impairment questionnaire'] = $questionnaireValue;
+
+foreach ($questionnaireDataSheet as $key => $sheetValue) {
+    $newArray[] = json_encode($sheetValue, JSON_PRETTY_PRINT);
+
+}
+// echo '<pre>' ; print_r($newArray); echo '</pre>' ;
 
 // insert in sheet 
 $googleSheetsHandler = new GoogleSheetsHandler();
