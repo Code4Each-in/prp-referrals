@@ -31,7 +31,7 @@ class Secret
     {
         return [
             'sheetName' => 'SECTION 2: CONSUMER INFORMATION ',
-            'keys' => ['firstName', 'lastName', 'dob', 'gender', 'diagnosis', 'medication', 'clientMedicaidNumber', 'clientSocialSecurityNumber', 'address', 'minor', 'schoolGrade']
+            'keys' => ['firstName', 'lastName', 'dob', 'gender', 'diagnosis', 'Diagnosis-DB','medication', 'medicationName', 'test', 'test4', 'clientMedicaidNumber', 'clientSocialSecurityNumber', 'address', 'test1', 'schoolGrade']
         ];
     }
 

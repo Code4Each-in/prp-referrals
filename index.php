@@ -566,28 +566,28 @@ function showAlertParticipant()
                                                 for ($i = 0; $i <= 3; $i++) {
                                                 ?>
                                                     <tr>
-                                                        <td> <select class="form-select" aria-label="Default select example" name="medication[<?php echo $i; ?>][name]" id="medicationName<?php echo $i; ?>">
+                                                        <td> <select class="form-select emptySelect" aria-label="Default select example" name="medication[<?php echo $i; ?>][name]" id="medicationName<?php echo $i; ?>">
                                                                 <option value=""></option>
                                                                 <?php
                                                                 foreach ($medicationName as $name) {
-                                                                    echo '<option value="' . htmlspecialchars($name['name']) . '" >' . $name['name'] . '</option>';
+                                                                    echo '<option value="' . htmlspecialchars($name['name']) . '" data-medicationnameid = "' .$name['id']. '">' . $name['name'] . '</option>';
                                                                 }
                                                                 ?>
                                                             </select></td>
-                                                        <td> <select class="form-select" aria-label="Default select example" name="medication[<?php echo $i; ?>][dosage]" id="medicationDosage<?php echo $i; ?>">
+                                                        <td> <select class="form-select emptySelect" aria-label="Default select example" name="medication[<?php echo $i; ?>][dosage]" id="medicationDosage<?php echo $i; ?>">
                                                                 <option value=""></option>
                                                                 <?php
                                                                 foreach ($medicationDosage as $dosage) {
-                                                                    echo '<option value="' . htmlspecialchars($dosage['medication_dosage']) . '" >' . $dosage['medication_dosage'] . '</option>';
+                                                                    echo '<option value="' . htmlspecialchars($dosage['medication_dosage']) . '"   data-medicationdoseid = "' .$dosage['id']. '">' . $dosage['medication_dosage'] . '</option>';
                                                                 }
                                                                 ?>
                                                             </select></td>
-                                                        <td> <select class="form-select" aria-label="Default select example" name="medication[<?php echo $i; ?>][frequency]">" id="medicationFrequency<?php echo $i; ?>">
+                                                        <td> <select class="form-select emptySelect" aria-label="Default select example" name="medication[<?php echo $i; ?>][frequency]" id="medicationFrequency<?php echo $i; ?>">
                                                                 <option value=""></option>
 
                                                                 <?php
-                                                                foreach ($medicationFrequency as $dosage) {
-                                                                    echo '<option value="' . htmlspecialchars($dosage['frequency']) . '" >' . $dosage['frequency'] . '</option>';
+                                                                foreach ($medicationFrequency as $frequency) {
+                                                                    echo '<option value="' . htmlspecialchars($frequency['frequency']) . '" data-medicationfrequencyid = "' .$frequency['id']. '" >' . $frequency['frequency'] . '</option>';
                                                                 }
                                                                 ?>
                                                             </select></td>
@@ -1068,17 +1068,19 @@ function showAlertParticipant()
 
                     <div class="card minorQuestionnaire hidden">
                         <div class="card-header">
-                            <h5><span id="diagnosisHeadingSpan">Minor</span> Questionnaire</h5>
+                            <h5><span class="diagnosisHeadingSpan">Minor</span> Questionnaire</h5>
                         </div>
                         <div class="card-body">
                             <div class="card mb-3">
                                 <div class="card-header">
-                                    <h5>Mental Health diagnosis (<span id="diagnosisHeadingSpan"> Adult</span>)</h5>
+                                    <h5>Mental Health diagnosis (<span class="diagnosisHeadingSpan"> Adult</span>)</h5>
                                 </div>
                                 <div class="card-body">
                                     <label for="diagnosis" class="form-label">What is the client's primary mental health diagnosis? <span class="text-danger">*</span></label>
-                                    <select class="form-select" aria-label="Default select example" name="diagnosis" id="diagnosis">
+                                    <select class="form-select emptySelect" aria-label="Default select example" name="diagnosis" id="diagnosis" required>
                                     </select>
+                                    <div class="invalid-feedback">Please enter the lient's primary mental health diagnosis.
+</div>
 
                                 </div>
 
@@ -1086,7 +1088,7 @@ function showAlertParticipant()
 
                             <div class="card">
                                 <div class="card-header">
-                                    <h5>Functional impairment questionnaire (<span id="diagnosisHeadingSpan"> Adult</span>)</h5>
+                                    <h5>Functional impairment questionnaire (<span class="diagnosisHeadingSpan"> Adult</span>)</h5>
                                 </div>
                                 <div class="card-body">
                                     <div class="card-body">
@@ -1095,143 +1097,12 @@ function showAlertParticipant()
                                             <label class="col-sm-12 col-form-label">To be considered evidence of impaired role functioning at least three of the following must have been present on a continuing or intermittent basis. If to your knowledge, the individual demonstrates impaired role functioning in the specified areas for at least two years, select the areas below. If not, stop, and do not complete this form. <span class="text-danger">*</span></label>
                                             <div id="checkboxContainer">
                                             </div>
-
+                                            
                                         </div>
+                                        <div id="checkboxWarning">
+                                            </div>
                                         <div id="templateContainer">
                                             </div>
-                                        <!-- <form >
-                                        <?php 
-                                        // include 'functions/new.php';
-                                        ?>
-
-
-<?php 
-                                        // include 'functions/new.php';
-                                        ?>
- <button type="button" class="btn btn-primary" >Submit</button>
-                                            </form > -->
-
-                                    <!-- <div class="card hidden FunctionalImpairmentNarrative">
-                                            <div class="card-header">
-                                                <h5><span id="diagnosisHeadingSpan">Adult </span>Functional Narrative Impairment #1</h5>
-                                            </div> -->
-                                            <!-- <div class="card-body">
-                                                <div class="card-body">
-
-                                                    <p> State priority population diagnosis, the onset/duration of diagnosis, and the DSM‐V symptom of the underlying priority population diagnosis that is presented by the client which adversely affects the functional impairment.</p>
-
-                                                    <p> State how the symptom adversely affects the functional impairment.</p>
-                                                    <p> State how the PRP can assist the client to
-                                                        improve or restore independent living and
-                                                        social skills necessary to support the
-                                                        individual's recovery, ability to make
-                                                        informed decisions and choices, and
-                                                        participation in community life.</p>
-                                                    <p> To be considered evidence of impaired role functioning at least three of the following must have been present on a continuing or intermittent basis. If to your knowledge, the individual demonstrates impaired role functioning in the specified areas for at least two years, select the areas below. If not, stop, and do not complete this form.</p>
-
-                                                    <p>Marked inability to establish or maintain independent competitive employment characterized by an established pattern of unemployment; underemployment; or sporadic employment that is primarily attributable to a diagnosed serious mental illness; which requires intervention by the behavioral health system beyond what is available to the individual from by mainstream workforce development; educational; faith-based; community or social service organizations. This does not include limitations due to factors such as geographic location; poverty; lack of education; availability of transportation; or loss of driver's license due to legal problems.</p>
-
-                                                    <div class="mb-3 row">
-                                                        <label for="mentalDiagnosis" class="col-sm-4 col-form-label">Client's mental health diagnosis is:</label>
-                                                        <div class="col-sm-6">
-                                                            <input type="text" class="form-control" id="mentalDiagnosis" name="mentalDiagnosis">
-                                                        </div>
-                                                    </div>
-                                                    <div class="mb-3 row">
-                                                        <label for="symptom" class="form-label">Which symptom of the above diagnosis impairs the client's functioning in this domain?</label>
-                                                        <select class="form-select" aria-label="Default select example" name="symptom" id="symptom">
-
-                                                        </select>
-
-                                                    </div>
-
-                                                    <div class="mb-3 row">
-                                                        <label for="experienced" class="col-sm-4 col-form-label">[Client], has experienced [Symptom of diagnosis] since [Onset date]:</label>
-                                                        <div class="col-sm-6">
-                                                            <input type="text" class="form-control" id="experienced" name="experienced">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="mb-3 row">
-                                                        <label for="clientIssue" class="form-label">7. Client presents with issues regarding...</label>
-                                                        <select class="form-select" aria-label="Default select example" name="clientIssue" id="clientIssue">
-                                                            <option value="">--Select--</option>
-
-                                                            <?php
-                                                            foreach ($clientIssue as $issue) {
-                                                                echo '<option value="' . htmlspecialchars(trim($issue['issue'])) . '" data-issueId="' . $issue['id'] . '" >' . $issue['issue'] . '</option>';
-                                                            }
-                                                            ?>
-                                                        </select>
-
-                                                    </div>
-                                                    <div class="mb-3 row">
-                                                        <label for="namely" class="form-label">8. Namely, the client's ...</label>
-                                                        <select class="form-select" aria-label="Default select example" name="namely" id="namely">
-                                                            <option value="">--Select--</option>
-                                                        </select>
-
-                                                    </div>
-                                                    <div class="mb-3 row">
-                                                        <label for="specifically" class="form-label">9. Specifically...</label>
-                                                        <select class="form-select" aria-label="Default select example" name="specifically" id="specifically">
-                                                            <option value="">--Select--</option>
-                                                        </select>
-
-                                                    </div>
-
-                                                    <div class="mb-3 row">
-                                                        <label for="clientAdditionalInformation" class="form-label">10. Additional information on the client's need in this area:</label>
-                                                        <select class="form-select" aria-label="Default select example" name="clientAdditionalInformation" id="clientAdditionalInformation">
-                                                            <option value="">--Select--</option>
-                                                        </select>
-
-                                                    </div>
-                                                    <div class="mb-3 row">
-                                                        <label for="intervention" class="form-label">11. The following intervention was implemented:</label>
-                                                        <select class="form-select" aria-label="Default select example" name="intervention" id="intervention">
-                                                            <option value="">--Select--</option>
-                                                        </select>
-
-                                                    </div>
-
-
-                                                    <div class="mb-3 row">
-                                                        <label for="specificallyIntervention" class="form-label">12. Specifically, an example for a planned intervention is to:</label>
-                                                        <select class="form-select" aria-label="Default select example" name="specificallyIntervention" id="specificallyIntervention">
-                                                            <option value="">--Select--</option>
-                                                        </select>
-
-                                                    </div>
-
-
-                                                    <div class="mb-3 row">
-                                                        <label for="serviceAdditionalInformation" class="form-label">13. Additional information on services to address this specific need area:</label>
-                                                        <select class="form-select" aria-label="Default select example" name="serviceAdditionalInformation" id="serviceAdditionalInformation">
-                                                            <option value="">--Select--</option>
-                                                        </select>
-
-                                                    </div>
-
-                                                    <div class="mb-3 row">
-                                                        <label for="clientLongTermGoal" class="form-label">14. Client's long term goal to address this impairment is..</label>
-                                                        <select class="form-select" aria-label="Default select example" name="clientLongTermGoal" id="clientLongTermGoal">
-                                                            <option value="">--Select--</option>
-                                                        </select>
-
-                                                    </div>
-
-                                                    <div class="mb-3 row">
-                                                        <label for="clientShortTermGoal" class="form-label">15. Client's short term goal to address this impairment is..</label>
-                                                        <select class="form-select" aria-label="Default select example" name="clientShortTermGoal" id="clientShortTermGoal">
-                                                            <option value="">--Select--</option>
-                                                        </select>
-
-                                                    </div>
-                                                </div>
-
-                                            </div> -->
-                                        <!-- </div>  -->
                                     </div>
 
                                 </div>
@@ -1280,10 +1151,13 @@ function showAlertParticipant()
         var diagnosisMinorArray = <?php echo json_encode($diagnosisMinorArray); ?>;
         var adultCheckobox = <?php echo json_encode($saticText['adultCheckobox']); ?>;
         var clientIssue = <?php echo json_encode($clientIssue); ?>;
+        var consumerInformation = <?php echo json_encode($consumerInformation); ?>;
 
+console.log(clientSheetData, 'ccccccccccccc');
+console.log(consumerInformation, 'aaaaaaaaaaaa');
 
         var submitButton = $('#submitButton');
-        var diagnosisHeadingSpan = $('#diagnosisHeadingSpan');
+        var diagnosisHeadingSpan = $('.diagnosisHeadingSpan');
         var firstOption = '<option value="">-Select-</option>';
         // Input elemets for Referring Professional Information form
         var refFirstName = $('#refFirstName');
@@ -1349,95 +1223,10 @@ function showAlertParticipant()
                 }
                 return null;
             }
+
+            
         })();
 
-
-        // (function() {
-        //     'use strict';
-
-        //     var form = document.getElementById('contactForm');
-        //     form.addEventListener('submit', function(event) {
-        //         var checkboxes = form.querySelectorAll('input.checkbox-group[type="checkbox"]');
-        //         var atLeastOneChecked = Array.from(checkboxes).some(function(checkbox) {
-        //             return checkbox.checked;
-        //         });
-        //         console.log(atLeastOneChecked, 'oooooooooooo');
-
-        //         if (!atLeastOneChecked) {
-        //         console.log(atLeastOneChecked, 'oooooooooooo');
-
-        //             event.preventDefault();
-        //             event.stopPropagation();
-        //             form.querySelector('.invalid-feedback').style.display = 'block';
-        //         } else {
-        //             form.querySelector('.invalid-feedback').style.display = 'none';
-        //         }
-
-        //         if (!form.checkValidity()) {
-        //             event.preventDefault();
-        //             event.stopPropagation();
-        //         }
-
-        //         form.classList.add('was-validated');
-        //     }, false);
-
-        //     // Show validation feedback on blur for checkboxes
-        //     form.addEventListener('blur', function(event) {
-        //         if (event.target.type === 'checkbox') {
-        //             var atLeastOneChecked = Array.from(form.querySelectorAll('input.checkbox-group[type="checkbox"]')).some(function(checkbox) {
-        //                 return checkbox.checked;
-        //             });
-
-        //             if (!atLeastOneChecked) {
-        //                 form.querySelector('.invalid-feedback').style.display = 'block';
-        //             } else {
-        //                 form.querySelector('.invalid-feedback').style.display = 'none';
-        //             }
-        //         } else if (event.target.tagName === 'INPUT') {
-        //             if (!event.target.checkValidity()) {
-        //                 event.target.classList.add('is-invalid');
-        //             } else {
-        //                 event.target.classList.remove('is-invalid');
-        //             }
-        //         }
-        //     }, true);
-        // })();
-        // (function() {
-        //     'use strict';
-
-        //     var form = document.getElementById('contactForm');
-        //     form.addEventListener('submit', function(event) {
-        //         var radioGroup = form.querySelector('input[name="options"]:checked');
-
-        //         if (!radioGroup) {
-        //             event.preventDefault();
-        //             event.stopPropagation();
-        //             form.querySelector('.invalid-feedback').style.display = 'block';
-        //         } else {
-        //             form.querySelector('.invalid-feedback').style.display = 'none';
-        //         }
-
-        //         if (!form.checkValidity()) {
-        //             event.preventDefault();
-        //             event.stopPropagation();
-        //         }
-
-        //         form.classList.add('was-validated');
-        //     }, false);
-
-        //     // Show validation feedback on blur for radio buttons
-        //     form.addEventListener('blur', function(event) {
-        //         if (event.target.type === 'radio' && event.target.name === 'options') {
-        //             var radioGroup = form.querySelector('input[name="options"]:checked');
-
-        //             if (!radioGroup) {
-        //                 form.querySelector('.invalid-feedback').style.display = 'block';
-        //             } else {
-        //                 form.querySelector('.invalid-feedback').style.display = 'none';
-        //             }
-        //         }
-        //     }, true);
-        // })();
         // on change first name of Referring Professional Information form 
         var refFirstName = document.getElementById('refFirstName');
         refFirstName.addEventListener('input', function() {
@@ -1501,9 +1290,9 @@ function showAlertParticipant()
             var clientInputValue = $(this).val();
             for (var i = 0; i < clientNameOptions.length; i++) {
                 if (clientNameOptions[i].value === clientInputValue) {
-                    var matchingClientObjects = clientSheetData.filter(function(obj) {
-                        var trimmedFirstName = obj.firstName.trim().toLowerCase();
-                        var trimmedLastName = obj.lastName.trim().toLowerCase();
+                    var matchingClientObjects = consumerInformation.filter(function(obj) {
+                        var trimmedFirstName = obj.client_first_name.trim().toLowerCase();
+                        var trimmedLastName = obj.client_last_name.trim().toLowerCase();
                         var fullName = (trimmedFirstName + ' ' + trimmedLastName);
                         var trimmedInputValue = clientInputValue.toLowerCase();
                         return fullName === trimmedInputValue;
@@ -1512,20 +1301,23 @@ function showAlertParticipant()
                     if (matchingClientObjects.length > 0) {
                         console.log(matchingClientObjects);
                         var matchingClientObject = matchingClientObjects[0];
-                        $(this).val(matchingClientObject.firstName)
-                        clientLastName.val(matchingClientObject.lastName);
-
-                        console.log(calculateAge(matchingClientObject.dob), 'ppppppppp');
+                        $(this).val(matchingClientObject.client_first_name)
+                        clientLastName.val(matchingClientObject.client_last_name);
+                        var userAge = calculateAge(matchingClientObject.client_dob);
+                        console.log(calculateAge(matchingClientObject.client_dob), 'ppppppppp');
                         //Set date 
-                        clientBirthDate.val(convertDateFormat(matchingClientObject.dob));
+                        // clientBirthDate.val(convertDateFormat(matchingClientObject.dob));
+                        clientBirthDate.val(matchingClientObject.client_dob);
+
+                        
 
                         //SET GENDER
-                        if (matchingClientObject.gender != null) {
+                        if (matchingClientObject.client_gender != null) {
 
-                            var cleintGenderToCheck = matchingClientObject.gender;
+                            var cleintGenderToCheck = matchingClientObject.client_gender;
 
-                            if (matchingClientObject.gender.toLowerCase().indexOf("minor") !== -1) {
-                                cleintGenderToCheck = matchingClientObject.gender.replace(/\s*\(minor\)/i, '');
+                            if (matchingClientObject.client_gender.toLowerCase().indexOf("minor") !== -1) {
+                                cleintGenderToCheck = matchingClientObject.client_gender.replace(/\s*\(minor\)/i, '');
                             }
                             var radioToCheck = $('input[name="clientGender"][value="' + cleintGenderToCheck + '"]');
 
@@ -1533,39 +1325,70 @@ function showAlertParticipant()
                             if (radioToCheck.length > 0) {
                                 radioToCheck.prop('checked', true);
                             }
+
+                            var selectedType = '';
+                            if(userAge >= 18){
+                                $("#minorNo").prop("checked", true);
+                                selectedType = 'no';
+                            }else{
+                                $("#minorYes").prop("checked", true);
+                                selectedType = 'yes';
+                            }
+
+                            clientAgeOnchange(selectedType);
+
+
                         }
 
                         // SET SECURITY NUMBER
-                        if (matchingClientObject.clientSocialSecurityNumber && matchingClientObject
-                            .clientSocialSecurityNumber != "--") {
-                            clientSecurityNumber.val(matchingClientObject.clientSocialSecurityNumber);
+                        if (matchingClientObject.client_social_security_no && matchingClientObject
+                            .client_social_security_no != "--") {
+                            clientSecurityNumber.val(matchingClientObject.client_social_security_no);
                         } else {
                             clientSecurityNumber.val("");
                         }
 
 
                         // SET ADDRESS
-                        if (matchingClientObject.address && matchingClientObject.address != null) {
-                            clientAddress.val(matchingClientObject.address);
+                        if (matchingClientObject.client_address && matchingClientObject.client_address != null) {
+                            clientAddress.val(matchingClientObject.client_address);
                         } else {
                             clientAddress.val("");
                         }
 
                         //SET CLIENT MINOR 
-                        if (matchingClientObject.minor && matchingClientObject.minor != "") {
-                            if (matchingClientObject.minor.toLowerCase() == "yes") {
+                        if (matchingClientObject.is_client_minor && matchingClientObject.is_client_minor != "") {
+                            if (matchingClientObject.is_client_minor.toLowerCase() == "minor") {
                                 $("#minorYes").prop('checked', true);
                             }
-                            if (matchingClientObject.minor.toLowerCase() == "no") {
+                            if (matchingClientObject.is_client_minor.toLowerCase() == "adult") {
                                 $("#minorNo").prop('checked', true);
                             }
                         }
                         // SET ADDRESS
-                        if (matchingClientObject.schoolGrade && matchingClientObject.schoolGrade != null) {
-                            clientGrade.val(matchingClientObject.schoolGrade);
+                        if (matchingClientObject.client_highest_grade && matchingClientObject.client_highest_grade != null) {
+                            clientGrade.val(matchingClientObject.client_highest_grade);
                         } else {
                             clientGrade.val("");
                         }
+
+                        clientGrade.val(matchingClientObject.client_highest_grade);
+
+                        // set medication 
+                        if (matchingClientObject.current_medication && matchingClientObject.current_medication != "") {
+                            if (matchingClientObject.current_medication.toLowerCase() == "yes") {
+                                $("#medicationsYes").prop('checked', true);
+                                $("#medicationsPrescribedYes").prop('checked', true);
+                                $('#medicationsYesRadioDiv').removeClass('hidden');
+                                $('#medicationTable').removeClass('hidden');
+
+                                getClientMedication(matchingClientObject.id);
+
+                            }else if (matchingClientObject.current_medication.toLowerCase() == "no active medications") {
+                                $("#medicationsNone").prop('checked', true);
+                            }
+                        }
+                        $('#diagnosis option[data-diagnosisid="' + matchingClientObject.diagnosis_id + '"]').prop('selected', true);
                     } else {
                         emptyClientForm();
                     }
@@ -1583,7 +1406,10 @@ function showAlertParticipant()
             clientAddress.val('');
             clientGrade.val('');
             $('input[name="clientGender"]').prop('checked', false);
+            $('input[name="medications"]').prop('checked', false);
             $('input[name="minorAge"]').prop('checked', false);
+            $('select.emptySelect').val('');
+            $('input[name="medicationsPrescribed"]').prop('checked', false);
         }
 
         // change date format
@@ -1658,42 +1484,39 @@ function showAlertParticipant()
             });
 
 
-            //
+            //on minor age change radio
             $('[name="minorAge"]').change(function() {
-                // Get the selected value
-                $('.minorQuestionnaire').removeClass('hidden');
                 var selectedType = $(this).val();
-
-                $('#diagnosisSelect').empty();
-                var diagnosisHeadingSpan = $('#diagnosisHeadingSpan');
-                // Add new options based on the selected radio value
-
-                if (selectedType === 'yes') {
-                    $('#diagnosis').empty();
-                    diagnosisHeadingSpan.text('Minor');
-                    $('#diagnosis').append(firstOption);
-                    $.each(diagnosisMinorArray, function(index, option) {
-                        $('#diagnosis').append('<option value="' + option.diagnosis_name + '" data-diagnosisid="' + option.id + '">' + option.diagnosis_name + '</option> ');
-                    });
-                } else if (selectedType === 'no') {
-                    $('#diagnosis').empty();
-                    diagnosisHeadingSpan.text('Adult');
-                    $('#diagnosis').append(firstOption);
-                    $.each(diagnosisAdultArray, function(index, option) {
-                        $('#diagnosis').append('<option value="' + option.diagnosis_name + '" data-diagnosisid="' + option.id + '">' + option.diagnosis_name + '</option>');
-                    });
-                    $('#checkboxContainer').empty();
-                    $.each(adultCheckobox, function(index, item) {
-                        var createRow = '<div class="row"><label for="functionalImpairment-' + index + '" class="col-sm-8 col-form-label">' + item + '</label><div class="col-sm-2 form-check mt-2"><input class="form-check-input functionalImpairment" type="checkbox" id="functionalImpairment-' + index + '" name="functionalImpairment" value="' + index + '"></div></div>';
-
-                        // checkboxDiv.append(createRow);
-                        $('#checkboxContainer').append(createRow);
-                    });
-                }
+                clientAgeOnchange(selectedType);
             });
 
+        
+           // on change functional Impairment
             $(document).on("change", '.functionalImpairment', function() {
+                var minorAge = $('input[name="minorAge"]:checked');
+                var minorAgeValue = minorAge.val();
+                var number = 4;
+                if(minorAgeValue === 'yes'){
+                    number = 2;
+                }
+                $('#checkboxWarning').empty();
+                var checkedCheckboxes = $('.functionalImpairment:checked').length;
+                console.log("Number of checked checkboxes: " + checkedCheckboxes);
                 $('.FunctionalImpairmentNarrative').removeClass('hidden');
+               
+                var alertHtml = `<div class="alert alert-danger d-flex align-items-center " role="alert">
+                    <div>
+                    <i class="bi-exclamation-octagon-fill"></i> Select At least ${number} checkbox otherwise ,you will not be able to complete this form and the
+                    submission buttion will be disabled.
+                    </div>
+                </div>`;
+                if(checkedCheckboxes >= number){
+                    $('#checkboxWarning').empty();
+                    submitButton.prop('disabled', false);
+                }else{
+                    $('#checkboxWarning').append(alertHtml);
+                    submitButton.prop('disabled', true);
+                }
             });
 
             $('#diagnosis').change(function() {
@@ -1722,70 +1545,7 @@ function showAlertParticipant()
                 });
             });
 
-          
-
-
-            // $(document).on("change", '#namely', function() {
-            //     var selectedValue = $(this).val();
-            //     var selectedOption = $(this).find(':selected');
-            //     var clientIssueId = selectedOption.data('issueid');
-            //     var clientNameleyId = selectedOption.data('namelyid');
-            //     $.ajax({
-            //         url: 'functions/getClientSpecifically.php',
-            //         type: 'POST',
-            //         data: {
-            //             clientIssueId: clientIssueId,
-            //             clientNameleyId: clientNameleyId,
-
-            //         },
-            //         success: function(response) {
-            //             var responseData = JSON.parse(response);
-            //             $('#specifically').empty();
-            //             $('#specifically').append(firstOption);
-            //             if (responseData.length > 0) {
-            //                 $.each(responseData, function(index, option) {
-            //                     $('#specifically').append('<option value="' + option.name + '" data-specificallyid="' + option.id + '">' + option.name + '</option> ');
-            //                 });
-            //             } else {
-            //                 $('#specifically').empty();
-            //                 $('#specifically').append(firstOption);
-            //             }
-            //         },
-            //         error: function() {}
-            //     });
-            // });
-
-            // $(document).on("change", '#intervention', function() {
-         
-            //     var selectedValue = $(this).val();
-            //     var selectedOption = $(this).find(':selected');
-            //     var clientIssueId = selectedOption.data('issueid');
-            //     var interventionId = selectedOption.data('interventionid');
-            //     $.ajax({
-            //         url: 'functions/getClientSpecificallyIntervention.php',
-            //         type: 'POST',
-            //         data: {
-            //             clientIssueId: clientIssueId,
-            //             interventionId: interventionId,
-
-            //         },
-            //         success: function(response) {
-            //             var responseData = JSON.parse(response);
-            //             $('#specificallyIntervention').empty();
-            //             $('#specificallyIntervention').append(firstOption);
-            //             if (responseData.length > 0) {
-            //                 $.each(responseData, function(index, option) {
-            //                     $('#specificallyIntervention').append('<option value="' + option.name + '" data-specificallyInterventionid="' + option.id + '">' + option.name + '</option> ');
-            //                 });
-            //             } else {
-            //                 $('#specificallyIntervention').empty();
-            //                 $('#specificallyIntervention').append(firstOption);
-            //             }
-            //         },
-            //         error: function() {}
-            //     });
-            // });
-
+// srcoll window at first error 
             $(window).scroll(function() {
                 if ($(this).scrollTop() > 100) {
                     $('#scrollToTopBtn').fadeIn();
@@ -1803,6 +1563,7 @@ function showAlertParticipant()
         });
 
 
+// to go on top button js
         window.onscroll = function() {
             var submitButton = document.querySelector('.submit-btn');
             var form = document.querySelector('form');
@@ -1814,6 +1575,8 @@ function showAlertParticipant()
             }
         };
 
+
+        // refral form input change
         function handleInputChange(element, removeClassRadio) {
             var value = element.value;
             var hiddenElement = $(element).closest('.outerRadio').find('.commonClass');
@@ -1834,9 +1597,8 @@ function showAlertParticipant()
         }
 
 
-        // function handleCheckbox() {
+      
             $(document).on("change", 'input[name="functionalImpairment"]', function() {
-            console.log("jskfh");
     var selectedCheckboxValues = $('input[name="functionalImpairment"]:checked').map(function () {
         return this.value;
     }).get();
@@ -1857,21 +1619,15 @@ function showAlertParticipant()
         }
     });
 });
-        // Attach the function to the checkbox change event
-        // $('input[name="functionalImpairment"]').change(handleCheckbox);
-
-
         function static(templateId){
             var optionsHTML = '';
            $.each(clientIssue, function(index, issue) {
                         optionsHTML += '<option value="' + issue.issue + '" data-issueId="' + issue.id + '">' + issue.issue + '</option>';
             });
 
-            // console.log(optionsHTML, 'nnnnnnnnnnnn');
-
             return `<div class="card hidden FunctionalImpairmentNarrative template" id="template_${templateId}" data-templateId="${templateId}">
     <div class="card-header">
-        <h5><span id="diagnosisHeadingSpan">Adult </span>Functional Narrative Impairment #1</h5>
+        <h5><span class="diagnosisHeadingSpan">Adult </span>Functional Narrative Impairment #1</h5>
     </div>
     <div class="card-body">
         <div class="card-body">
@@ -1890,95 +1646,106 @@ function showAlertParticipant()
             <p>Marked inability to establish or maintain independent competitive employment characterized by an established pattern of unemployment; underemployment; or sporadic employment that is primarily attributable to a diagnosed serious mental illness; which requires intervention by the behavioral health system beyond what is available to the individual from by mainstream workforce development; educational; faith-based; community or social service organizations. This does not include limitations due to factors such as geographic location; poverty; lack of education; availability of transportation; or loss of driver's license due to legal problems.</p>
 
             <div class="mb-3 row">
-                <label for="mentalDiagnosis" class="col-sm-4 col-form-label">Client's mental health diagnosis is:</label>
+                <label for="mentalDiagnosis" class="col-sm-4 col-form-label">Client's mental health diagnosis is:<span class="text-danger"> *</span></label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control mentalDiagnosis" id="mentalDiagnosis" name="questionnaire[${templateId}][mentalDiagnosis]">
+                    <input type="text" class="form-control mentalDiagnosis" id="mentalDiagnosis" name="questionnaire[${templateId}][mentalDiagnosis]" required>
+                    <div class="invalid-feedback">Please enter the Client's mental health diagnosis.</div>
                 </div>
             </div>
             <div class="mb-3 row">
-                <label for="symptom" class="form-label">Which symptom of the above diagnosis impairs the client's functioning in this domain?</label>
-                <select class="form-select symptom" aria-label="Default select example" name="questionnaire[${templateId}][symptom]" id="symptom">
-
+                <label for="symptom" class="form-label">Which symptom of the above diagnosis impairs the client's functioning in this domain?<span class="text-danger"> *</span</label>
+                <select class="form-select symptom" aria-label="Default select example" name="questionnaire[${templateId}][symptom]" id="symptom" required>
                 </select>
+                <div class="invalid-feedback">Please Select Value.</div>
 
             </div>
 
             <div class="mb-3 row">
-                <label for="experienced" class="col-sm-4 col-form-label">[Client], has experienced [Symptom of diagnosis] since [Onset date]:</label>
+                <label for="experienced" class="col-sm-4 col-form-label">[Client], has experienced [Symptom of diagnosis] since [Onset date]:<span class="text-danger"> *</span</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" id="experienced" name="questionnaire[${templateId}][experienced]">
+                    <input type="text" class="form-control" id="experienced" name="questionnaire[${templateId}][experienced]" required />
+                    <div class="invalid-feedback">Please Select Value.</div>
                 </div>
             </div>
 
             <div class="mb-3 row">
-                <label for="clientIssue-${templateId}" class="form-label">7. Client presents with issues regarding...</label>
-                <select class="form-select" aria-label="Default select example" name="questionnaire[${templateId}][clientIssue]" id="clientIssue-${templateId}" onchange="handleclientIssue(this)">
+                <label for="clientIssue-${templateId}" class="form-label">7. Client presents with issues regarding...<span class="text-danger"> *</span</label>
+                <select class="form-select" aria-label="Default select example" name="questionnaire[${templateId}][clientIssue]" id="clientIssue-${templateId}" onchange="handleclientIssue(this)" required>
                     <option value="">--Select--</option>
                     ${optionsHTML}
                 </select>
+                <div class="invalid-feedback">Please Select Value.</div>
 
             </div>
             <div class="mb-3 row">
-                <label for="namely-${templateId}" class="form-label">8. Namely, the client's ...</label>
-                <select class="form-select" aria-label="Default select example" name="questionnaire[${templateId}][namely]" id="namely-${templateId}" onchange="handleClientnamely(this)">
+                <label for="namely-${templateId}" class="form-label">8. Namely, the client's ...<span class="text-danger"> *</span</label>
+                <select class="form-select" aria-label="Default select example" name="questionnaire[${templateId}][namely]" id="namely-${templateId}" onchange="handleClientnamely(this)" required>
                     <option value="">--Select--</option>
                 </select>
+                <div class="invalid-feedback">Please Select Value.</div>
 
             </div>
             <div class="mb-3 row">
-                <label for="specifically-${templateId}" class="form-label">9. Specifically...</label>
-                <select class="form-select" aria-label="Default select example"  name="questionnaire[${templateId}][specifically]" id="specifically-${templateId}">
+                <label for="specifically-${templateId}" class="form-label">9. Specifically...<span class="text-danger"> *</span</label>
+                <select class="form-select" aria-label="Default select example"  name="questionnaire[${templateId}][specifically]" id="specifically-${templateId}" required>
                     <option value="">--Select--</option>
                 </select>
+                <div class="invalid-feedback">Please Select Value.</div>
 
             </div>
 
             <div class="mb-3 row">
-                <label for="clientAdditionalInformation-${templateId}" class="form-label">10. Additional information on the client's need in this area:</label>
-                <select class="form-select" aria-label="Default select example"  name="questionnaire[${templateId}][clientAdditionalInformation]" id="clientAdditionalInformation-${templateId}">
+                <label for="clientAdditionalInformation-${templateId}" class="form-label">10. Additional information on the client's need in this area:<span class="text-danger"> *</span</label>
+                <select class="form-select" aria-label="Default select example"  name="questionnaire[${templateId}][clientAdditionalInformation]" id="clientAdditionalInformation-${templateId}" required>
                     <option value="">--Select--</option>
                 </select>
+                <div class="invalid-feedback">Please Select Value.</div>
 
             </div>
             <div class="mb-3 row">
-                <label for="intervention-${templateId}" class="form-label">11. The following intervention was implemented:</label>
-                <select class="form-select" aria-label="Default select example"  name="questionnaire[${templateId}][intervention]" id="intervention-${templateId}" onchange="handleClientQuestionnaire(this)">
+                <label for="intervention-${templateId}" class="form-label">11. The following intervention was implemented:<span class="text-danger"> *</span</label>
+                <select class="form-select" aria-label="Default select example"  name="questionnaire[${templateId}][intervention]" id="intervention-${templateId}" onchange="handleClientQuestionnaire(this)" required>
                     <option value="">--Select--</option>
                 </select>
-
-            </div>
-
-
-            <div class="mb-3 row">
-                <label for="specificallyIntervention-${templateId}" class="form-label">12. Specifically, an example for a planned intervention is to:</label>
-                <select class="form-select" aria-label="Default select example"  name="questionnaire[${templateId}][specificallyIntervention]" id="specificallyIntervention-${templateId}">
-                    <option value="">--Select--</option>
-                </select>
+                <div class="invalid-feedback">Please Select Value.</div>
 
             </div>
 
 
             <div class="mb-3 row">
-                <label for="serviceAdditionalInformation-${templateId}" class="form-label">13. Additional information on services to address this specific need area:</label>
-                <select class="form-select" aria-label="Default select example"  name="questionnaire[${templateId}][serviceAdditionalInformation]" id="serviceAdditionalInformation-${templateId}">
+                <label for="specificallyIntervention-${templateId}" class="form-label">12. Specifically, an example for a planned intervention is to:<span class="text-danger"> *</span</label>
+                <select class="form-select" aria-label="Default select example"  name="questionnaire[${templateId}][specificallyIntervention]" id="specificallyIntervention-${templateId}" required>
                     <option value="">--Select--</option>
                 </select>
+                 <div class="invalid-feedback">Please Select Value.</div>
+
+            </div>
+
+
+            <div class="mb-3 row">
+                <label for="serviceAdditionalInformation-${templateId}" class="form-label">13. Additional information on services to address this specific need area:<span class="text-danger"> *</span</label>
+                <select class="form-select" aria-label="Default select example"  name="questionnaire[${templateId}][serviceAdditionalInformation]" id="serviceAdditionalInformation-${templateId}" required>
+                    <option value="">--Select--</option>
+                </select>
+                 <div class="invalid-feedback">Please Select Value.</div>
 
             </div>
 
             <div class="mb-3 row">
-                <label for="clientLongTermGoal-${templateId}" class="form-label">14. Client's long term goal to address this impairment is..</label>
-                <select class="form-select" aria-label="Default select example"  name="questionnaire[${templateId}][clientLongTermGoal]" id="clientLongTermGoal-${templateId}">
+                <label for="clientLongTermGoal-${templateId}" class="form-label">14. Client's long term goal to address this impairment is..<span class="text-danger"> *</span</label>
+                <select class="form-select" aria-label="Default select example"  name="questionnaire[${templateId}][clientLongTermGoal]" id="clientLongTermGoal-${templateId}" required>
                     <option value="">--Select--</option>
                 </select>
+                 <div class="invalid-feedback">Please Select Value.</div>
 
             </div>
 
             <div class="mb-3 row">
-                <label for="clientShortTermGoal-${templateId}" class="form-label">15. Client's short term goal to address this impairment is..</label>
-                <select class="form-select" aria-label="Default select example"  name="questionnaire[${templateId}][clientShortTermGoal]" id="clientShortTermGoal-${templateId}">
+                <label for="clientShortTermGoal-${templateId}" class="form-label">15. Client's short term goal to address this impairment is..<span class="text-danger"> *</span</label>
+                <select class="form-select" aria-label="Default select example"  name="questionnaire[${templateId}][clientShortTermGoal]" id="clientShortTermGoal-${templateId}" required>
                     <option value="">--Select--</option>
                 </select>
+                 <div class="invalid-feedback">Please Select Value.</div>
 
             </div>
         </div>
@@ -2135,6 +1902,59 @@ function showAlertParticipant()
         function refreshPage() {
         // Reload the current page
         location.reload();
+    }
+
+
+    function clientAgeOnchange(selectedType){
+        $('.minorQuestionnaire').removeClass('hidden');
+                $('#diagnosisSelect').empty();
+                var diagnosisHeadingSpan = $('.diagnosisHeadingSpan');
+           
+                if (selectedType === 'yes') {
+                    $('#diagnosis').empty();
+                    diagnosisHeadingSpan.text('Minor');
+                    $('#diagnosis').append(firstOption);
+                    $.each(diagnosisMinorArray, function(index, option) {
+                        $('#diagnosis').append('<option value="' + option.diagnosis_name + '" data-diagnosisid="' + option.id + '">' + option.diagnosis_name + '</option> ');
+                    });
+                } else if (selectedType === 'no') {
+                    $('#diagnosis').empty();
+                    diagnosisHeadingSpan.text('Adult');
+                    $('#diagnosis').append(firstOption);
+                    $.each(diagnosisAdultArray, function(index, option) {
+                        $('#diagnosis').append('<option value="' + option.diagnosis_name + '" data-diagnosisid="' + option.id + '">' + option.diagnosis_name + '</option>');
+                    });
+                    $('#checkboxContainer').empty();
+                    $.each(adultCheckobox, function(index, item) {
+                        var createRow = '<div class="row"><label for="functionalImpairment-' + index + '" class="col-sm-8 col-form-label">' + item + '</label><div class="col-sm-2 form-check mt-2"><input class="form-check-input functionalImpairment" type="checkbox" id="functionalImpairment-' + index + '" name="functionalImpairment" value="' + index + '"></div></div>';
+
+                        // checkboxDiv.append(createRow);
+                        $('#checkboxContainer').append(createRow);
+                    });
+                }
+    }
+
+
+    function getClientMedication(clientId){
+
+        $.ajax({
+                    url: 'functions/getConsumerMedication.php',
+                    type: 'POST',
+                    data: {
+                        clientId: clientId
+                    },
+                    success: function(response) {
+                        var responseData = JSON.parse(response);
+                        $.each(responseData, function(index, medication) {
+                            $('#medicationName'+index+' option[data-medicationnameid="' + medication.medication_name_id + '"]').prop('selected', true);
+                            $('#medicationDosage'+index+' option[data-medicationdoseid="' + medication.medication_dose_id + '"]').prop('selected', true);
+                            $('#medicationFrequency'+index+' option[data-medicationfrequencyid="' + medication.medication_frequency_id + '"]').prop('selected', true);
+                        });
+                    },
+                    error: function() {
+                        $('#result').html('Error loading data.');
+                    }
+                });
     }
     </script>
 </body>

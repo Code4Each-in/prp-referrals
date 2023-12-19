@@ -68,12 +68,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 }
 
             }else{
-                // if($key === 'medicationsNoRadio' && $value != ''){
-                //     $submittedData['medications_description'] = $value;
-                // }elseif ($key === 'medicationsNoRadio' && $value != ''){
-
-                // }
-                
                 if (isset($submittedData['medications'])){
                     if ($submittedData['medications'] === 'no' && $key === 'medicationsNoRadio') {
                         $submittedData['medications_description'] = $value;
@@ -199,12 +193,11 @@ foreach ($questionnaireDataSheet as $key => $sheetValue) {
     $newArray[] = json_encode($sheetValue, JSON_PRETTY_PRINT);
 
 }
-// echo '<pre>' ; print_r($newArray); echo '</pre>' ;
 
 // insert in sheet 
 $googleSheetsHandler = new GoogleSheetsHandler();
 $result = $googleSheetsHandler->insertData($newArray);
-$insertData = true;
+$delay_seconds = 5;
     if($insertData){
         ?>
 <div class="container mt-4">
@@ -216,6 +209,8 @@ $insertData = true;
       </div>
       <div class="alert-message text-center">
         <strong>Success!</strong> Your Data is submited successfully .
+
+        <p>Redirecting in <span id="timer"><?php echo $delay_seconds; ?> seconds</span></p>
       </div>
     </div>
   </div>
@@ -231,6 +226,12 @@ function addUnderscoreBeforeCapital($str) {
     // Convert the entire string to lowercase
     return strtolower($str);
 }
+
 ?>
+  <script>
+    setTimeout(function() {
+      window.location.href = "http://prp-referrals.code4each.com";
+    }, <?php echo $delay_seconds * 1000; ?>); 
+  </script>
 </body>
 </html>
