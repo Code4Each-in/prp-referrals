@@ -110,7 +110,7 @@ function showAlertParticipant()
             /* background-color: #4CAF50; */
             /* color: white; */
             padding: 10px 20px;
-            border: none;
+            /* border: none; */
             border-radius: 5px;
             cursor: pointer;
             margin-top: 20px;
@@ -1095,14 +1095,12 @@ function showAlertParticipant()
 
                                         <div class="mb-3 row row-radio">
                                             <label class="col-sm-12 col-form-label">To be considered evidence of impaired role functioning at least three of the following must have been present on a continuing or intermittent basis. If to your knowledge, the individual demonstrates impaired role functioning in the specified areas for at least two years, select the areas below. If not, stop, and do not complete this form. <span class="text-danger">*</span></label>
-                                            <div id="checkboxContainer">
-                                            </div>
+                                            <div id="checkboxWarning"> </div>
+
+                                            <div id="checkboxContainer"> </div>
                                             
                                         </div>
-                                        <div id="checkboxWarning">
-                                            </div>
-                                        <div id="templateContainer">
-                                            </div>
+                                        <div id="templateContainer"> </div>
                                     </div>
 
                                 </div>
@@ -1118,7 +1116,7 @@ function showAlertParticipant()
         </div>
         <button type="submit" class="btn btn-primary submit-btn me-4" id="submitButton">Submit</button>
 
-        <button type="button" class="btn btn-primary submit-btn me-4" onclick="refreshPage()" id="resetButton">Reset</button>
+        <button type="button" class="btn btn-outline-primary submit-btn me-4" onclick="refreshPage()" id="resetButton">Reset</button>
         </form>
 
         <button id="scrollToTopBtn" class="btn btn-secondary"><i class="fa fa-arrow-up"></i></button>
@@ -1901,7 +1899,9 @@ console.log(consumerInformation, 'aaaaaaaaaaaa');
 
         function refreshPage() {
         // Reload the current page
-        location.reload();
+        if (confirm('Are you sure you want to reset the form?')) {
+            location.reload();
+        }
     }
 
 
