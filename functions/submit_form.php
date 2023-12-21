@@ -4,38 +4,9 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 require_once  'databseConnection/db_connection.php';
 require_once  'insertData.php';
+require_once  'new.php';
 require_once  'config.php';
-?>
 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/form.css">
-    <title>Psychiatric Rehabilitation Program (PRP)</title>
-    <style>
-        .alert-box
-  {
-    /* max-width : 300px;
-    min-height: 300px;
-     */
-    .alert-icon
-    {
-        padding-bottom: 20px;
-    }
-  }
-        </style>
-</head>
-
-<body>
-<?php 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // echo '<pre>' ; print_r($_POST); echo '</pre>' ;
 
@@ -199,7 +170,57 @@ $googleSheetsHandler = new GoogleSheetsHandler();
 $result = $googleSheetsHandler->insertData($newArray);
 $delay_seconds = 5;
     if($insertData){
+        $filePath = sys_get_temp_dir() . '/example.pdf';
+
+// if(isset($submit_form_data['clientIssueId'])){
+    // $submit_form_Id = $submit_form_data['submit_form_Id'];
+    $submit_form_Id = $submit_fromId;
+
+// get data with id
+$submit_form_data =$db->query('SELECT * FROM submit_form_data WHERE id = ?' , $submit_form_Id )->fetchArray();
+
+$submitted_impairment_questionnaire =$db->query('SELECT *  FROM submitted_impairment_questionnaire LEFT JOIN submitted_impairment_questionnaire_data ON submitted_impairment_questionnaire_data.impairment_questionnaire_id = submitted_impairment_questionnaire.id WHERE submitted_impairment_questionnaire.submit_form_id = ?' , $submit_form_Id)->fetchAll();
+
+
+$getMedications =$db->query('SELECT * FROM medication_form_data WHERE submit_form_id = ?' , $submit_form_Id )->fetchAll();
+
+   // Create the PDF
+   createPDF($filePath, $submit_form_data, $submitted_impairment_questionnaire, $getMedications);
+
+// Upload the PDF to Google Drive
+$firstName = isset($submit_form_data['client_first_name']) ? $submit_form_data['client_first_name'] : '';
+$lastName = isset($submit_form_data['client_last_name']) ? $submit_form_data['client_last_name'] : '';
+$pdfFileName = 'PRP_referral_'.$firstName.'_'.$lastName.'_'.time().'.pdf';
+uploadToDrive($filePath, $pdfFileName);
         ?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/form.css">
+    <title>Psychiatric Rehabilitation Program (PRP)</title>
+    <style>
+        .alert-box
+  {
+    /* max-width : 300px;
+    min-height: 300px;
+     */
+    .alert-icon
+    {
+        padding-bottom: 20px;
+    }
+  }
+        </style>
+</head>
+
+<body>
 <div class="container mt-4">
   <div class='row'>
     <div class="alert-box" style="float: none; margin: 0 auto;">
@@ -209,7 +230,6 @@ $delay_seconds = 5;
       </div>
       <div class="alert-message text-center">
         <strong>Success!</strong> Your Data is submited successfully .
-
         <p>Redirecting in <span id="timer"><?php echo $delay_seconds; ?> seconds</span></p>
       </div>
     </div>
