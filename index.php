@@ -7,6 +7,7 @@ require_once  'functions/config.php';
 require_once  'functions/databseConnection/db_connection.php';
 include  'functions/getMedicationData.php';
 include  'functions/getDiagnosisSymptoms.php';
+// require_once('inc/config.php');
 
 $googleSheetsReader = new GoogleSheetsReader();
 
@@ -52,7 +53,6 @@ function showAlertParticipant()
    </div>';
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -1121,21 +1121,6 @@ function showAlertParticipant()
 
         <button id="scrollToTopBtn" class="btn btn-secondary"><i class="fa fa-arrow-up"></i></button>
     </div>
-    <!-- <div class="alert alert-danger alert-dismissible fade show">
-
-
-                <p>
-                    <i class="bi-exclamation-octagon-fill"></i> Answering "no" or "unknown" to this question
-                    automatically disqualifies
-                    the individual from being eligible for PRP services. If the answer is
-                    "no" or "unknown", you will not be able to complete this form and the
-                    submission buttion will be disabled. If you answer "no" or "unknown" in
-                    error and intended to answer the question with "yes", simply correct
-                    your answer and move to the next question.
-                </p>
-
-                 <p class="mb-0">Once you have filled all the details, click on the 'Next' button to continue.</p>
-        </div> -->
     </div>
     </div>
 
@@ -1150,13 +1135,10 @@ function showAlertParticipant()
         var adultCheckobox = <?php echo json_encode($saticText['adultCheckobox']); ?>;
         var clientIssue = <?php echo json_encode($clientIssue); ?>;
         var consumerInformation = <?php echo json_encode($consumerInformation); ?>;
-
-console.log(clientSheetData, 'ccccccccccccc');
-console.log(consumerInformation, 'aaaaaaaaaaaa');
-
         var submitButton = $('#submitButton');
         var diagnosisHeadingSpan = $('.diagnosisHeadingSpan');
         var firstOption = '<option value="">-Select-</option>';
+
         // Input elemets for Referring Professional Information form
         var refFirstName = $('#refFirstName');
         var refLastName = $('#refLastName');
@@ -1243,7 +1225,6 @@ console.log(consumerInformation, 'aaaaaaaaaaaa');
                         return fullName === trimmedInputValue;
                     });
                     if (matchingObjects.length > 0) {
-                        console.log(matchingObjects);
                         var matchingObject = matchingObjects[0];
                         $(this).val(matchingObject.firstName)
                         refLastName.val(matchingObject.lastName);
@@ -1295,19 +1276,15 @@ console.log(consumerInformation, 'aaaaaaaaaaaa');
                         var trimmedInputValue = clientInputValue.toLowerCase();
                         return fullName === trimmedInputValue;
                     });
-                    console.log(matchingClientObjects, 'ooooooooooooo');
                     if (matchingClientObjects.length > 0) {
-                        console.log(matchingClientObjects);
+                       
                         var matchingClientObject = matchingClientObjects[0];
                         $(this).val(matchingClientObject.client_first_name)
                         clientLastName.val(matchingClientObject.client_last_name);
                         var userAge = calculateAge(matchingClientObject.client_dob);
-                        console.log(calculateAge(matchingClientObject.client_dob), 'ppppppppp');
+                      
                         //Set date 
-                        // clientBirthDate.val(convertDateFormat(matchingClientObject.dob));
                         clientBirthDate.val(matchingClientObject.client_dob);
-
-                        
 
                         //SET GENDER
                         if (matchingClientObject.client_gender != null) {
@@ -1499,7 +1476,6 @@ console.log(consumerInformation, 'aaaaaaaaaaaa');
                 }
                 $('#checkboxWarning').empty();
                 var checkedCheckboxes = $('.functionalImpairment:checked').length;
-                console.log("Number of checked checkboxes: " + checkedCheckboxes);
                 $('.FunctionalImpairmentNarrative').removeClass('hidden');
                
                 var alertHtml = `<div class="alert alert-danger d-flex align-items-center " role="alert">
@@ -1596,7 +1572,7 @@ console.log(consumerInformation, 'aaaaaaaaaaaa');
 
 
       
-            $(document).on("change", 'input[name="functionalImpairment"]', function() {
+    $(document).on("change", 'input[name="functionalImpairment"]', function() {
     var selectedCheckboxValues = $('input[name="functionalImpairment"]:checked').map(function () {
         return this.value;
     }).get();
@@ -1605,27 +1581,27 @@ console.log(consumerInformation, 'aaaaaaaaaaaa');
 
     // Remove templates that are unchecked
     templateContainer.find('.template').filter(function () {
-        return !selectedCheckboxValues.includes($(this).data('templateId'));
+        return !selectedCheckboxValues.includes($(this).data('templateid'));
     }).remove();
  
     // Add new templates for checked checkboxes
-    selectedCheckboxValues.forEach(function (templateId) {
+    selectedCheckboxValues.forEach(function (templateId, index) {
         // Check if the template is already present to avoid duplication
         if (!templateContainer.find(`#template_${templateId}`).length) {
-            var jhfbkljfh = static(templateId);
+            var jhfbkljfh = static(templateId, index);
             templateContainer.append(jhfbkljfh);
         }
     });
 });
-        function static(templateId){
+        function static(templateId, indexNo){
             var optionsHTML = '';
            $.each(clientIssue, function(index, issue) {
                         optionsHTML += '<option value="' + issue.issue + '" data-issueId="' + issue.id + '">' + issue.issue + '</option>';
             });
 
-            return `<div class="card hidden FunctionalImpairmentNarrative template" id="template_${templateId}" data-templateId="${templateId}">
+            return `<div class="card hidden FunctionalImpairmentNarrative template" id="template_${templateId}" data-templateid="${templateId}">
     <div class="card-header">
-        <h5><span class="diagnosisHeadingSpan">Adult </span>Functional Narrative Impairment #1</h5>
+        <h5><span class="diagnosisHeadingSpan">Adult </span>Functional Narrative Impairment #${indexNo + 1}</h5>
     </div>
     <div class="card-body">
         <div class="card-body">
@@ -1659,13 +1635,12 @@ console.log(consumerInformation, 'aaaaaaaaaaaa');
             </div>
 
             <div class="mb-3 row">
-                <label for="experienced" class="col-sm-4 col-form-label">[Client], has experienced [Symptom of diagnosis] since [Onset date]:<span class="text-danger"> *</span</label>
+                <label for="experienced" class="col-sm-4 col-form-label">[Client], has experienced [Symptom of diagnosis] since [Onset date]:<span class="text-danger"> *</span></label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" id="experienced" name="questionnaire[${templateId}][experienced]" required />
+                    <input type="text" class="form-control experienced" id="experienced" name="questionnaire[${templateId}][experienced]" required>
                     <div class="invalid-feedback">Please Select Value.</div>
                 </div>
             </div>
-
             <div class="mb-3 row">
                 <label for="clientIssue-${templateId}" class="form-label">7. Client presents with issues regarding...<span class="text-danger"> *</span</label>
                 <select class="form-select" aria-label="Default select example" name="questionnaire[${templateId}][clientIssue]" id="clientIssue-${templateId}" onchange="handleclientIssue(this)" required>
