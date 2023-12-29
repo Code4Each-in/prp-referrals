@@ -432,7 +432,7 @@ function createPDF($filePath, $submit_form_data, $submitted_impairment_questionn
     }
     ob_end_clean();
     
-    $pdf->Output($filePath, 'D');
+    $pdf->Output($filePath, 'F');
 
   
 }
