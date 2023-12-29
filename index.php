@@ -1723,6 +1723,9 @@ console.log(minorValue,     'oooooooooo', this.id);
 
             </div>
             <div class="mb-3 row">
+            <textarea class="form-control" id="test1" rows="3" name="test1"></textarea>
+            </div>
+            <div class="mb-3 row">
                 <label for="intervention-${templateId}" class="form-label">11. The following intervention was implemented:<span class="text-danger"> *</span</label>
                 <select class="form-select" aria-label="Default select example"  name="questionnaire[${templateId}][intervention]" id="intervention-${templateId}" onchange="handleClientQuestionnaire(this)" required>
                     <option value="">--Select--</option>
@@ -1750,7 +1753,9 @@ console.log(minorValue,     'oooooooooo', this.id);
                  <div class="invalid-feedback">Please Select Value.</div>
 
             </div>
-
+            <div class="mb-3 row">
+            <textarea class="form-control" id="test1" rows="3" name="test1"></textarea>
+            </div>
             <div class="mb-3 row">
                 <label for="clientLongTermGoal-${templateId}" class="form-label">14. Client's long term goal to address this impairment is..<span class="text-danger"> *</span</label>
                 <select class="form-select" aria-label="Default select example"  name="questionnaire[${templateId}][clientLongTermGoal]" id="clientLongTermGoal-${templateId}" required>

@@ -157,7 +157,7 @@ $minorData = [];
     foreach ($minorForm as $key1 => $value1) {
         
          $minor1 =null;
-         $minor2 =null;
+         $minor2 =null; 
          $minor3 =null;
                if(isset($value1['minor1'])){
                 $minor1 = $value1['minor1'];
@@ -290,9 +290,9 @@ function addUnderscoreBeforeCapital($str) {
 
 ?>
   <script>
-    // setTimeout(function() {
-    //   window.location.href = "http://prp-referrals.code4each.com";
-    // }, <?php //echo $delay_seconds * 1000; ?>); 
+    setTimeout(function() {
+      window.location.href = "http://prp-referrals.code4each.com";
+    }, <?php echo $delay_seconds * 1000; ?>); 
   </script>
 </body>
 </html>
