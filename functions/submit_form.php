@@ -177,6 +177,8 @@ $minorData = [];
                     $questionnaireValue[$checkboxMinor['minor3']] =$submittedData['minor3'];
                 }
                }
+
+                $db->query('UPDATE submit_form_data SET minor1 =? ,minor2 = ? ,minor3 = ?  WHERE id = ?', $minor1, $minor2,$minor3, $submit_fromId);
         }
 
 $medicationFormDataSheet = [];
