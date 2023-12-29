@@ -6,18 +6,21 @@ require_once  'databseConnection/db_connection.php';
 require_once  'insertData.php';
 require_once  'new.php';
 require_once  'config.php';
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // echo '<pre>' ; print_r($_POST); echo '</pre>' ;
-
     $submittedData = [];
     $questionnaireData = [];
     $medicationFormData = [];
     $submittedData['medications_description'] = null;
-    $submittedData['intenseServices'] = null;
+    $submittedData['intense_services'] = null;
     $submittedData['diagnosis'] = null;
-    $submittedData['refDate'] = null;
-    $submittedData['refDate'] = null;
+    $submittedData['ref_date'] = null;
+    $submittedData['referral_type'] = null;
+    $submittedData['minor1'] = null;
+    $submittedData['minor2'] = null;
+    $submittedData['minor3'] = null;
+    $minorForm = [];
+
     foreach ($_POST as $key => $value) {
         if($value == ''){
             $value = null;
@@ -26,6 +29,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             if($key === 'questionnaire'){
                 $questionnaireData[] = $value;
+            }elseif($key === 'minorForm'){
+                $minorForm[] = $value;
             }
             elseif(is_array($value)){
                 if(isset($submittedData['medications']) && $submittedData['medications'] === 'yes' && $key === 'medication'){
@@ -67,6 +72,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
             $newArray = [];
         foreach ($fieldsToInsert as $key) {
+            // echo 
             if (isset($submittedData[$key])) {
                 $newKey = $key;
                 $value = $submittedData[$key];
@@ -78,6 +84,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $newArray[$newKey] = $value;
 
             } else {
+                $newKey = $key;
                 if(isset($keyMapping[$key])){
                     $newKey = $keyMapping[$key];
                 }
@@ -93,7 +100,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         ARRAY_FILTER_USE_KEY
     );
 
-    // echo '<pre>' ; print_r($filteredArray); echo '</pre>' ;
 
  $colName = implode(', ', array_keys($filteredArray));
  $colValues = array_values($filteredArray);
@@ -109,7 +115,6 @@ $insertData =  $db->query("INSERT INTO submit_form_data ($colName ) VALUES ( $qu
 $submit_fromId = $db->lastInsertID();
 
 // insert questionnaire Data 
-
 // Get client Sheet data 
 $saticText = Secret::saticText();
 $questionnaireValue = [];
@@ -118,7 +123,6 @@ foreach ($questionnaireData as $key => $value) {
 $ageCheckbox = '';
     foreach ($value as $impairment_questionnaire_name => $impairment_questionnaire_data) {
         $ageCheckbox = $impairment_questionnaire_name;
-        // echo '<pre>' ; print_r($value); echo '</pre>' ;
         $questionnaireDataSheet[] = $impairment_questionnaire_data;
        $insertData =  $db->query("INSERT INTO submitted_impairment_questionnaire (submit_form_id,  impairment_questionnaire_name ) VALUES ( ?, ? )" , $submit_fromId, $impairment_questionnaire_name);
         $impairment_questionnaire_id = $db->lastInsertID();
@@ -141,6 +145,40 @@ $ageCheckbox = '';
     }
 }
 
+// for minor 
+
+$minorValues = [];
+$minorValuesSheet = [];
+
+$minorData = [];
+$minorSheetData = [];
+$checkboxMinor = $saticText['minorCheckobox'];
+$minorData = [];
+    foreach ($minorForm as $key1 => $value1) {
+        
+         $minor1 =null;
+         $minor2 =null;
+         $minor3 =null;
+               if(isset($value1['minor1'])){
+                $minor1 = $value1['minor1'];
+                if (isset($checkboxMinor['minor1'])) {
+                    $questionnaireValue[$checkboxMinor['minor1']] =$value1['minor1'];
+                }
+               }
+               if(isset($value1['minor2'])){
+                $minor2 = $submittedData['minor2'];
+                if (isset($checkboxMinor['minor2'])) {
+                    $questionnaireValue[$checkboxMinor['minor2']] =$submittedData['minor2'];
+                }
+               }
+               if(isset($value1['minor3'])){
+                $minor3 = $submittedData['minor3'];
+                if (isset($checkboxMinor['minor3'])) {
+                    $questionnaireValue[$checkboxMinor['minor3']] =$submittedData['minor3'];
+                }
+               }
+        }
+
 $medicationFormDataSheet = [];
 if(count($medicationFormData) > 0){
 foreach ($medicationFormData as $key => $medicationFormValue) {
@@ -149,7 +187,6 @@ foreach ($medicationFormData as $key => $medicationFormValue) {
            $insertData =  $db->query("INSERT INTO medication_form_data (submit_form_id,  name, dosage, frequency ) VALUES ( ?, ? , ?, ?)" , $submit_fromId, $eachValue['name'], $eachValue['dosage'], $eachValue['frequency']);
 
    // insert insheet 
-
    $medicationFormDataSheet[]= $eachValue;
         }
     }
@@ -160,20 +197,22 @@ $newArray['medication Detail'] = json_encode($medicationFormDataSheet, JSON_PRET
 $questionnaireValue = json_encode($questionnaireValue, JSON_PRETTY_PRINT);
 $newArray['Functional impairment questionnaire'] = $questionnaireValue;
 
-foreach ($questionnaireDataSheet as $key => $sheetValue) {
-    $newArray[] = json_encode($sheetValue, JSON_PRETTY_PRINT);
-
+if($questionnaireDataSheet> 0){
+    foreach ($questionnaireDataSheet as $key => $sheetValue) {
+        $newArray[] = json_encode($sheetValue, JSON_PRETTY_PRINT);
+    
+    }
 }
+
 
 // insert in sheet 
 $googleSheetsHandler = new GoogleSheetsHandler();
 $result = $googleSheetsHandler->insertData($newArray);
+
 $delay_seconds = 5;
     if($insertData){
         $filePath = sys_get_temp_dir() . '/example.pdf';
 
-// if(isset($submit_form_data['clientIssueId'])){
-    // $submit_form_Id = $submit_form_data['submit_form_Id'];
     $submit_form_Id = $submit_fromId;
 
 // get data with id
@@ -184,8 +223,8 @@ $submitted_impairment_questionnaire =$db->query('SELECT *  FROM submitted_impair
 
 $getMedications =$db->query('SELECT * FROM medication_form_data WHERE submit_form_id = ?' , $submit_form_Id )->fetchAll();
 
-   // Create the PDF
-   createPDF($filePath, $submit_form_data, $submitted_impairment_questionnaire, $getMedications);
+  // Create the PDF
+  createPDF($filePath, $submit_form_data, $submitted_impairment_questionnaire, $getMedications);
 
 // Upload the PDF to Google Drive
 $firstName = isset($submit_form_data['client_first_name']) ? $submit_form_data['client_first_name'] : '';
@@ -249,9 +288,9 @@ function addUnderscoreBeforeCapital($str) {
 
 ?>
   <script>
-    setTimeout(function() {
-      window.location.href = "http://prp-referrals.code4each.com";
-    }, <?php echo $delay_seconds * 1000; ?>); 
+    // setTimeout(function() {
+    //   window.location.href = "http://prp-referrals.code4each.com";
+    // }, <?php //echo $delay_seconds * 1000; ?>); 
   </script>
 </body>
 </html>

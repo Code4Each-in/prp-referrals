@@ -7,7 +7,6 @@ require_once  'functions/config.php';
 require_once  'functions/databseConnection/db_connection.php';
 include  'functions/getMedicationData.php';
 include  'functions/getDiagnosisSymptoms.php';
-// require_once('inc/config.php');
 
 $googleSheetsReader = new GoogleSheetsReader();
 
@@ -53,6 +52,7 @@ function showAlertParticipant()
    </div>';
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -1026,12 +1026,8 @@ function showAlertParticipant()
                                             <div class="col-sm-8 form-check">
                                                 <div class="row row-cols">
                                                     <div class="col-sm-6 form-check mt-2">
-                                                        <label for="referralSourceDigital" class="col-form-label">IP/
-                                                            Crisis Res/
-                                                            Mobile/ ACT/ RTC/ Incarceration</label>
-                                                        <input class="form-check-input mt-2" type="radio" id="referralSourceDigital" name="referralSource" value="IP/
-                                                            Crisis Res/
-                                                            Mobile/ ACT/ RTC/ Incarceration" required>
+                                                        <label for="referralSourceDigital" class="col-form-label">IP/Crisis Res/Mobile/ ACT/ RTC/ Incarceration</label>
+                                                        <input class="form-check-input mt-2" type="radio" id="referralSourceDigital" name="referralSource" value="IP/Crisis Res/Mobile/ ACT/ RTC/ Incarceration" required>
                                                     </div>
                                                     <div class="col-sm-3 form-check mt-2">
                                                         <label for="referralSourceOutpatient" class="col-form-label">Outpatient</label>
@@ -1121,6 +1117,21 @@ function showAlertParticipant()
 
         <button id="scrollToTopBtn" class="btn btn-secondary"><i class="fa fa-arrow-up"></i></button>
     </div>
+    <!-- <div class="alert alert-danger alert-dismissible fade show">
+
+
+                <p>
+                    <i class="bi-exclamation-octagon-fill"></i> Answering "no" or "unknown" to this question
+                    automatically disqualifies
+                    the individual from being eligible for PRP services. If the answer is
+                    "no" or "unknown", you will not be able to complete this form and the
+                    submission buttion will be disabled. If you answer "no" or "unknown" in
+                    error and intended to answer the question with "yes", simply correct
+                    your answer and move to the next question.
+                </p>
+
+                 <p class="mb-0">Once you have filled all the details, click on the 'Next' button to continue.</p>
+        </div> -->
     </div>
     </div>
 
@@ -1133,8 +1144,10 @@ function showAlertParticipant()
         var diagnosisAdultArray = <?php echo json_encode($diagnosisAdultArray); ?>;
         var diagnosisMinorArray = <?php echo json_encode($diagnosisMinorArray); ?>;
         var adultCheckobox = <?php echo json_encode($saticText['adultCheckobox']); ?>;
+        var minorCheckobox = <?php echo json_encode($saticText['minorCheckobox']); ?>;
         var clientIssue = <?php echo json_encode($clientIssue); ?>;
         var consumerInformation = <?php echo json_encode($consumerInformation); ?>;
+
         var submitButton = $('#submitButton');
         var diagnosisHeadingSpan = $('.diagnosisHeadingSpan');
         var firstOption = '<option value="">-Select-</option>';
@@ -1156,6 +1169,12 @@ function showAlertParticipant()
         var clientSecurityNumber = $('#clientSecurityNumber');
         var clientAddress = $('#clientAddress');
         var clientGrade = $('#clientGrade');
+
+        var templateContainer = $("#templateContainer");
+        var diagnosisSelect = $("#diagnosis");
+        var symtomsHtml = firstOption;
+        var diagnosisVal = '';
+
 
         // Bootstrap form validation using Bootstrap 5
         (function() {
@@ -1225,6 +1244,7 @@ function showAlertParticipant()
                         return fullName === trimmedInputValue;
                     });
                     if (matchingObjects.length > 0) {
+                        console.log(matchingObjects);
                         var matchingObject = matchingObjects[0];
                         $(this).val(matchingObject.firstName)
                         refLastName.val(matchingObject.lastName);
@@ -1276,15 +1296,19 @@ function showAlertParticipant()
                         var trimmedInputValue = clientInputValue.toLowerCase();
                         return fullName === trimmedInputValue;
                     });
+                    console.log(matchingClientObjects, 'ooooooooooooo');
                     if (matchingClientObjects.length > 0) {
-                       
+                        console.log(matchingClientObjects);
                         var matchingClientObject = matchingClientObjects[0];
                         $(this).val(matchingClientObject.client_first_name)
                         clientLastName.val(matchingClientObject.client_last_name);
                         var userAge = calculateAge(matchingClientObject.client_dob);
-                      
+                        console.log(calculateAge(matchingClientObject.client_dob), 'ppppppppp');
                         //Set date 
+                        // clientBirthDate.val(convertDateFormat(matchingClientObject.dob));
                         clientBirthDate.val(matchingClientObject.client_dob);
+
+                        
 
                         //SET GENDER
                         if (matchingClientObject.client_gender != null) {
@@ -1472,10 +1496,11 @@ function showAlertParticipant()
                 var minorAgeValue = minorAge.val();
                 var number = 4;
                 if(minorAgeValue === 'yes'){
-                    number = 2;
+                    number = 1;
                 }
                 $('#checkboxWarning').empty();
                 var checkedCheckboxes = $('.functionalImpairment:checked').length;
+                console.log("Number of checked checkboxes: " + checkedCheckboxes);
                 $('.FunctionalImpairmentNarrative').removeClass('hidden');
                
                 var alertHtml = `<div class="alert alert-danger d-flex align-items-center " role="alert">
@@ -1509,6 +1534,7 @@ function showAlertParticipant()
                         $('.symptom').empty();
                         $('.symptom').append(firstOption);
                         $.each(responseData, function(index, option) {
+                            symtomsHtml += '<option value="' + option.name + '" data-symptom="' + option.id + '">' + option.name + '</option> ';
                             $('.symptom').append('<option value="' + option.name + '" data-symptom="' + option.id + '">' + option.name + '</option> ');
                         });
 
@@ -1572,10 +1598,13 @@ function showAlertParticipant()
 
 
       
-    $(document).on("change", 'input[name="functionalImpairment"]', function() {
+            $(document).on("change", 'input[name="functionalImpairment"]', function() {
+
     var selectedCheckboxValues = $('input[name="functionalImpairment"]:checked').map(function () {
         return this.value;
     }).get();
+
+    var selectedCheckboxId = this.id
 
     var templateContainer = $("#templateContainer");
 
@@ -1584,14 +1613,29 @@ function showAlertParticipant()
         return !selectedCheckboxValues.includes($(this).data('templateid'));
     }).remove();
  
+    var minorAge = $('input[name="minorAge"]:checked');
+                var minorAgeValue = minorAge.val();
+          
+                if(minorAgeValue === 'yes'){
+                    templateContainer.empty();
+                    var selectedCheckboxIdArray = selectedCheckboxId.split('-');
+                    var minorValue = selectedCheckboxIdArray[1];
+                    
+console.log(minorValue,     'oooooooooo', this.id);
+
+                }else{
+            diagnosisVal = diagnosisSelect.val();
+
     // Add new templates for checked checkboxes
-    selectedCheckboxValues.forEach(function (templateId, index) {
+
+                    selectedCheckboxValues.forEach(function (templateId, index) {
         // Check if the template is already present to avoid duplication
         if (!templateContainer.find(`#template_${templateId}`).length) {
-            var jhfbkljfh = static(templateId, index);
+            var jhfbkljfh = static(templateId, index );
             templateContainer.append(jhfbkljfh);
         }
     });
+                }
 });
         function static(templateId, indexNo){
             var optionsHTML = '';
@@ -1599,7 +1643,7 @@ function showAlertParticipant()
                         optionsHTML += '<option value="' + issue.issue + '" data-issueId="' + issue.id + '">' + issue.issue + '</option>';
             });
 
-            return `<div class="card hidden FunctionalImpairmentNarrative template" id="template_${templateId}" data-templateid="${templateId}">
+            return `<div class="card hidden FunctionalImpairmentNarrative template" id="template_${templateId}" data-templateId="${templateId}">
     <div class="card-header">
         <h5><span class="diagnosisHeadingSpan">Adult </span>Functional Narrative Impairment #${indexNo + 1}</h5>
     </div>
@@ -1620,27 +1664,30 @@ function showAlertParticipant()
             <p>Marked inability to establish or maintain independent competitive employment characterized by an established pattern of unemployment; underemployment; or sporadic employment that is primarily attributable to a diagnosed serious mental illness; which requires intervention by the behavioral health system beyond what is available to the individual from by mainstream workforce development; educational; faith-based; community or social service organizations. This does not include limitations due to factors such as geographic location; poverty; lack of education; availability of transportation; or loss of driver's license due to legal problems.</p>
 
             <div class="mb-3 row">
-                <label for="mentalDiagnosis" class="col-sm-4 col-form-label">Client's mental health diagnosis is:<span class="text-danger"> *</span></label>
+                <label for="mentalDiagnosis-${templateId}" class="col-sm-4 col-form-label">Client's mental health diagnosis is:<span class="text-danger"> *</span></label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control mentalDiagnosis" id="mentalDiagnosis" name="questionnaire[${templateId}][mentalDiagnosis]" required>
+                    <input type="text" class="form-control mentalDiagnosis" id="mentalDiagnosis-${templateId}" name="questionnaire[${templateId}][mentalDiagnosis]" value="${diagnosisVal}" required>
                     <div class="invalid-feedback">Please enter the Client's mental health diagnosis.</div>
                 </div>
             </div>
             <div class="mb-3 row">
-                <label for="symptom" class="form-label">Which symptom of the above diagnosis impairs the client's functioning in this domain?<span class="text-danger"> *</span</label>
-                <select class="form-select symptom" aria-label="Default select example" name="questionnaire[${templateId}][symptom]" id="symptom" required>
+                <label for="symptom-${templateId}" class="form-label">Which symptom of the above diagnosis impairs the client's functioning in this domain?<span class="text-danger"> *</span</label>
+                <select class="form-select symptom" aria-label="Default select example" name="questionnaire[${templateId}][symptom]" id="symptom-${templateId}" required>
+                ${symtomsHtml}
                 </select>
                 <div class="invalid-feedback">Please Select Value.</div>
 
             </div>
 
+          
             <div class="mb-3 row">
-                <label for="experienced" class="col-sm-4 col-form-label">[Client], has experienced [Symptom of diagnosis] since [Onset date]:<span class="text-danger"> *</span></label>
+                <label for="experienced-${templateId}" class="col-sm-4 col-form-label">[Client], has experienced [Symptom of diagnosis] since [Onset date]:<span class="text-danger"> *</span></label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control experienced" id="experienced" name="questionnaire[${templateId}][experienced]" required>
+                    <input type="text" class="form-control experienced" id="experienced-${templateId}" name="questionnaire[${templateId}][experienced]" required>
                     <div class="invalid-feedback">Please Select Value.</div>
                 </div>
             </div>
+
             <div class="mb-3 row">
                 <label for="clientIssue-${templateId}" class="form-label">7. Client presents with issues regarding...<span class="text-danger"> *</span</label>
                 <select class="form-select" aria-label="Default select example" name="questionnaire[${templateId}][clientIssue]" id="clientIssue-${templateId}" onchange="handleclientIssue(this)" required>
@@ -1884,22 +1931,62 @@ function showAlertParticipant()
         $('.minorQuestionnaire').removeClass('hidden');
                 $('#diagnosisSelect').empty();
                 var diagnosisHeadingSpan = $('.diagnosisHeadingSpan');
-           
+                $('#diagnosis').empty();
+                $('#checkboxContainer').empty();
+                var allCheckbox = [];
+               var diagnosisArray =  []
                 if (selectedType === 'yes') {
-                    $('#diagnosis').empty();
                     diagnosisHeadingSpan.text('Minor');
-                    $('#diagnosis').append(firstOption);
-                    $.each(diagnosisMinorArray, function(index, option) {
-                        $('#diagnosis').append('<option value="' + option.diagnosis_name + '" data-diagnosisid="' + option.id + '">' + option.diagnosis_name + '</option> ');
+                    allCheckbox = minorCheckobox
+                    diagnosisArray = diagnosisMinorArray
+                    templateContainer.empty();
+                        $.each(minorCheckobox, function(index, item) {
+                        var createRow = ` <div class="mb-3 row row-age">
+                                    <label class="col-sm-8 col-form-label">${item}</label>
+                                    <div class="col-sm-4 form-check">
+                                        <div class="row row-cols">
+                                            <div class="col-sm-4 form-check mt-2">
+                                                <label for="minorYes-${index}" class="col-form-label">Yes</label>
+                                                <input class="form-check-input mt-2 functionalImpairment" type="radio" id="minorYes-${index}" name="minorForm[${index}]"  value="yes" required onchange="handleMinorRadioYes(this, '${index}')" >
+                                            </div>
+                                            <div class="col-sm-8 form-check mt-2">
+                                                <label for="minorNo-${index}" class="col-form-label">No</label>
+                                                <input class="form-check-input mt-2 functionalImpairment" type="radio" id="minorNo-${index}" name="minorForm[${index}]"  value="no" onchange="handleMinorRadioYes(this, '${index}')">
+
+                                            </div></div>
+                                </div>`;
+if(index != 'minor1'){
+var optionsHtml = firstOption;
+if(index == 'minor2'){
+    var optionsFromConfig = <?php echo json_encode($saticText['minor2']); ?>;
+
+}else{
+    var optionsFromConfig = <?php echo json_encode($saticText['minor3']); ?>;
+
+}
+
+    $.each(optionsFromConfig, function(indexOp, option) {
+        optionsHtml+= '<option value="' + option + '">' + option + '</option>';
+                });
+                                        createRow +=  `<div class="mb-3 row hidden selectDiv${index}">
+                <label for="minorFormAns-${index}" class="form-label">Possible Answers for above?<span class="text-danger"> *</span</label>
+                <select class="form-select symptom" aria-label="Default select example" name="${index}" id="minorFormAns-${index}" required>
+             ${optionsHtml}
+                </select>
+                <div class="invalid-feedback">Please Select Value.</div>
+            </div>
+                                    `;
+                        }
+                            $('#checkboxContainer').append(createRow);
                     });
                 } else if (selectedType === 'no') {
-                    $('#diagnosis').empty();
                     diagnosisHeadingSpan.text('Adult');
-                    $('#diagnosis').append(firstOption);
-                    $.each(diagnosisAdultArray, function(index, option) {
-                        $('#diagnosis').append('<option value="' + option.diagnosis_name + '" data-diagnosisid="' + option.id + '">' + option.diagnosis_name + '</option>');
-                    });
-                    $('#checkboxContainer').empty();
+                    allCheckbox = adultCheckobox
+                    diagnosisArray = diagnosisAdultArray
+                    // $.each(adultCheckobox, function(index, item) {
+                    //     var createRow = `<div class="row"><label for="functionalImpairment-${index}" class="col-sm-8 col-form-label">${item}</label><div class="col-sm-2 form-check mt-2"><input class="form-check-input functionalImpairment" type="checkbox" id="functionalImpairment-${index}" name="minorForm[${index}]" value="${index}"></div></div> `;
+                    //     $('#checkboxContainer').append(createRow);
+                    // });
                     $.each(adultCheckobox, function(index, item) {
                         var createRow = '<div class="row"><label for="functionalImpairment-' + index + '" class="col-sm-8 col-form-label">' + item + '</label><div class="col-sm-2 form-check mt-2"><input class="form-check-input functionalImpairment" type="checkbox" id="functionalImpairment-' + index + '" name="functionalImpairment" value="' + index + '"></div></div>';
 
@@ -1907,6 +1994,65 @@ function showAlertParticipant()
                         $('#checkboxContainer').append(createRow);
                     });
                 }
+
+                $('#diagnosis').append(firstOption);
+                    $.each(diagnosisArray, function(index, option) {
+                        $('#diagnosis').append('<option value="' + option.diagnosis_name + '" data-diagnosisid="' + option.id + '">' + option.diagnosis_name + '</option>');
+                });
+
+           // Array to store promises
+    // var promises = [];
+
+    // $.each(allCheckbox, function(index, item) {
+    //     var createRow = `<div class="row"><label for="functionalImpairment-${index}" class="col-sm-8 col-form-label">${item}</label><div class="col-sm-2 form-check mt-2"><input class="form-check-input functionalImpairment" type="checkbox" id="functionalImpairment-${index}" name="minorForm[${index}]" value="${index}"></div></div> `;
+
+    //     if (selectedType === 'yes') {
+    //         $.ajax({
+    //             type: 'POST',
+    //             url: 'functions/getIndex.php',
+    //             data: { index: index },
+    //             success: function(response) {
+    //                 var responseData = JSON.parse(response);
+    //                 var testcheck = responseData;
+    //                 $.each(testcheck, function(checkIndex, val) {
+    //                     createRow += `<div class="mb-3 row row-age"><label class="col-sm-8 col-form-label">${val}</label> <div class="col-sm-4 form-check"><div class="row row-cols">
+    //                                     <div class="col-sm-4 form-check mt-2">
+    //                                         <label for="minorYes${checkIndex}" class="col-form-label">Yes</label>
+    //                                         <input class="form-check-input mt-2" type="radio" id="minorYes${checkIndex}" name="minorForm[${index}][${checkIndex}]" value="yes">
+    //                                     </div>
+    //                                     <div class="col-sm-8 form-check mt-2">
+    //                                         <label for="minorNo${checkIndex}" class="col-form-label">No</label>
+    //                                         <input class="form-check-input mt-2" type="radio" id="minorNo${checkIndex}" name="minorForm[${index}][${checkIndex}]" value="no">
+
+    //                                     </div>
+    //                                 </div>
+    //                             </div>
+    //                             <div class="invalid-feedback">Please choose one
+    //                             </div>
+    //                         </div> `;
+    //                 });
+
+    //                 $('#checkboxContainer').append(createRow);
+    //             },
+    //             error: function(xhr, status, error) {
+    //                 console.error('Error in Ajax request:', error);
+
+    //                 $('#checkboxContainer').append(createRow);
+    //             }
+    //         });
+    //     } else {
+    //         $('#checkboxContainer').append(createRow);
+    //     }
+
+    //                 });
+
+        // Promise.all(promises)
+        // .then(function() {
+        //     console.log('All Ajax requests completed');
+        // })
+        // .catch(function(error) {
+        //     console.error('Error in Ajax requests:', error);
+        // });
     }
 
 
@@ -1930,6 +2076,18 @@ function showAlertParticipant()
                         $('#result').html('Error loading data.');
                     }
                 });
+    }
+
+
+    function handleMinorRadioYes(element, val){
+        if(val !=  'minor1'){
+
+        }
+                if (element.value === 'yes') {
+                    $('.selectDiv'+val+'').removeClass('hidden');
+                } else {
+                    $('.selectDiv'+val+'').addClass('hidden');
+                } 
     }
     </script>
 </body>
