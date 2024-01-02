@@ -1669,7 +1669,7 @@ function showAlertParticipant()
 
                         <div class="mb-3 row">
                             <label for="clientAdditionalInformation-${templateId}" class="form-label">10. Additional information on the client's need in this area:<span class="text-danger"> *</span</label>
-                            <select class="form-select" aria-label="Default select example"  name="questionnaire[${templateId}][clientAdditionalInformation]" id="clientAdditionalInformation-${templateId}" required>
+                            <select class="form-select" aria-label="Default select example"  name="questionnaire[${templateId}][clientAdditionalInformation]" id="clientAdditionalInformation-${templateId}">
                                 <option value="">--Select--</option>
                             </select>
                             <div class="invalid-feedback">Please Select Value.</div>

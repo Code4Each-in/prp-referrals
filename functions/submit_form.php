@@ -121,11 +121,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $insertData =  $db->query("INSERT INTO submitted_impairment_questionnaire (submit_form_id,  impairment_questionnaire_name ) VALUES ( ?, ? )", $submit_fromId, $impairment_questionnaire_name);
             $impairment_questionnaire_id = $db->lastInsertID();
             $clientAdditionalInformation = $impairment_questionnaire_data['clientAdditionalInformation'];
-            if ($impairment_questionnaire_data['clientAdditionalInformationText'] !== '') {
+            if (trim($impairment_questionnaire_data['clientAdditionalInformationText']) !== '') {
                 $clientAdditionalInformation = $impairment_questionnaire_data['clientAdditionalInformationText'];
             }
             $serviceAdditionalInformation = $impairment_questionnaire_data['serviceAdditionalInformation'];
-            if ($impairment_questionnaire_data['clientAdditionalInformationText'] !== '') {
+            if (trim($impairment_questionnaire_data['clientAdditionalInformationText']) !== '') {
                 $serviceAdditionalInformation = $impairment_questionnaire_data['serviceAdditionalInformationText'];
             }
             $insertData =  $db->query("INSERT INTO submitted_impairment_questionnaire_data (impairment_questionnaire_id, mental_health_diagnosis,  symptom, Symptom_experience_date, client_issue, namely, specifically, client_need, intervention, intervention_specifically, specific_need_area, long_term_goal, short_term_goal ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )", $impairment_questionnaire_id, $impairment_questionnaire_data['mentalDiagnosis'], $impairment_questionnaire_data['symptom'], $impairment_questionnaire_data['experienced'], $impairment_questionnaire_data['clientIssue'], $impairment_questionnaire_data['namely'], $impairment_questionnaire_data['specifically'], $clientAdditionalInformation, $impairment_questionnaire_data['intervention'], $impairment_questionnaire_data['specificallyIntervention'], $serviceAdditionalInformation, $impairment_questionnaire_data['clientLongTermGoal'], $impairment_questionnaire_data['clientShortTermGoal']);
