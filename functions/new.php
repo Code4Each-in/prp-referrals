@@ -10,9 +10,10 @@ require_once __DIR__ . '/../vendor/autoload.php';
 require_once  'databseConnection/db_connection.php';
 require_once  'config.php';
 
-function saveUserCredentials($credentials) {
+//save first google user Credentials to save pdfs in that perticular account
+function saveUserCredentials($credentials)
+{
     $storedCredentialsPath = "credentials.json";
-
     // Convert credentials to JSON
     $jsonCredentials = json_encode($credentials);
 
@@ -53,14 +54,14 @@ function saveUserCredentials($credentials) {
 
 
 // Load user credentials from a file
-function getUserCredentials() {
+function getUserCredentials()
+{
     $storedCredentialsPath = "credentials.json";
     if (file_exists($storedCredentialsPath)) {
         return json_decode(file_get_contents($storedCredentialsPath), true);
     }
     return null;
 }
-
 
 // Function to create a simple PDF
 function createPDF($filePath, $submit_form_data, $submitted_impairment_questionnaire, $getMedications)
@@ -84,12 +85,12 @@ function createPDF($filePath, $submit_form_data, $submitted_impairment_questionn
     $ref_clinician_email = isset($submit_form_data['ref_clinician_email']) ? $submit_form_data['ref_clinician_email'] : '';
     $ref_npi = isset($submit_form_data['ref_npi']) ? $submit_form_data['ref_npi'] : '';
 
-    $services1 = isset($submit_form_data['services1']) ? $submit_form_data['services1'].',' : '';
-    $services2 = isset($submit_form_data['services2']) ? $submit_form_data['services2'].',' : '';
-    $services3 = isset($submit_form_data['services3']) ? $submit_form_data['services3'].',' : '';
-    $services4 = isset($submit_form_data['services4']) ? $submit_form_data['services4'].',' : '';
-    $services5 = isset($submit_form_data['services5']) ? $submit_form_data['services5'].',' : '';
-    $services6 = isset($submit_form_data['services6']) ? $submit_form_data['services6'].',' : '';
+    $services1 = isset($submit_form_data['services1']) ? $submit_form_data['services1'] . ',' : '';
+    $services2 = isset($submit_form_data['services2']) ? $submit_form_data['services2'] . ',' : '';
+    $services3 = isset($submit_form_data['services3']) ? $submit_form_data['services3'] . ',' : '';
+    $services4 = isset($submit_form_data['services4']) ? $submit_form_data['services4'] . ',' : '';
+    $services5 = isset($submit_form_data['services5']) ? $submit_form_data['services5'] . ',' : '';
+    $services6 = isset($submit_form_data['services6']) ? $submit_form_data['services6'] . ',' : '';
 
     $reason_for_insufficient_treatment = isset($submit_form_data['reason_for_insufficient_treatment']) ? $submit_form_data['reason_for_insufficient_treatment'] : '';
     $referral_source = isset($submit_form_data['referral_source']) ? $submit_form_data['referral_source'] : '';
@@ -100,7 +101,7 @@ function createPDF($filePath, $submit_form_data, $submitted_impairment_questionn
     $eligible_disable_admin_service = isset($submit_form_data['eligible_disable_admin_service']) ? $submit_form_data['eligible_disable_admin_service'] : '';
     $support_considered = isset($submit_form_data['support_considered']) ? $submit_form_data['support_considered'] : '';
     $discharged = isset($submit_form_data['discharged']) ? $submit_form_data['discharged'] : '';
-   
+
     $clientFirstName = isset($submit_form_data['client_first_name']) ? $submit_form_data['client_first_name'] : '';
     $clientLastName = isset($submit_form_data['client_last_name']) ? $submit_form_data['client_last_name'] : '';
     $clientBirthDate = isset($submit_form_data['client_birth_date']) ? $submit_form_data['client_birth_date'] : '';
@@ -128,18 +129,18 @@ function createPDF($filePath, $submit_form_data, $submitted_impairment_questionn
     $pdf->SetAuthor('Your Name');
     $pdf->SetTitle('Referral Form PDF');
     $pdf->SetMargins(10, 10, 10);
-    
+
     $pdf->AddPage();
     // Add data as headings to PDF
-    $pdf->SetFont('helvetica', 'B', 14); 
-    
+    $pdf->SetFont('helvetica', 'B', 14);
+
     $pdf->Cell(0, 10, $organizationName, 0, 1, 'C');
     $pdf->Cell(0, 10, $programName, 0, 1, 'C');
     $pdf->Cell(0, 10, $address, 0, 1, 'C');
     $pdf->Ln(10);
-    
+
     $pdf->SetFont('helvetica', '', 10);
-    
+
     // form one
     $pdf->SetFont('helvetica', 'B', 13);
     $pdf->Cell(0, 10, 'Referring Professional Information: ', 0, 1);
@@ -152,48 +153,48 @@ function createPDF($filePath, $submit_form_data, $submitted_impairment_questionn
     $pdf->SetFont('helvetica', 'B', 10);
     // $pdf->SetLeftMargin(12);
     $pdf->MultiCell(0, 10, $referral_type, 0, 'L');
-     $pdf->SetFont('helvetica', '', 10); 
+    $pdf->SetFont('helvetica', '', 10);
     $pdf->MultiCell(0, 5, "Referring Clinician First Name: ", 0, 'L');
-     $pdf->SetFont('helvetica', '', 10);
+    $pdf->SetFont('helvetica', '', 10);
     $pdf->SetFont('helvetica', 'B', 10);
     $pdf->MultiCell(0, 10, $ref_first_name, 0, 'L');
-     $pdf->SetFont('helvetica', '', 10);
+    $pdf->SetFont('helvetica', '', 10);
 
     $pdf->MultiCell(0, 5, "Referring Clinician Last Name: ", 0, 'L');
-     $pdf->SetFont('helvetica', '', 10);
+    $pdf->SetFont('helvetica', '', 10);
     $pdf->SetFont('helvetica', 'B', 10);
     $pdf->MultiCell(0, 10, $ref_last_name, 0, 'L');
-     $pdf->SetFont('helvetica', '', 10);
+    $pdf->SetFont('helvetica', '', 10);
     $pdf->MultiCell(0, 5, "Credentials: ", 0, 'L');
-     $pdf->SetFont('helvetica', '', 10);
+    $pdf->SetFont('helvetica', '', 10);
     $pdf->SetFont('helvetica', 'B', 10);
     $pdf->MultiCell(0, 10, $credentials, 0, 'L');
-     $pdf->SetFont('helvetica', '', 10);
+    $pdf->SetFont('helvetica', '', 10);
     $pdf->MultiCell(0, 5, "Affiliated Referring Organization: ", 0, 'L');
-     $pdf->SetFont('helvetica', '', 10);
+    $pdf->SetFont('helvetica', '', 10);
     $pdf->SetFont('helvetica', 'B', 10);
     $pdf->MultiCell(0, 10, $affiliated_ref_organization, 0, 'L');
-     $pdf->SetFont('helvetica', '', 10);
+    $pdf->SetFont('helvetica', '', 10);
     $pdf->MultiCell(0, 5, "Referring Clinician Phone No: ", 0, 'L');
-     $pdf->SetFont('helvetica', '', 10);
+    $pdf->SetFont('helvetica', '', 10);
     $pdf->SetFont('helvetica', 'B', 10);
     $pdf->MultiCell(0, 10, $ref_clinician_phone, 0, 'L');
-     $pdf->SetFont('helvetica', '', 10);
+    $pdf->SetFont('helvetica', '', 10);
     $pdf->MultiCell(0, 5, "Referring Clinician Email Address: ", 0, 'L');
-     $pdf->SetFont('helvetica', '', 10);
+    $pdf->SetFont('helvetica', '', 10);
     $pdf->SetFont('helvetica', 'B', 10);
     $pdf->MultiCell(0, 10, $ref_clinician_email, 0, 'L');
-     $pdf->SetFont('helvetica', '', 10);
+    $pdf->SetFont('helvetica', '', 10);
     $pdf->MultiCell(0, 5, "Referring Agency or Clinician NPI: ", 0, 'L');
-     $pdf->SetFont('helvetica', '', 10);
+    $pdf->SetFont('helvetica', '', 10);
     $pdf->SetFont('helvetica', 'B', 10);
     $pdf->MultiCell(0, 10, $ref_npi, 0, 'L');
-     $pdf->SetFont('helvetica', '', 10);
+    $pdf->SetFont('helvetica', '', 10);
     $pdf->MultiCell(0, 5, "In addition to psychiatric rehabilitation program (PRP) and behavioral health home (BHH) services, what other services would the client need? (check all that apply): ", 0, 'L');
     $pdf->SetFont('helvetica', '', 10);
     $pdf->SetFont('helvetica', 'B', 10);
-    $pdf->MultiCell(0, 10, $services1. $services2. $services3. $services4. $services5. $services6, 0, 'L');
-     $pdf->SetFont('helvetica', '', 10);
+    $pdf->MultiCell(0, 10, $services1 . $services2 . $services3 . $services4 . $services5 . $services6, 0, 'L');
+    $pdf->SetFont('helvetica', '', 10);
 
     $pdf->Ln(1);
 
@@ -203,7 +204,7 @@ function createPDF($filePath, $submit_form_data, $submitted_impairment_questionn
     $pdf->SetFont('helvetica', '', 10);
     $pdf->Cell(0, 5, "Client's name: ", 0, 1);
     $pdf->SetFont('helvetica', 'B', 10);
-    $pdf->MultiCell(0, 10, $clientFirstName. ' '.$clientLastName, 0, 'L');
+    $pdf->MultiCell(0, 10, $clientFirstName . ' ' . $clientLastName, 0, 'L');
     $pdf->SetFont('helvetica', '', 10);
     $pdf->Cell(0, 5, "Client's date of birth: ", 0, 1);
     $pdf->SetFont('helvetica', 'B', 10);
@@ -251,11 +252,11 @@ function createPDF($filePath, $submit_form_data, $submitted_impairment_questionn
 
     // show medication if active 
 
-    if(count($getMedications)> 0){
-        foreach($getMedications as $key => $eachMedication){
-            $pdf->MultiCell(0, 5,'Medications-'.($key+1).': ', 0, 'L');
+    if (count($getMedications) > 0) {
+        foreach ($getMedications as $key => $eachMedication) {
+            $pdf->MultiCell(0, 5, 'Medications-' . ($key + 1) . ': ', 0, 'L');
             $pdf->SetFont('helvetica', 'B', 10);
-            $pdf->MultiCell(0, 10, $eachMedication['name'].', '.$eachMedication['dosage'].', '.$eachMedication['frequency'], 0, 'L');
+            $pdf->MultiCell(0, 10, $eachMedication['name'] . ', ' . $eachMedication['dosage'] . ', ' . $eachMedication['frequency'], 0, 'L');
             $pdf->SetFont('helvetica', '', 10);
         }
     }
@@ -263,11 +264,11 @@ function createPDF($filePath, $submit_form_data, $submitted_impairment_questionn
     $pdf->SetFont('helvetica', 'B', 10);
     $pdf->MultiCell(0, 10, strtoupper($discharged), 0, 'L');
     $pdf->SetFont('helvetica', '', 10);
-    $pdf->Cell(0, 5, "6. Has the client been arrested in the past six months? " , 0, 1);
+    $pdf->Cell(0, 5, "6. Has the client been arrested in the past six months? ", 0, 1);
     $pdf->SetFont('helvetica', 'B', 10);
     $pdf->MultiCell(0, 10, strtoupper($arrested), 0, 'L');
     $pdf->SetFont('helvetica', '', 10);
-    $pdf->Cell(0, 5, "7. What is the highest grade of school completed by the client? "  , 0, 1);
+    $pdf->Cell(0, 5, "7. What is the highest grade of school completed by the client? ", 0, 1);
     $pdf->SetFont('helvetica', 'B', 10);
     $pdf->MultiCell(0, 10, $diagnosis, 0, 'L');
     $pdf->SetFont('helvetica', '', 10);
@@ -275,11 +276,11 @@ function createPDF($filePath, $submit_form_data, $submitted_impairment_questionn
     $pdf->SetFont('helvetica', 'B', 10);
     $pdf->MultiCell(0, 10, strtoupper($employed), 0, 'L');
     $pdf->SetFont('helvetica', '', 10);
-    $pdf->Cell(0, 5, "9. Is the client currently receiving mental health treatment or psychotherapy from a therapist or psychiatrist? " , 0, 1);
+    $pdf->Cell(0, 5, "9. Is the client currently receiving mental health treatment or psychotherapy from a therapist or psychiatrist? ", 0, 1);
     $pdf->SetFont('helvetica', 'B', 10);
     $pdf->MultiCell(0, 10, strtoupper($receivingTreatment), 0, 'L');
     $pdf->SetFont('helvetica', '', 10);
-    $pdf->Cell(0, 5, "10. Is the individual currently enrolled in SSI or SSDI? " , 0, 1);
+    $pdf->Cell(0, 5, "10. Is the individual currently enrolled in SSI or SSDI? ", 0, 1);
     $pdf->SetFont('helvetica', 'B', 10);
     $pdf->MultiCell(0, 10, strtoupper($currentlyEnrolled), 0, 'L');
     $pdf->SetFont('helvetica', '', 10);
@@ -288,11 +289,11 @@ function createPDF($filePath, $submit_form_data, $submitted_impairment_questionn
     $pdf->SetFont('helvetica', 'B', 10);
     $pdf->MultiCell(0, 10, strtoupper($individualNature), 0, 'L');
     $pdf->SetFont('helvetica', '', 10);
-    $pdf->Cell(0, 5, "12. Does the Individual require a more intensive level of care? " , 0, 'L');
+    $pdf->Cell(0, 5, "12. Does the Individual require a more intensive level of care? ", 0, 'L');
     $pdf->SetFont('helvetica', 'B', 10);
     $pdf->MultiCell(0, 10, strtoupper($individualIntensiveCare), 0, 'L');
     $pdf->SetFont('helvetica', '', 10);
-    $pdf->MultiCell(0, 5, "13. Have all less intensive levels of treatment have been determined to be unsafe or unsuccessful? " , 0, 'L');
+    $pdf->MultiCell(0, 5, "13. Have all less intensive levels of treatment have been determined to be unsafe or unsuccessful? ", 0, 'L');
     $pdf->SetFont('helvetica', 'B', 10);
     $pdf->MultiCell(0, 10, strtoupper($individual_intensivelevel), 0, 'L');
     $pdf->SetFont('helvetica', '', 10);
@@ -300,11 +301,11 @@ function createPDF($filePath, $submit_form_data, $submitted_impairment_questionn
     $pdf->SetFont('helvetica', 'B', 10);
     $pdf->MultiCell(0, 10, strtoupper($support_considered), 0, 'L');
     $pdf->SetFont('helvetica', '', 10);
-    $pdf->MultiCell(0, 5, "15. Participant is fully eligible for Developmental Disabilities Administration funded services? " , 0, 'L');
+    $pdf->MultiCell(0, 5, "15. Participant is fully eligible for Developmental Disabilities Administration funded services? ", 0, 'L');
     $pdf->SetFont('helvetica', 'B', 10);
     $pdf->MultiCell(0, 10, strtoupper($eligible_disable_admin_service), 0, 'L');
     $pdf->SetFont('helvetica', '', 10);
-    $pdf->MultiCell(0, 5, "16. Primary reason for the participant’s impairment is due to an organic process or syndrome, intellectual disability, a neurodevelopmental disorder, or neurocognitive disorder? " , 0, 'L');
+    $pdf->MultiCell(0, 5, "16. Primary reason for the participant’s impairment is due to an organic process or syndrome, intellectual disability, a neurodevelopmental disorder, or neurocognitive disorder? ", 0, 'L');
     $pdf->SetFont('helvetica', 'B', 10);
     $pdf->MultiCell(0, 10, strtoupper($organic_process_or_syndrome), 0, 'L');
     $pdf->SetFont('helvetica', '', 10);
@@ -330,108 +331,92 @@ function createPDF($filePath, $submit_form_data, $submitted_impairment_questionn
     $pdf->SetFont('helvetica', '', 10);
 
     // Functional impairment questionnaire
-    if($minorAge === 'no'){
-    foreach($submitted_impairment_questionnaire as $key => $eachData){
-        $pdf->SetFont('helvetica', 'B', 13);
-        $pdf->Cell(0, 10, 'FUNCTIONAL IMPARIMENT DOMAIN #'.($key + 1).' ', 0, 1);
-        $pdf->SetFont('helvetica', '', 10);
+    if ($minorAge === 'no') {
+        foreach ($submitted_impairment_questionnaire as $key => $eachData) {
+            $pdf->SetFont('helvetica', 'B', 13);
+            $pdf->Cell(0, 10, 'FUNCTIONAL IMPARIMENT DOMAIN #' . ($key + 1) . ' ', 0, 1);
+            $pdf->SetFont('helvetica', '', 10);
 
-        $impairment_questionnaire_name = isset($eachData['impairment_questionnaire_name']) ? $eachData['impairment_questionnaire_name'] : '';
-        $mental_health_diagnosis = isset($eachData['mental_health_diagnosis']) ? $eachData['mental_health_diagnosis'] : '';
+            $impairment_questionnaire_name = isset($eachData['impairment_questionnaire_name']) ? $eachData['impairment_questionnaire_name'] : '';
+            $mental_health_diagnosis = isset($eachData['mental_health_diagnosis']) ? $eachData['mental_health_diagnosis'] : '';
 
-        $symptom = isset($eachData['symptom']) ? $eachData['symptom'] : '';
+            $symptom = isset($eachData['symptom']) ? $eachData['symptom'] : '';
 
-        $Symptom_experience_date = isset($eachData['Symptom_experience_date']) ? $eachData['Symptom_experience_date'] : '';
-        $client_issue = isset($eachData['client_issue']) ? $eachData['client_issue'] : '';
-        $namely = isset($eachData['namely']) ? $eachData['namely'] : '';
-        $specifically = isset($eachData['specifically']) ? $eachData['specifically'] : '';
-        $client_need = isset($eachData['client_need']) ? $eachData['client_need'] : '';
-        $intervention = isset($eachData['intervention']) ? $eachData['intervention'] : '';
-        $intervention_specifically = isset($eachData['intervention_specifically']) ? $eachData['intervention_specifically'] : '';
-        $specific_need_area = isset($eachData['specific_need_area']) ? $eachData['specific_need_area'] : '';
-        $long_term_goal = isset($eachData['long_term_goal']) ? $eachData['long_term_goal'] : '';
-        $short_term_goal = isset($eachData['short_term_goal']) ? $eachData['short_term_goal'] : '';
+            $Symptom_experience_date = isset($eachData['Symptom_experience_date']) ? $eachData['Symptom_experience_date'] : '';
+            $client_issue = isset($eachData['client_issue']) ? $eachData['client_issue'] : '';
+            $namely = isset($eachData['namely']) ? $eachData['namely'] : '';
+            $specifically = isset($eachData['specifically']) ? $eachData['specifically'] : '';
+            $client_need = isset($eachData['client_need']) ? $eachData['client_need'] : '';
+            $intervention = isset($eachData['intervention']) ? $eachData['intervention'] : '';
+            $intervention_specifically = isset($eachData['intervention_specifically']) ? $eachData['intervention_specifically'] : '';
+            $specific_need_area = isset($eachData['specific_need_area']) ? $eachData['specific_need_area'] : '';
+            $long_term_goal = isset($eachData['long_term_goal']) ? $eachData['long_term_goal'] : '';
+            $short_term_goal = isset($eachData['short_term_goal']) ? $eachData['short_term_goal'] : '';
 
-        $checkbox = '';
-        $allCheckBox = array_merge($saticText['adultCheckobox']);
-     
-        if (isset($allCheckBox[$impairment_questionnaire_name])) {
-            $checkbox = $allCheckBox[$impairment_questionnaire_name];
-        } 
-        $pdf->MultiCell(0, 20, $clientFirstName ." ". $clientLastName. " has experienced ".$symptom. ". which are symptoms of ".$mental_health_diagnosis." since ".$Symptom_experience_date.".", 0, 'L');
+            $checkbox = '';
+            $allCheckBox = array_merge($saticText['adultCheckobox']);
 
-        $pdf->MultiCell(0, 20, $clientFirstName ." ". $clientLastName. " presents with issues regarding ".$client_issue. " Namely, the client's ".$namely.". ".$specifically."..".$client_need, 0, 'L');
+            if (isset($allCheckBox[$impairment_questionnaire_name])) {
+                $checkbox = $allCheckBox[$impairment_questionnaire_name];
+            }
+            $pdf->MultiCell(0, 20, $clientFirstName . " " . $clientLastName . " has experienced " . $symptom . ". which are symptoms of " . $mental_health_diagnosis . " since " . $Symptom_experience_date . ".", 0, 'L');
 
-        $pdf->MultiCell(0, 30, "To help ".$clientFirstName . " with this ".$client_issue. " problem, the PRP would assist ".$clientFirstName ." to ".$intervention." An example of a planned intervention is ".$intervention_specifically.".. ".$specific_need_area."..", 0, 'L');
+            $pdf->MultiCell(0, 20, $clientFirstName . " " . $clientLastName . " presents with issues regarding " . $client_issue . " Namely, the client's " . $namely . ". " . $specifically . ".." . $client_need, 0, 'L');
 
-        $pdf->MultiCell(0, 20, $clientFirstName ."'s long term goal to address this impairment is  ". $long_term_goal. ".", 0, 'L');
+            $pdf->MultiCell(0, 30, "To help " . $clientFirstName . " with this " . $client_issue . " problem, the PRP would assist " . $clientFirstName . " to " . $intervention . " An example of a planned intervention is " . $intervention_specifically . ".. " . $specific_need_area . "..", 0, 'L');
 
-        $pdf->MultiCell(0, 20, $clientFirstName ."'s short term goal to address this impairment is  ". $short_term_goal. ".", 0, 'L');
+            $pdf->MultiCell(0, 20, $clientFirstName . "'s long term goal to address this impairment is  " . $long_term_goal . ".", 0, 'L');
 
-        // $pdf->MultiCell(0, 10, $checkbox, 0, 'L');
-        // $pdf->MultiCell(0, 10, "Client's mental health diagnosis is: " . $mental_health_diagnosis, 0, 'L');
-        // $pdf->MultiCell(0, 10, "Which symptom of the above diagnosis impairs the client's functioning in this domain? " . $symptom, 0, 'L');
-        // $pdf->MultiCell(0, 10, "Client, has experienced Symptom of diagnosis since:" . $Symptom_experience_date, 0, 'L');
-        // $pdf->MultiCell(0, 10, "Client presents with issues regarding: " . $client_issue, 0, 'L');
-        // $pdf->MultiCell(0, 10, "Namely, the client's: " . $namely, 0, 'L');
-        // $pdf->MultiCell(0, 10, "Specifically: " . $specifically, 0, 'L');
-        // $pdf->MultiCell(0, 10, "Additional information on the client's need in this area: " . $client_need, 0, 'L');
-        // $pdf->MultiCell(0, 10, "The following intervention was implemented: " . $intervention, 0, 'L');
-        // $pdf->MultiCell(0, 10, "Specifically, an example for a planned intervention is to: " . $intervention_specifically, 0, 'L');
-        // $pdf->MultiCell(0, 10, "Additional information on services to address this specific need area: " . $specific_need_area, 0, 'L');
-        // $pdf->MultiCell(0, 10, "Client's long term goal to address this impairment is: " . $long_term_goal, 0, 'L');
-        // $pdf->MultiCell(0, 10, "Client's short term goal to address this impairment is: " . $short_term_goal, 0, 'L');
-    }
-    }else{
-        
+            $pdf->MultiCell(0, 20, $clientFirstName . "'s short term goal to address this impairment is  " . $short_term_goal . ".", 0, 'L');
+        }
+    } else {
+
         $pdf->SetFont('helvetica', 'B', 13);
         $pdf->Cell(0, 10, 'Minor', 0, 1);
         $pdf->SetFont('helvetica', '', 10);
-        if(isset($submit_form_data['minor1'])){
-    if (isset($checkboxMinor['minor1'])) {
+        if (isset($submit_form_data['minor1'])) {
+            if (isset($checkboxMinor['minor1'])) {
 
-        // $questionnaireValue[$checkboxMinor['minor1']] =$submit_form_data['minor1'];
+                // $questionnaireValue[$checkboxMinor['minor1']] =$submit_form_data['minor1'];
 
-          $pdf->MultiCell(0, 5, $checkboxMinor['minor1'], 0, 'L');
-          $pdf->SetFont('helvetica', 'B', 10);
-        $pdf->MultiCell(0, 10, $submit_form_data['minor1'], 0, 'L');
-        $pdf->SetFont('helvetica', '', 10);
+                $pdf->MultiCell(0, 5, $checkboxMinor['minor1'], 0, 'L');
+                $pdf->SetFont('helvetica', 'B', 10);
+                $pdf->MultiCell(0, 10, $submit_form_data['minor1'], 0, 'L');
+                $pdf->SetFont('helvetica', '', 10);
 
-    $pdf->Ln(1);
-    }
-   }
-   if(isset($submit_form_data['minor2'])){
-
-    if (isset($checkboxMinor['minor2'])) {
-        $pdf->MultiCell(0, 5, $checkboxMinor['minor2'], 0, 'L');
-        $pdf->SetFont('helvetica', 'B', 10);
-        if ($checkboxMinor['minor2'] != 'no') {
-            $pdf->MultiCell(0, 5, 'Yes', 0, 'L');
+                $pdf->Ln(1);
+            }
         }
-      $pdf->MultiCell(0, 20, $submit_form_data['minor2'], 0, 'L');
+        if (isset($submit_form_data['minor2'])) {
 
-      $pdf->SetFont('helvetica', '', 10);
+            if (isset($checkboxMinor['minor2'])) {
+                $pdf->MultiCell(0, 5, $checkboxMinor['minor2'], 0, 'L');
+                $pdf->SetFont('helvetica', 'B', 10);
+                if ($checkboxMinor['minor2'] != 'no') {
+                    $pdf->MultiCell(0, 5, 'Yes', 0, 'L');
+                }
+                $pdf->MultiCell(0, 20, $submit_form_data['minor2'], 0, 'L');
 
-    $pdf->Ln(1);
-     
-    }
-   }
-   if(isset($submit_form_data['minor3'])){
-    if (isset($checkboxMinor['minor3'])) {
-        $pdf->MultiCell(0, 5, $checkboxMinor['minor3'], 0, 'L');
-        $pdf->SetFont('helvetica', 'B', 10);
-        if ($checkboxMinor['minor3'] != 'no') {
-            $pdf->MultiCell(0, 5, 'Yes', 0, 'L');
+                $pdf->SetFont('helvetica', '', 10);
+
+                $pdf->Ln(1);
+            }
         }
-      $pdf->MultiCell(0, 20, $submit_form_data['minor3'], 0, 'L');
+        if (isset($submit_form_data['minor3'])) {
+            if (isset($checkboxMinor['minor3'])) {
+                $pdf->MultiCell(0, 5, $checkboxMinor['minor3'], 0, 'L');
+                $pdf->SetFont('helvetica', 'B', 10);
+                if ($checkboxMinor['minor3'] != 'no') {
+                    $pdf->MultiCell(0, 5, 'Yes', 0, 'L');
+                }
+                $pdf->MultiCell(0, 20, $submit_form_data['minor3'], 0, 'L');
 
-      $pdf->SetFont('helvetica', '', 10);
-
-    }
-   }
+                $pdf->SetFont('helvetica', '', 10);
+            }
+        }
     }
     ob_end_clean();
-    
+
     $pdf->Output($filePath, 'F');
 }
 
@@ -452,7 +437,7 @@ function uploadToDrive($filePath, $pdfFileName)
 
     if ($userCredentials) {
         $client->setAccessToken($userCredentials);
-    
+
         // Refresh the access token if it's expired
         if ($client->isAccessTokenExpired()) {
             $client->fetchAccessTokenWithRefreshToken();
@@ -466,23 +451,23 @@ function uploadToDrive($filePath, $pdfFileName)
 
     $driveService = new Google\Service\Drive($client);
     $client->setDefer(TRUE);
-   // File metadata
+    // File metadata
 
     $fileMetadata = new Google\Service\Drive\DriveFile([
         'name' => $pdfFileName
     ]);
 
-$createdFile = $driveService->files->create($fileMetadata);
-// Create a media file upload with the file's content
-$media = new Google\Http\MediaFileUpload(
-    $client,
-    $createdFile,
-    'application/pdf',
-    null,
-    true,
-    filesize($filePath)
-);
-$media->setFileSize(filesize($filePath));
+    $createdFile = $driveService->files->create($fileMetadata);
+    // Create a media file upload with the file's content
+    $media = new Google\Http\MediaFileUpload(
+        $client,
+        $createdFile,
+        'application/pdf',
+        null,
+        true,
+        filesize($filePath)
+    );
+    $media->setFileSize(filesize($filePath));
 
     // Upload the file in chunks
     $status = false;
@@ -494,17 +479,14 @@ $media->setFileSize(filesize($filePath));
 
     // Close the file handle
     fclose($handle);
-
-    // Redirect to a success page
-    // header('Location: http://localhost/prp-referrals/success.php');
 }
 
 // Create a temporary file path for the PDF
 // $filePath = sys_get_temp_dir() . '/example.pdf';
 
 // if(isset($submit_form_data['clientIssueId'])){
-    // $submit_form_Id = $submit_form_data['submit_form_Id'];
-    // $submit_form_Id = 9;
+// $submit_form_Id = $submit_form_data['submit_form_Id'];
+// $submit_form_Id = 9;
 
 // get data with id
 // $submit_form_data =$db->query('SELECT * FROM submit_form_data WHERE id = ?' , $submit_form_Id )->fetchArray();
@@ -522,4 +504,3 @@ $media->setFileSize(filesize($filePath));
 // $lastName = isset($submit_form_data['client_last_name']) ? $submit_form_data['client_last_name'] : '';
 // $pdfFileName = 'PRP_referral_'.$firstName.'_'.$lastName.'_'.time().'.pdf';
 // uploadToDrive($filePath, $pdfFileName);
-?>

@@ -25,7 +25,7 @@ class GoogleSheetsReader
     public function readSheet($sheetName, $columnKeys)
     {
         $rageLimit = chr(ord('A') + count($columnKeys) - 1);
-        $range = $sheetName. '!A1:'.$rageLimit; 
+        $range = $sheetName . '!A1:' . $rageLimit;
         $response = $this->service->spreadsheets_values->get($this->spreadsheetId, $range);
         $values = $response->getValues();
 
@@ -36,17 +36,27 @@ class GoogleSheetsReader
             $result = [];
             foreach ($values as $row) {
                 $row = array_map('trim', $row);
-                if(count($row) < count($columnKeys)){
-                    $row = array_pad($row, count($columnKeys), ''); 
+                if (count($row) < count($columnKeys)) {
+                    $row = array_pad($row, count($columnKeys), '');
                 }
                 $rowData = array_combine($columnKeys, $row);
                 $firstValue = reset($rowData);
-                if(trim($firstValue) != ''){
+                if (trim($firstValue) != '') {
                     $result[] = $rowData;
                 }
             }
             return $result;
         }
     }
-}
 
+
+    public function headingExists($range)
+    {
+        $response = $this->service->spreadsheets_values->get($this->spreadsheetId, $range);
+        return !empty($response->getValues());
+    }
+
+    public function insertData()
+    {
+    }
+}

@@ -59,7 +59,7 @@ class GoogleSheetsHandler
 
     private function addHeading($range, $heading)
     {
-        $rows = [$heading]; 
+        $rows = [$heading];
         $valueRange = new \Google_Service_Sheets_ValueRange();
         $valueRange->setValues($rows);
         $options = ['valueInputOption' => 'RAW'];
@@ -80,4 +80,3 @@ class GoogleSheetsHandler
         }, $data);
     }
 }
-
