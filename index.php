@@ -1146,7 +1146,7 @@ function showAlertParticipant()
 
             var form = document.getElementById('contactForm');
             form.addEventListener('submit', function(event) {
-                if (!form.checkValidity() || !isAtLeastOneRadioCheckedMinorFunctionalImpairment()) {
+                if (!form.checkValidity() || !showFuntionalAlert()) {
                     event.preventDefault();
                     event.stopPropagation();
 
@@ -1207,6 +1207,7 @@ function showAlertParticipant()
                 return returnValue;
 
             }
+
         })();
 
         // on change first name of Referring Professional Information form 
@@ -1461,6 +1462,7 @@ function showAlertParticipant()
             //on minor age change radio
             $('[name="minorAge"]').change(function() {
                 var selectedType = $(this).val();
+                showFuntionalAlert();
                 clientAgeOnchange(selectedType);
             });
 
@@ -1988,6 +1990,8 @@ function showAlertParticipant()
 
         // show alert for Functional impairment questionnaire radio or checked select
         function showFuntionalAlert() {
+
+            var returnVal = false;
             var minorAge = $('input[name="minorAge"]:checked');
             var minorAgeValue = minorAge.val();
             var number = 4;
@@ -2016,9 +2020,13 @@ function showAlertParticipant()
 
             if ($('body:has(.showingWorning)').length > 0) {
                 submitButton.prop('disabled', true);
+                returnVal = false;
+
             } else {
                 submitButton.prop('disabled', false);
+                returnVal = true;
             }
+            return returnVal;
         }
     </script>
 </body>
