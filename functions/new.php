@@ -226,17 +226,18 @@ function createPDF($filePath, $submit_form_data, $submitted_impairment_questionn
     $pdf->SetFont('helvetica', 'B', 10);
     $pdf->MultiCell(0, 10, strtoupper($minorAge), 0, 'L');
     $pdf->SetFont('helvetica', '', 10);
-
-    $pdf->SetFont('helvetica', 'B', 13);
-    $pdf->Cell(0, 10, 'PRESUMPTIVE ELIGIBILITY SUMMARY:', 0, 1);
-    $pdf->SetFont('helvetica', '', 10);
-    $pdf->MultiCell(0, 10, $clientFirstName . ' ' . $clientLastName . ' presumptively eligible for PRP services, as a result of being diagnosed with a category A diagnosis (' . $diagnosis . ') and demonstrates impaired role functioning on a continued or intermittent basis in at least 3 of the 7 function categories.', 0, 'L');
-    $pdf->Cell(0, 10, 'AND', 0, 1);
-    $pdf->MultiCell(0, 20, "The nature of the " . $clientFirstName . " " . $clientLastName . "'s functional impairments and/or skill deficits can be effectively remediated through specific, focused skills-training activities designed to develop and restore (and maintain) independent living skills to support the individual's recovery.", 0, 'L');
-    $pdf->MultiCell(0, 10, $clientFirstName . ' ' . $clientLastName . ' is concurrently engaged in outpatient mental health treatment.', 0, 'L');
-    $pdf->MultiCell(0, 10, $clientFirstName . ' ' . $clientLastName . ' not require a more intensive level of care.', 0, 'L');
-    $pdf->MultiCell(0, 10, 'All less intensive levels of treatment have been determined to be unsafe or unsuccessful for ' . $clientFirstName . ' ' . $clientLastName, 0, 'L');
-    $pdf->MultiCell(0, 10, 'Peer or natural support alternatives have been considered or attempted, and/or are insufficient to meet the need for specific, focused skills training to function effectively for ' . $clientFirstName . ' ' . $clientLastName, 0, 'L');
+    if ($minorAge === 'no') {
+        $pdf->SetFont('helvetica', 'B', 13);
+        $pdf->Cell(0, 10, 'PRESUMPTIVE ELIGIBILITY SUMMARY:', 0, 1);
+        $pdf->SetFont('helvetica', '', 10);
+        $pdf->MultiCell(0, 10, $clientFirstName . ' ' . $clientLastName . ' presumptively eligible for PRP services, as a result of being diagnosed with a category A diagnosis (' . $diagnosis . ') and demonstrates impaired role functioning on a continued or intermittent basis in at least 3 of the 7 function categories.', 0, 'L');
+        $pdf->Cell(0, 10, 'AND', 0, 1);
+        $pdf->MultiCell(0, 20, "The nature of the " . $clientFirstName . " " . $clientLastName . "'s functional impairments and/or skill deficits can be effectively remediated through specific, focused skills-training activities designed to develop and restore (and maintain) independent living skills to support the individual's recovery.", 0, 'L');
+        $pdf->MultiCell(0, 10, $clientFirstName . ' ' . $clientLastName . ' is concurrently engaged in outpatient mental health treatment.', 0, 'L');
+        $pdf->MultiCell(0, 10, $clientFirstName . ' ' . $clientLastName . ' not require a more intensive level of care.', 0, 'L');
+        $pdf->MultiCell(0, 10, 'All less intensive levels of treatment have been determined to be unsafe or unsuccessful for ' . $clientFirstName . ' ' . $clientLastName, 0, 'L');
+        $pdf->MultiCell(0, 10, 'Peer or natural support alternatives have been considered or attempted, and/or are insufficient to meet the need for specific, focused skills training to function effectively for ' . $clientFirstName . ' ' . $clientLastName, 0, 'L');
+    }
     //
     $pdf->SetFont('helvetica', 'B', 13);
     $pdf->Cell(0, 10, 'MEDICAL NECESSITY CRITERIA HISTORY QUESTIONNAIRE:', 0, 1);
@@ -450,8 +451,9 @@ function uploadToDrive($filePath, $pdfFileName)
     // $client->setRedirectUri('http://localhost/prp-referrals/functions/response.php');
     $client->addScope(Google\Service\Drive::DRIVE_FILE);
     $client->setAccessType('offline');
-    $client->setPrompt('consent');
+    $client->setApprovalPrompt("force");
     $client->setIncludeGrantedScopes(true);
+    $client->setPrompt('consent');
 
     $userCredentials = getUserCredentials();
 
@@ -507,7 +509,7 @@ function uploadToDrive($filePath, $pdfFileName)
     fclose($handle);
 }
 
-// Create a temporary file path for the PDF
+// // Create a temporary file path for the PDF
 // $filePath = sys_get_temp_dir() . '/example.pdf';
 
 // // if(isset($submit_form_data['clientIssueId'])){
