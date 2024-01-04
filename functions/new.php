@@ -464,7 +464,7 @@ function uploadToDrive($filePath, $pdfFileName)
                 $client->fetchAccessTokenWithRefreshToken();
                 saveUserCredentials($client->getAccessToken());
             } else {
-                $authUrl = $client->createAuthUrl();
+                $authUrl = $client->createAuthUrl() . '&state=' . urlencode($_SERVER['REQUEST_URI']);
                 header('Location: ' . filter_var($authUrl, FILTER_SANITIZE_URL));
                 exit;
             }
