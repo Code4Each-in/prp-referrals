@@ -2006,7 +2006,7 @@ function showAlertParticipant()
                     }
                 });
             } else {
-                $('.selectDiv' + val + '').addClass('hidden');
+                $('.selectDivminor' + val + '').addClass('hidden');
             }
         }
 

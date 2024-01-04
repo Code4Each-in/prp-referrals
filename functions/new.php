@@ -460,8 +460,14 @@ function uploadToDrive($filePath, $pdfFileName)
 
         // Refresh the access token if it's expired
         if ($client->isAccessTokenExpired()) {
-            $client->fetchAccessTokenWithRefreshToken();
-            saveUserCredentials($client->getAccessToken());
+            if ($client->getRefreshToken()) {
+                $client->fetchAccessTokenWithRefreshToken();
+                saveUserCredentials($client->getAccessToken());
+            } else {
+                $authUrl = $client->createAuthUrl();
+                header('Location: ' . filter_var($authUrl, FILTER_SANITIZE_URL));
+                exit;
+            }
         }
     } else {
         $authUrl = $client->createAuthUrl();
