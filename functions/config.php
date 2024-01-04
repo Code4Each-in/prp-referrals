@@ -55,6 +55,12 @@ class Secret
             ],
             "minorCheckobox" => ["minor1" => "A clear, current threat to the youth's ability to be maintained in their customary setting?", "minor2" => "An emerging risk to the safety of the youth or others?", "minor3" => "Significant psychological or social impairments causing serious problems with peer relationships and/or family members?"],
 
+            "minor1" => [
+                "minorCheckbox1" => "one",
+
+                "minorCheckbox2" => "two ",
+                "minorCheckbox3" => "three"
+            ],
             "minor2" => [
                 "minorCheckbox1" => "The client is prone to mood swings and self-harming behavior, which makes her hostile toward others. She developed self-harming behavior at an early age, which was brought on by the anxiety she experienced.",
 

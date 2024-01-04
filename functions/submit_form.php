@@ -7,7 +7,10 @@ require_once  'insertData.php';
 require_once  'new.php';
 require_once  'config.php';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // echo '<pre>' ; print_r($_POST); echo '</pre>' ;
+    // echo '<pre>';
+    // print_r($_POST);
+    // echo '</pre>';
+    // die;
     $submittedData = [];
     $questionnaireData = [];
     $medicationFormData = [];
@@ -20,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $submittedData['minor2'] = null;
     $submittedData['minor3'] = null;
     $minorForm = [];
-
+    $minorFormAns = [];
 
     foreach ($_POST as $key => $value) {
         if ($value == '') {
@@ -30,6 +33,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $questionnaireData[] = $value;
         } elseif ($key === 'minorForm') {
             $minorForm[] = $value;
+        } elseif ($key === 'minorFormAns') {
+            $minorFormAns[] = $value;
         } elseif (is_array($value)) {
             if (isset($submittedData['medications']) && $submittedData['medications'] === 'yes' && $key === 'medication') {
 
@@ -153,32 +158,58 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $minorSheetData = [];
     $checkboxMinor = $saticText['minorCheckobox'];
     $minorData = [];
+
     foreach ($minorForm as $key1 => $value1) {
+        foreach ($value1 as $key2 => $value2) {
+            $minorValue =  $value2;
+            $data = $db->query('SELECT name FROM minor_options WHERE id = ?', $key2)->fetchArray();
+            $minor =  $data['name'];
+            if ($value2 === 'yes') {
 
-        $minor1 = null;
-        $minor2 = null;
-        $minor3 = null;
-        if (isset($value1['minor1'])) {
-            $minor1 = $value1['minor1'];
-            if (isset($checkboxMinor['minor1'])) {
-                $questionnaireValue[$checkboxMinor['minor1']] = $value1['minor1'];
+                foreach ($minorFormAns as $key3 => $value3) {
+                    echo  $minorValue =  $value3[$key2];
+                }
             }
+            $questionnaireValue[$minor] = $minorValue;
+            $db->query('UPDATE submit_form_data SET minor' . $key2 . ' =? WHERE id = ?', $minorValue, $submit_fromId);
         }
-        if (isset($value1['minor2'])) {
-            $minor2 = $submittedData['minor2'];
-            if (isset($checkboxMinor['minor2'])) {
-                $questionnaireValue[$checkboxMinor['minor2']] = $submittedData['minor2'];
-            }
-        }
-        if (isset($value1['minor3'])) {
-            $minor3 = $submittedData['minor3'];
-            if (isset($checkboxMinor['minor3'])) {
-                $questionnaireValue[$checkboxMinor['minor3']] = $submittedData['minor3'];
-            }
-        }
-
-        $db->query('UPDATE submit_form_data SET minor1 =? ,minor2 = ? ,minor3 = ?  WHERE id = ?', $minor1, $minor2, $minor3, $submit_fromId);
     }
+    // die;
+    // foreach ($minorForm as $key1 => $value1) {
+
+    //     $minor1 = null;
+    //     $minor2 = null;
+    //     $minor3 = null;
+    //     if (isset($value1['minor1'])) {
+    //         $minor1 = $value1['minor1'];
+    //         if ($value1['minor1'] === 'yes') {
+    //             $minor1 = $submittedData['minor1'];
+    //         }
+    //         if (isset($checkboxMinor['minor1'])) {
+    //             $questionnaireValue[$checkboxMinor['minor1']] = $minor1;
+    //         }
+    //     }
+    //     if (isset($value1['minor2'])) {
+    //         $minor2 = $value1['minor2'];
+    //         if ($value1['minor2'] === 'yes') {
+    //             $minor2 = $submittedData['minor2'];
+    //         }
+    //         if (isset($checkboxMinor['minor2'])) {
+    //             $questionnaireValue[$checkboxMinor['minor2']] = $minor2;
+    //         }
+    //     }
+    //     if (isset($value1['minor3'])) {
+    //         $minor3 = $value1['minor3'];
+    //         if ($value1['minor3'] === 'yes') {
+    //             $minor3 = $submittedData['minor3'];
+    //         }
+    //         if (isset($checkboxMinor['minor3'])) {
+    //             $questionnaireValue[$checkboxMinor['minor3']] = $minor3;
+    //         }
+    //     }
+
+    //     $db->query('UPDATE submit_form_data SET minor1 =? ,minor2 = ? ,minor3 = ?  WHERE id = ?', $minor1, $minor2, $minor3, $submit_fromId);
+    // }
 
     $medicationFormDataSheet = [];
     if (count($medicationFormData) > 0) {

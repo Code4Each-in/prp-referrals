@@ -9,3 +9,4 @@ $medicationFrequency = $db->query('SELECT * FROM medication_frequency')->fetchAl
 $clientIssue = $db->query('SELECT * FROM client_issue')->fetchAll();
 
 $consumerInformation = $db->query('SELECT * FROM  consumer_information')->fetchAll();
+$minorCheckBox = $db->query('SELECT * FROM  minor_checkbox')->fetchAll();

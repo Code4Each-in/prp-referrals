@@ -1108,9 +1108,11 @@ function showAlertParticipant()
         var diagnosisAdultArray = <?php echo json_encode($diagnosisAdultArray); ?>;
         var diagnosisMinorArray = <?php echo json_encode($diagnosisMinorArray); ?>;
         var adultCheckobox = <?php echo json_encode($saticText['adultCheckobox']); ?>;
-        var minorCheckobox = <?php echo json_encode($saticText['minorCheckobox']); ?>;
+        // var minorCheckobox = <?php //echo json_encode($saticText['minorCheckobox']); 
+                                ?>;
         var clientIssue = <?php echo json_encode($clientIssue); ?>;
         var consumerInformation = <?php echo json_encode($consumerInformation); ?>;
+        var minorCheckobox = <?php echo json_encode($minorCheckBox); ?>;
 
         var submitButton = $('#submitButton');
         var diagnosisHeadingSpan = $('.diagnosisHeadingSpan');
@@ -1902,39 +1904,41 @@ function showAlertParticipant()
                 templateContainer.empty();
                 $.each(minorCheckobox, function(index, item) {
                     var createRow = ` <div class="mb-3 row row-age">
-                                    <label class="col-sm-8 col-form-label">${item}</label>
+                                    <label class="col-sm-8 col-form-label">${item.name}</label>
                                     <div class="col-sm-4 form-check">
                                         <div class="row row-cols">
                                             <div class="col-sm-4 form-check mt-2">
-                                                <label for="minorYes-${index}" class="col-form-label">Yes</label>
-                                                <input class="form-check-input mt-2 functionalImpairment" type="radio" id="minorYes-${index}" name="minorForm[${index}]"  value="yes"  onchange="handleMinorRadioYes(this, '${index}')" >
+                                                <label for="minorYes-${item.id}" class="col-form-label">Yes</label>
+                                                <input class="form-check-input mt-2 functionalImpairment" type="radio" id="minorYes-${item.id}" name="minorForm[${item.id}]"  value="yes"  onchange="handleMinorRadioYes(this, '${item.id}')">
                                             </div>
                                             <div class="col-sm-8 form-check mt-2">
-                                                <label for="minorNo-${index}" class="col-form-label">No</label>
-                                                <input class="form-check-input mt-2 functionalImpairment" type="radio" id="minorNo-${index}" name="minorForm[${index}]"  value="no" onchange="handleMinorRadioYes(this, '${index}')">
+                                                <label for="minorNo-${item.id}" class="col-form-label">No</label>
+                                                <input class="form-check-input mt-2 functionalImpairment" type="radio" id="minorNo-${item.id}" name="minorForm[${item.id}]"  value="no" onchange="handleMinorRadioYes(this, '${item.id}')">
 
                                             </div></div>
                                 </div>`;
-                    if (index != 'minor1') {
-                        var optionsHtml = firstOption;
-                        if (index == 'minor2') {
-                            var optionsFromConfig = <?php echo json_encode($saticText['minor2']); ?>;
+                    // if (index != 'minor1') {
+                    var optionsHtml = firstOption;
+                    if (index == 'minor2') {
+                        var optionsFromConfig = <?php echo json_encode($saticText['minor2']); ?>;
 
-                        } else {
-                            var optionsFromConfig = <?php echo json_encode($saticText['minor3']); ?>;
+                    } else if ((index == 'minor3')) {
+                        var optionsFromConfig = <?php echo json_encode($saticText['minor3']); ?>;
 
-                        }
+                    } else if ((index == 'minor1')) {
+                        var optionsFromConfig = <?php echo json_encode($saticText['minor1']); ?>;
 
-                        $.each(optionsFromConfig, function(indexOp, option) {
-                            optionsHtml += '<option value="' + option + '">' + option + '</option>';
-                        });
-                        createRow += `<div class="mb-3 row hidden selectDiv${index}">
-                <label for="minorFormAns-${index}" class="form-label">Possible Answers for above?</label>
-                <select class="form-select symptom" aria-label="Default select example" name="${index}" id="minorFormAns-${index}">
-             ${optionsHtml}
+                    }
+
+                    $.each(optionsFromConfig, function(indexOp, option) {
+                        optionsHtml += '<option value="' + option + '">' + option + '</option>';
+                    });
+                    createRow += `<div class="mb-3 row hidden selectDivminor${item.id}">
+                <label for="minorFormAns-minor${item.id}" class="form-label">Possible Answers for above?</label>
+                <select class="form-select symptom" aria-label="Default select example" name="minorFormAns[${item.id}]" id="minorFormAns-minor${item.id}">
                 </select>
             </div>`;
-                    }
+                    // }
                     $('#checkboxContainer').append(createRow);
                 });
             } else if (selectedType === 'no') {
@@ -1978,11 +1982,29 @@ function showAlertParticipant()
 
         // on Functional impairment questionnaire radio change 
         function handleMinorRadioYes(element, val) {
-            if (val != 'minor1') {
-
-            }
             if (element.value === 'yes') {
-                $('.selectDiv' + val + '').removeClass('hidden');
+                $.ajax({
+                    url: 'functions/getMinorOptions.php',
+                    type: 'POST',
+                    data: {
+                        id: val
+                    },
+                    success: function(response) {
+                        $('#minorFormAns-minor' + val + '').empty();
+                        var responseData = JSON.parse(response);
+                        var optionsHtml = '';
+                        $('#minorFormAns-minor' + val + '').append(firstOption);
+                        $.each(responseData, function(indexOp, option) {
+                            optionsHtml += '<option value="' + option.name + '">' + option.name + '</option>';
+                        });
+                        $('#minorFormAns-minor' + val + '').append(optionsHtml);
+                        $('.selectDivminor' + val + '').removeClass('hidden');
+
+                    },
+                    error: function() {
+                        $('#result').html('Error loading data.');
+                    }
+                });
             } else {
                 $('.selectDiv' + val + '').addClass('hidden');
             }
