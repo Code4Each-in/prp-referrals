@@ -14,14 +14,12 @@ class GoogleSheetsHandler
     public function __construct()
     {
         $this->apiKey = Secret::getGoogleApiKey();
-        $this->spreadsheetId = '10cy37MmDeQ4BortDoHEOxqDwLlhjmlMC4iCXZ0yPt6c';
+        $this->spreadsheetId =  Secret::saveSpreadsheetId();
         $this->initializeService();
     }
 
     private function initializeService()
     {
-        // $client = new Google_Client();
-        // $this->service->getClient()->setDeveloperKey($this->apiKey);
         $client = new \Google_Client();
         $client->setApplicationName('Google Sheets API');
         $client->setScopes([\Google_Service_Sheets::SPREADSHEETS]);
@@ -35,18 +33,6 @@ class GoogleSheetsHandler
     {
         $headingRange = 'Sheet1';
         $headingExists = $this->headingExists($headingRange);
-        // if (!$headingExists) {
-        //     print_r($data);
-        //     $this->addHeading($headingRange, array_keys($data));
-        // }
-
-        // $body = new Google_Service_Sheets_ValueRange([
-        //     'values' => [array_values($data)],
-        // ]);
-
-        // $params = ['valueInputOption' => 'RAW'];
-
-        // $result = $this->service->spreadsheets_values->update($this->spreadsheetId, $headingRange, $body, $params);
         $result = $this->addHeading($headingRange, array_values($data));
         return $result;
     }

@@ -167,7 +167,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($value2 === 'yes') {
 
                 foreach ($minorFormAns as $key3 => $value3) {
-                    echo  $minorValue =  $value3[$key2];
+                    $minorValue =  $value3[$key2];
                 }
             }
             $questionnaireValue[$minor] = $minorValue;

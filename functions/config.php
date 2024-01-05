@@ -4,7 +4,28 @@ class Secret
 {
     public static function getGoogleApiKey()
     {
-        return 'AIzaSyBOPcINZBcaBGwoMglLALCph7YtAGRkv84';
+        // return 'AIzaSyBOPcINZBcaBGwoMglLALCph7YtAGRkv84';
+        return 'AIzaSyCD6RfWOsuuztDxGihRDqANKjDDhWTXbEE';
+    }
+
+
+    public static function getDriveKey()
+    {
+        return [
+            'clientId' => '656812227896-52ldtdaalvacti5s83srfi1et45p3mvo.apps.googleusercontent.com',
+            'clientSecret' => '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',
+            'redirectUri' => 'https://prp-referrals.code4each.com/functions/response.php'
+            // 'redirectUri' =>  'http://localhost/prp-referrals/functions/response.php'
+
+        ];
+    }
+
+
+    public static function saveSpreadsheetId()
+    {
+        // return '10cy37MmDeQ4BortDoHEOxqDwLlhjmlMC4iCXZ0yPt6c'; // dev id
+
+        return '11xRaV2ldNDFoDxFcisFFSU2pcgkCTZDAXqtsElGkjiw'; //live sheet
     }
 
     public static function getSpreadsheetId()

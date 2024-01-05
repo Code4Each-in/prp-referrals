@@ -1365,6 +1365,11 @@ function showAlertParticipant()
                             }
                         }
                         $('#diagnosis option[data-diagnosisid="' + matchingClientObject.diagnosis_id + '"]').prop('selected', true);
+                        var selectedValue = $("#diagnosis").val();
+                        $('.mentalDiagnosis').val(selectedValue);
+                        var selectedOption = $("#diagnosis :selected");
+                        var diagnosisid = selectedOption.data('diagnosisid');
+                        updateSymptoms(diagnosisid);
                     } else {
                         emptyClientForm();
                     }
@@ -1382,6 +1387,8 @@ function showAlertParticipant()
             clientSecurityNumber.val('');
             clientAddress.val('');
             clientGrade.val('');
+            $('.mentalDiagnosis').val('');
+            $('.symptom').empty();
             $('input[name="clientGender"]').prop('checked', false);
             $('input[name="medications"]').prop('checked', false);
             $('input[name="minorAge"]').prop('checked', false);
@@ -1480,26 +1487,27 @@ function showAlertParticipant()
                 $('.mentalDiagnosis').val(selectedValue);
                 var selectedOption = $(this).find(':selected');
                 var diagnosisid = selectedOption.data('diagnosisid');
-                $.ajax({
-                    url: 'functions/getSymptoms.php',
-                    type: 'POST',
-                    data: {
-                        diagnosisid: diagnosisid
-                    },
-                    success: function(response) {
-                        var responseData = JSON.parse(response);
-                        $('.symptom').empty();
-                        $('.symptom').append(firstOption);
-                        $.each(responseData, function(index, option) {
-                            symtomsHtml += '<option value="' + option.name + '" data-symptom="' + option.id + '">' + option.name + '</option> ';
-                            $('.symptom').append('<option value="' + option.name + '" data-symptom="' + option.id + '">' + option.name + '</option> ');
-                        });
+                updateSymptoms(diagnosisid);
+                // $.ajax({
+                //     url: 'functions/getSymptoms.php',
+                //     type: 'POST',
+                //     data: {
+                //         diagnosisid: diagnosisid
+                //     },
+                //     success: function(response) {
+                //         var responseData = JSON.parse(response);
+                //         $('.symptom').empty();
+                //         $('.symptom').append(firstOption);
+                //         $.each(responseData, function(index, option) {
+                //             symtomsHtml += '<option value="' + option.name + '" data-symptom="' + option.id + '">' + option.name + '</option> ';
+                //             $('.symptom').append('<option value="' + option.name + '" data-symptom="' + option.id + '">' + option.name + '</option> ');
+                //         });
 
-                    },
-                    error: function() {
-                        $('#result').html('Error loading data.');
-                    }
-                });
+                //     },
+                //     error: function() {
+                //         $('#result').html('Error loading data.');
+                //     }
+                // });
             });
 
 
@@ -1579,7 +1587,9 @@ function showAlertParticipant()
                 var minorValue = selectedCheckboxIdArray[1];
             } else {
                 diagnosisVal = diagnosisSelect.val();
-
+                var selectedOption = $("#diagnosis :selected");
+                var diagnosisid = selectedOption.data('diagnosisid');
+                updateSymptoms(diagnosisid);
                 // Add new templates for checked checkboxes
                 selectedCheckboxValues.forEach(function(templateId, index) {
                     // Check if the template is already present to avoid duplication
@@ -2049,6 +2059,29 @@ function showAlertParticipant()
                 returnVal = true;
             }
             return returnVal;
+        }
+
+        function updateSymptoms(diagnosisid) {
+            $.ajax({
+                url: 'functions/getSymptoms.php',
+                type: 'POST',
+                data: {
+                    diagnosisid: diagnosisid
+                },
+                success: function(response) {
+                    var responseData = JSON.parse(response);
+                    $('.symptom').empty();
+                    $('.symptom').append(firstOption);
+                    $.each(responseData, function(index, option) {
+                        symtomsHtml += '<option value="' + option.name + '" data-symptom="' + option.id + '">' + option.name + '</option> ';
+                        $('.symptom').append('<option value="' + option.name + '" data-symptom="' + option.id + '">' + option.name + '</option> ');
+                    });
+
+                },
+                error: function() {
+                    $('#result').html('Error loading data.');
+                }
+            });
         }
     </script>
 </body>

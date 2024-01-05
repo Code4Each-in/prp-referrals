@@ -14,41 +14,28 @@ require_once  'config.php';
 function saveUserCredentials($credentials)
 {
     $storedCredentialsPath = "credentials.json";
-    // Convert credentials to JSON
     $jsonCredentials = json_encode($credentials);
 
-    // Create the file if it doesn't exist
     if (!file_exists($storedCredentialsPath)) {
         if (!touch($storedCredentialsPath)) {
             die("Failed to create the file.");
         }
     }
-
-    // Set read and write permissions
     if (!chmod($storedCredentialsPath, 0666)) {
         die("Failed to set file permissions.");
     }
-
-    // Open the file for writing (create if it doesn't exist)
     $fileHandle = fopen($storedCredentialsPath, 'w');
 
     if ($fileHandle === false) {
-        // Handle the error, e.g., log it or display a message
         die("Error opening the file for writing.");
     }
-
-    // Write the JSON data to the file
     $bytesWritten = fwrite($fileHandle, $jsonCredentials);
 
     if ($bytesWritten === false) {
-        // Handle the error, e.g., log it or display a message
         die("Error writing data to the file.");
     }
 
-    // Close the file handle
     fclose($fileHandle);
-
-    // Optionally, you can return true or perform additional actions upon success
     return true;
 }
 
@@ -435,7 +422,7 @@ function createPDF($filePath, $submit_form_data, $submitted_impairment_questionn
     $pdf->SetFont('helvetica', 'B', 10);
     $pdf->Cell(0, 5, 'ELECTRONICALLY SIGNED BY:', 0, 'L');
     $pdf->SetFont('helvetica', ' ', 10);
-    $pdf->Cell(0, 5,  $clientFirstName . " " . $clientLastName . ', CRNP-PMH of Changing Lives at Home, Inc. on ' . $refDate, 0, 'L');
+    $pdf->Cell(0, 5,  $ref_first_name . " " . $ref_last_name . ', CRNP-PMH of Changing Lives at Home, Inc. on ' . $refDate, 0, 'L');
     ob_end_clean();
 
     $pdf->Output($filePath, 'F');
@@ -445,10 +432,14 @@ function createPDF($filePath, $submit_form_data, $submitted_impairment_questionn
 function uploadToDrive($filePath, $pdfFileName)
 {
     $client = new Google_Client();
-    $client->setClientId('1043613198330-cf98b9hggt1of5a0tpf337eab2ph0o3l.apps.googleusercontent.com');
-    $client->setClientSecret('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');
-    $client->setRedirectUri('https://prp-referrals.code4each.com/functions/response.php');
-    // $client->setRedirectUri('http://localhost/prp-referrals/functions/response.php');
+    $googelData = Secret::getDriveKey();
+    // $client->setClientId('1043613198330-cf98b9hggt1of5a0tpf337eab2ph0o3l.apps.googleusercontent.com');
+    // $client->setClientSecret('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');
+    // $client->setRedirectUri('https://prp-referrals.code4each.com/functions/response.php');
+    $client->setClientId($googelData['clientId']);
+    $client->setClientSecret($googelData['clientSecret']);
+    $client->setRedirectUri($googelData['redirectUri']);
+
     $client->addScope(Google\Service\Drive::DRIVE_FILE);
     $client->setAccessType('offline');
     $client->setApprovalPrompt("force");
