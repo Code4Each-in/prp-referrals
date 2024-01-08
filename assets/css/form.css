@@ -14,17 +14,15 @@ i.fa.fa-hand-o-right {
 .mb-3.row.row-age {
     display: flex;
 }
-
 .row-radio label.col-sm-8.col-form-label {
     color: #444444;
-    text-align: justify;
     font-size: 15px;
     font-weight: 500;
     display: flex;
     align-items: center;
     gap: 8px;
+    width: 80%;
 }
-
 .mb-3.row.row-radio {
     display: flex;
     justify-content: center;

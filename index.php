@@ -1956,7 +1956,7 @@ function showAlertParticipant()
                 allCheckbox = adultCheckobox
                 diagnosisArray = diagnosisAdultArray
                 $.each(adultCheckobox, function(index, item) {
-                    var createRow = '<div class="row"><label for="functionalImpairment-' + index + '" class="col-sm-8 col-form-label">' + item + '</label><div class="col-sm-2 form-check mt-2"><input class="form-check-input functionalImpairment" type="checkbox" id="functionalImpairment-' + index + '" name="functionalImpairment" value="' + index + '"></div></div>';
+                    var createRow = '<div class="row"><label for="functionalImpairment-' + index + '" class="col-sm-8 col-form-label"><p>' + item + '</p></label><div class="col-sm-2 form-check mt-2"><input class="form-check-input functionalImpairment" type="checkbox" id="functionalImpairment-' + index + '" name="functionalImpairment" value="' + index + '"></div></div>';
                     $('#checkboxContainer').append(createRow);
                 });
             }
