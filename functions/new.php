@@ -415,40 +415,40 @@ function createPDF($filePath, $submit_form_data, $submitted_impairment_questionn
         $minor_question_4 = isset($submit_form_data['minor_question_4']) ? $submit_form_data['minor_question_4'] : '';
         $minor_question_5 = isset($submit_form_data['minor_question_5']) ? $submit_form_data['minor_question_5'] : '';
         $minor_1_addtional = isset($submit_form_data['minor_1_addtional']) ? $submit_form_data['minor_1_addtional'] : '';
-        $minor_2_addtional = isset($submit_form_data['minor_2_addtional']) ? $submit_form_data['minor_1_addtional'] : '';
-        $minor_3_addtional = isset($submit_form_data['minor_3_addtional']) ? $submit_form_data['minor_1_addtional'] : '';
-        $minor_4_addtional = isset($submit_form_data['minor_4_addtional']) ? $submit_form_data['minor_1_addtional'] : '';
-        $minor_1_addtional = isset($submit_form_data['minor_5_addtional']) ? $submit_form_data['minor_1_addtional'] : '';
+        $minor_2_addtional = isset($submit_form_data['minor_2_addtional']) ? $submit_form_data['minor_2_addtional'] : '';
+        $minor_3_addtional = isset($submit_form_data['minor_3_addtional']) ? $submit_form_data['minor_3_addtional'] : '';
+        $minor_4_addtional = isset($submit_form_data['minor_4_addtional']) ? $submit_form_data['minor_4_addtional'] : '';
+        $minor_1_addtional = isset($submit_form_data['minor_5_addtional']) ? $submit_form_data['minor_5_addtional'] : '';
         
-        if($minor_question_1 != ''){
+        if($minor_question_1 != '' || $minor_1_addtional != ''){
             $pdf->SetFont('helvetica', '', 10);
             $pdf->MultiCell(0, 6,'What evidence exists to show that the current intensity of outpatient treatment for this individual is insufficient to reduce the youth’s symptoms and functional behavioral impairments resulting from mental illness?', 0, 'L');
             $pdf->SetFont('helvetica', 'B', 10);
             $pdf->MultiCell(0, 6,$minor_question_1, 0, 'L');
             $pdf->MultiCell(0, 10,$minor_1_addtional, 0, 'L');
         }
-        if($minor_question_2 != ''){
+        if($minor_question_2 != '' || $minor_2_addtional != ''){
             $pdf->SetFont('helvetica', '', 10);
             $pdf->MultiCell(0, 6,'How will PRP serve to help this youth to age-appropriate development, more independent functioning and independent living skills?', 0, 'L');
             $pdf->SetFont('helvetica', 'B', 10);
             $pdf->MultiCell(0, 6,$minor_question_2, 0, 'L');
             $pdf->MultiCell(0, 10,$minor_2_addtional, 0, 'L');
         }
-        if($minor_question_3 != ''){
+        if($minor_question_3 != '' || $minor_3_addtional != ''){
             $pdf->SetFont('helvetica', '', 10);
             $pdf->MultiCell(0, 6,'Has the youth made progress toward age appropriate development, more independent functioning and independent living skills?', 0, 'L');
             $pdf->SetFont('helvetica', 'B', 10);
             $pdf->MultiCell(0, 6,$minor_question_3, 0, 'L');
             $pdf->MultiCell(0, 10,$minor_3_addtional, 0, 'L');
         }
-        if($minor_question_4 != ''){
+        if($minor_question_4 != '' || $minor_4_addtional != ''){
             $pdf->SetFont('helvetica', '', 10);
             $pdf->MultiCell(0, 6,'Is a documented crisis response plan in progress or completed?', 0, 'L');
             $pdf->SetFont('helvetica', 'B', 10);
             $pdf->MultiCell(0, 6,$minor_question_4, 0, 'L');
             $pdf->MultiCell(0, 10,$minor_4_addtional, 0, 'L');
         }
-        if($minor_question_5 != ''){
+        if($minor_question_5 != '' || $minor_5_addtional != ''){
             $pdf->SetFont('helvetica', '', 10);
             $pdf->MultiCell(0, 6,'As an individual treatment plan/individual rehabilitation plan been completed?', 0, 'L');
             $pdf->SetFont('helvetica', 'B', 10);
