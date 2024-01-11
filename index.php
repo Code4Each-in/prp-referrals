@@ -1358,7 +1358,8 @@ function showAlertParticipant()
                                                                 <input
                                                                     class="form-check-input mt-2 functionalImpairment"
                                                                     type="radio" id="minor_question_3_1"
-                                                                    name="minor_question_3" value="yes">
+                                                                    name="minor_question_3" value="yes"
+                                                                    onchange="handleMinorRadioQuestion(this, '${item.id}')">
                                                             </div>
                                                             <div class="col-sm-8 form-check mt-2">
                                                                 <label for="minor_question_3_2"
@@ -1366,13 +1367,15 @@ function showAlertParticipant()
                                                                 <input
                                                                     class="form-check-input mt-2 functionalImpairment"
                                                                     type="radio" id="minor_question_3_2"
-                                                                    name="minor_question_3" value="no">
+                                                                    name="minor_question_3" value="no"
+                                                                    onchange="handleMinorRadioQuestion(this, '${item.id}')">
 
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <select class="form-select" aria-label="Default select example"
-                                                        name="minor_question_3" id="minor_question_3" required>
+                                                    <select class="form-select question_3_select hidden"
+                                                        aria-label="Default select example" name="minor_question_3"
+                                                        id="minor_question_3" required>
                                                         <?php
                                         foreach ($minorQuestion_2 as $eachVal2) {
                                             echo '<option value="' . htmlspecialchars(trim($eachVal2['question'])) . '" >' . $eachVal2['question'] . '</option>';
@@ -2423,6 +2426,15 @@ function showAlertParticipant()
             });
         } else {
             $('.selectDivminor' + val + '').addClass('hidden');
+        }
+    }
+
+    // on minor question 3 radio change 
+    function handleMinorRadioQuestion(element, val) {
+        if (element.value === 'yes') {
+            $('.question_3_select').removeClass('hidden');
+        } else {
+            $('.question_3_select').addClass('hidden');
         }
     }
 

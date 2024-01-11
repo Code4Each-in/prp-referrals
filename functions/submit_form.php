@@ -19,6 +19,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $submittedData['minor1'] = null;
     $submittedData['minor2'] = null;
     $submittedData['minor3'] = null;
+    $submittedData['minor_question_1'] = null;
+    $submittedData['minor_question_2'] = null;
+    $submittedData['minor_question_3'] = null;
+    $submittedData['minor_question_4'] = null;
+    $submittedData['minor_question_5'] = null;
+    $submittedData['minor_1_addtional'] = null;
+    $submittedData['minor_2_addtional'] = null;
+    $submittedData['minor_3_addtional'] = null;
+    $submittedData['minor_4_addtional'] = null;
+    $submittedData['minor_5_addtional'] = null;
     $minorForm = [];
     $minorFormAns = [];
 
@@ -172,43 +182,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $db->query('UPDATE submit_form_data SET minor' . $key2 . ' =? WHERE id = ?', $minorValue, $submit_fromId);
         }
     }
-    // die;
-    // foreach ($minorForm as $key1 => $value1) {
 
-    //     $minor1 = null;
-    //     $minor2 = null;
-    //     $minor3 = null;
-    //     if (isset($value1['minor1'])) {
-    //         $minor1 = $value1['minor1'];
-    //         if ($value1['minor1'] === 'yes') {
-    //             $minor1 = $submittedData['minor1'];
-    //         }
-    //         if (isset($checkboxMinor['minor1'])) {
-    //             $questionnaireValue[$checkboxMinor['minor1']] = $minor1;
-    //         }
-    //     }
-    //     if (isset($value1['minor2'])) {
-    //         $minor2 = $value1['minor2'];
-    //         if ($value1['minor2'] === 'yes') {
-    //             $minor2 = $submittedData['minor2'];
-    //         }
-    //         if (isset($checkboxMinor['minor2'])) {
-    //             $questionnaireValue[$checkboxMinor['minor2']] = $minor2;
-    //         }
-    //     }
-    //     if (isset($value1['minor3'])) {
-    //         $minor3 = $value1['minor3'];
-    //         if ($value1['minor3'] === 'yes') {
-    //             $minor3 = $submittedData['minor3'];
-    //         }
-    //         if (isset($checkboxMinor['minor3'])) {
-    //             $questionnaireValue[$checkboxMinor['minor3']] = $minor3;
-    //         }
-    //     }
+    if (isset($submittedData['minor_question_1'])) {
+        $questionnaireValue['What evidence exists to show that the current intensity of outpatient treatment for this individual is insufficient to reduce the youth’s symptoms and functional behavioral impairments resulting from mental illness?'] =$submittedData['minor_question_1'].' '.isset($submittedData['minor_1_addtional']) ? $submittedData['minor_1_addtional'] : '';
+    }
 
-    //     $db->query('UPDATE submit_form_data SET minor1 =? ,minor2 = ? ,minor3 = ?  WHERE id = ?', $minor1, $minor2, $minor3, $submit_fromId);
-    // }
+    if (isset($submittedData['minor_question_2'])) {
+        $questionnaireValue['How will PRP serve to help this youth to age-appropriate development, more independent functioning and independent living skills?'] =$submittedData['minor_question_2'].' '.$submittedData['minor_2_addtional'].isset($submittedData['minor_2_addtional']) ? $submittedData['minor_2_addtional'] : '';
+    }
 
+    if (isset($submittedData['minor_question_3'])) {
+        $questionnaireValue['Has the youth made progress toward age appropriate development, more independent functioning and independent living skills?'] =$submittedData['minor_question_3'].' '.isset($submittedData['minor_3_addtional']) ? $submittedData['minor_3_addtional'] : '';
+    }
+
+    if (isset($submittedData['minor_question_4'])) {
+        $questionnaireValue['Is a documented crisis response plan in progress or completed?'] =$submittedData['minor_question_4'].' '.isset($submittedData['minor_4_addtional']) ? $submittedData['minor_1_addtiona4'] : '';
+    }
+
+    if (isset($submittedData['minor_question_5'])) {
+        $questionnaireValue['As an individual treatment plan/individual rehabilitation plan been completed?'] =$submittedData['minor_question_5'].' '.isset($submittedData['minor_5_addtional']) ? $submittedData['minor_5_addtional'] : '';
+    }
+    
     $medicationFormDataSheet = [];
     if (count($medicationFormData) > 0) {
         foreach ($medicationFormData as $key => $medicationFormValue) {
@@ -232,12 +226,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $newArray[] = json_encode($sheetValue, JSON_PRETTY_PRINT);
         }
     }
-
-    // echo '<pre>';
-    // print_r($_POST);
-    // echo '</pre>';
-    // die;
-    // insert in sheet 
+//     echo '<pre>';
+//     print_r($_POST);
+//     echo '</pre>';
+// die;
+    // insert in sheet  
     $googleSheetsHandler = new GoogleSheetsHandler();
     $result = $googleSheetsHandler->insertData($newArray);
 
