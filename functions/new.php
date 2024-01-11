@@ -456,6 +456,7 @@ function createPDF($filePath, $submit_form_data, $submitted_impairment_questionn
             $pdf->MultiCell(0, 10,$minor_5_addtional, 0, 'L');
         }
     }
+    
     // show service
     $pdf->Ln(3);
     $pdf->SetFont('helvetica', 'B', 10);
