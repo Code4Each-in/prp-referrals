@@ -226,10 +226,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $newArray[] = json_encode($sheetValue, JSON_PRETTY_PRINT);
         }
     }
-    echo '<pre>';
-    print_r($_POST);
-    echo '</pre>';
-die;
+//     echo '<pre>';
+//     print_r($_POST);
+//     echo '</pre>';
+// die;
     // insert in sheet  
     $googleSheetsHandler = new GoogleSheetsHandler();
     $result = $googleSheetsHandler->insertData($newArray);
