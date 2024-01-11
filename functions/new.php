@@ -443,7 +443,7 @@ function createPDF($filePath, $submit_form_data, $submitted_impairment_questionn
             $pdf->SetFont('helvetica', 'B', 10);
             $pdf->MultiCell(0, 6,$minor_question_3, 0, 'L');
             if(isset($submit_form_data['minor_question_3_yes'])){
-                $select = $submittedData['minor_question_3_yes'];
+                $select = $submit_form_data['minor_question_3_yes'];
                  $pdf->MultiCell(0, 6,$select, 0, 'L');
             }
             $pdf->MultiCell(0, 10,$minor_3_addtional, 0, 'L');
