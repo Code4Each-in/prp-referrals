@@ -188,7 +188,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if (isset($submittedData['minor_question_2']) || isset($submittedData['minor_2_addtional'])) {
-        $questionnaireValue['How will PRP serve to help this youth to age-appropriate development, more independent functioning and independent living skills?'] =isset($submittedData['minor_question_2']) ? $submittedData['minor_question_2'] : ''.' '.$submittedData['minor_2_addtional'].isset($submittedData['minor_2_addtional']) ? $submittedData['minor_2_addtional'] : '';
+        $questionnaireValue['How will PRP serve to help this youth to age-appropriate development, more independent functioning and independent living skills?'] =isset($submittedData['minor_question_2']) ? $submittedData['minor_question_2'] : ''.' '.isset($submittedData['minor_2_addtional']) ? $submittedData['minor_2_addtional'] : '';
     }
 
     if (isset($submittedData['minor_question_3']) || isset($submittedData['minor_3_addtional'])) {
@@ -196,7 +196,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if (isset($submittedData['minor_question_4']) || isset($submittedData['minor_4_addtional'])) {
-        $questionnaireValue['Is a documented crisis response plan in progress or completed?'] =isset($submittedData['minor_question_4']) ? $submittedData['minor_question_4'] : ''.' '.isset($submittedData['minor_4_addtional']) ? $submittedData['minor_1_addtiona4'] : '';
+        $questionnaireValue['Is a documented crisis response plan in progress or completed?'] =isset($submittedData['minor_question_4']) ? $submittedData['minor_question_4'] : ''.' '.isset($submittedData['minor_4_addtional']) ? $submittedData['minor_4_addtional'] : '';
     }
 
     if (isset($submittedData['minor_question_5']) || isset($submittedData['minor_5_addtional'])) {
@@ -226,10 +226,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $newArray[] = json_encode($sheetValue, JSON_PRETTY_PRINT);
         }
     }
-//     echo '<pre>';
-//     print_r($_POST);
-//     echo '</pre>';
-// die;
+    echo '<pre>';
+    print_r($_POST);
+    echo '</pre>';
+die;
     // insert in sheet  
     $googleSheetsHandler = new GoogleSheetsHandler();
     $result = $googleSheetsHandler->insertData($newArray);
