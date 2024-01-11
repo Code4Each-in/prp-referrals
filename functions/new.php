@@ -408,6 +408,53 @@ function createPDF($filePath, $submit_form_data, $submitted_impairment_questionn
                 $pdf->SetFont('helvetica', '', 10);
             }
         }
+        // minor questions 
+        $minor_question_1 = isset($submit_form_data['minor_question_1']) ? $submit_form_data['minor_question_1'] : '';
+        $minor_question_2 = isset($submit_form_data['minor_question_2']) ? $submit_form_data['ref_date'] : '';
+        $minor_question_3 = isset($submit_form_data['minor_question_3']) ? $submit_form_data['minor_question_3'] : '';
+        $minor_question_4 = isset($submit_form_data['minor_question_4']) ? $submit_form_data['minor_question_4'] : '';
+        $minor_question_5 = isset($submit_form_data['minor_question_5']) ? $submit_form_data['minor_question_5'] : '';
+        $minor_1_addtional = isset($submit_form_data['minor_1_addtional']) ? $submit_form_data['minor_1_addtional'] : '';
+        $minor_2_addtional = isset($submit_form_data['minor_2_addtional']) ? $submit_form_data['minor_1_addtional'] : '';
+        $minor_3_addtional = isset($submit_form_data['minor_3_addtional']) ? $submit_form_data['minor_1_addtional'] : '';
+        $minor_4_addtional = isset($submit_form_data['minor_4_addtional']) ? $submit_form_data['minor_1_addtional'] : '';
+        $minor_1_addtional = isset($submit_form_data['minor_5_addtional']) ? $submit_form_data['minor_1_addtional'] : '';
+        
+        if($minor_question_1 != ''){
+            $pdf->SetFont('helvetica', '', 10);
+            $pdf->MultiCell(0, 20,'How will PRP serve to help this youth to age-appropriate development, more independent functioning and independent living skills?', 0, 'L');
+            $pdf->SetFont('helvetica', 'B', 10);
+            $pdf->MultiCell(0, 20,$minor_question_1, 0, 'L');
+            $pdf->MultiCell(0, 20,$minor_1_addtional, 0, 'L');
+        }
+        if($minor_question_2 != ''){
+            $pdf->SetFont('helvetica', '', 10);
+            $pdf->MultiCell(0, 20,'How will PRP serve to help this youth to age-appropriate development, more independent functioning and independent living skills?', 0, 'L');
+            $pdf->SetFont('helvetica', 'B', 10);
+            $pdf->MultiCell(0, 20,$minor_question_2, 0, 'L');
+            $pdf->MultiCell(0, 20,$minor_2_addtional, 0, 'L');
+        }
+        if($minor_question_3 != ''){
+            $pdf->SetFont('helvetica', '', 10);
+            $pdf->MultiCell(0, 20,'How will PRP serve to help this youth to age-appropriate development, more independent functioning and independent living skills?', 0, 'L');
+            $pdf->SetFont('helvetica', 'B', 10);
+            $pdf->MultiCell(0, 20,$minor_question_3, 0, 'L');
+            $pdf->MultiCell(0, 20,$minor_3_addtional, 0, 'L');
+        }
+        if($minor_question_4 != ''){
+            $pdf->SetFont('helvetica', '', 10);
+            $pdf->MultiCell(0, 20,'How will PRP serve to help this youth to age-appropriate development, more independent functioning and independent living skills?', 0, 'L');
+            $pdf->SetFont('helvetica', 'B', 10);
+            $pdf->MultiCell(0, 20,$minor_question_4, 0, 'L');
+            $pdf->MultiCell(0, 20,$minor_4_addtional, 0, 'L');
+        }
+        if($minor_question_5 != ''){
+            $pdf->SetFont('helvetica', '', 10);
+            $pdf->MultiCell(0, 20,'How will PRP serve to help this youth to age-appropriate development, more independent functioning and independent living skills?', 0, 'L');
+            $pdf->SetFont('helvetica', 'B', 10);
+            $pdf->MultiCell(0, 20,$minor_question_5, 0, 'L');
+            $pdf->MultiCell(0, 20,$minor_5_addtional, 0, 'L');
+        }
     }
     // show service
     $pdf->Ln(3);

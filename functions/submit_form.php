@@ -4,13 +4,10 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 require_once  'databseConnection/db_connection.php';
 require_once  'insertData.php';
-require_once  'new.php';
+// require_once  'new.php';
 require_once  'config.php';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // echo '<pre>';
-    // print_r($_POST);
-    // echo '</pre>';
-    // die;
+  
     $submittedData = [];
     $questionnaireData = [];
     $medicationFormData = [];
@@ -57,7 +54,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // database fields need to insert data
-    $fieldsToInsert = ['referral_type', 'ref_date', 'ref_first_name', 'ref_last_name', 'credentials', 'affiliated_ref_organization', 'ref_clinician_phone', 'ref_clinician_email', 'ref_npi', 'services1', 'client_first_name', 'client_last_name', 'client_birth_date', 'client_gender', 'client_address', 'minor_age', 'services2', 'services3', 'services4', 'services5', 'services6', 'client_homeless', 'disorder', 'communicable_diseases', 'medications', 'discharged', 'arrested', 'client_grade', 'employed', 'receiving_treatment', 'currently_enrolled', 'individual_nature', 'individual_intensive_care', 'individual_intensivelevel', 'support_considered', 'eligible_disable_admin_service', 'organic_process_or_syndrome', 'behavioral_control', 'lacks_capacity_for_prp', 'referral_source_paid', 'referral_source', 'reason_for_insufficient_treatment', 'diagnosis', 'medications_description', 'intense_services'];
+    $fieldsToInsert = ['referral_type', 'ref_date', 'ref_first_name', 'ref_last_name', 'credentials', 'affiliated_ref_organization', 'ref_clinician_phone', 'ref_clinician_email', 'ref_npi', 'services1', 'client_first_name', 'client_last_name', 'client_birth_date', 'client_gender', 'client_address', 'minor_age', 'services2', 'services3', 'services4', 'services5', 'services6', 'client_homeless', 'disorder', 'communicable_diseases', 'medications', 'discharged', 'arrested', 'client_grade', 'employed', 'receiving_treatment', 'currently_enrolled', 'individual_nature', 'individual_intensive_care', 'individual_intensivelevel', 'support_considered', 'eligible_disable_admin_service', 'organic_process_or_syndrome', 'behavioral_control', 'lacks_capacity_for_prp', 'referral_source_paid', 'referral_source', 'reason_for_insufficient_treatment', 'diagnosis', 'medications_description', 'intense_services', 'minor_question_1', 'minor_question_2', 'minor_question_3', 'minor_question_4', 'minor_question_5', 'minor_4_addtional', 'minor_1_addtional','minor_2_addtional', 
+'minor_3_addtional', 'minor_5_addtional' ];
 
     $keyMapping = [
         'services1' => 'housing - assisted living services - 24/7 supervision',
@@ -235,7 +233,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
-
+    echo '<pre>';
+    print_r($_POST);
+    echo '</pre>';
+    die;
     // insert in sheet 
     $googleSheetsHandler = new GoogleSheetsHandler();
     $result = $googleSheetsHandler->insertData($newArray);
@@ -262,44 +263,44 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $pdfFileName = 'PRP_referral_' . $firstName . '_' . $lastName . '_' . time() . '.pdf';
         uploadToDrive($filePath, $pdfFileName);
 ?>
-        <!DOCTYPE html>
-        <html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <!-- Bootstrap 5 CSS -->
-            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-            <link rel="stylesheet" type="text/css" href="assets/css/form.css">
-            <title>Psychiatric Rehabilitation Program (PRP)</title>
-            <style>
-                .alert-box {
-                    .alert-icon {
-                        padding-bottom: 20px;
-                    }
-                }
-            </style>
-        </head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/form.css">
+    <title>Psychiatric Rehabilitation Program (PRP)</title>
+    <style>
+    .alert-box {
+        .alert-icon {
+            padding-bottom: 20px;
+        }
+    }
+    </style>
+</head>
 
-        <body>
-            <div class="container mt-4">
-                <div class='row'>
-                    <div class="alert-box" style="float: none; margin: 0 auto;">
-                        <div class="alert alert-success">
-                            <div class="alert-icon text-center">
-                                <i class="fa fa-check-square-o  fa-3x" aria-hidden="true"></i>
-                            </div>
-                            <div class="alert-message text-center">
-                                <strong>Success!</strong> Your Data is submited successfully .
-                                <p>Redirecting in <span id="timer"><?php echo $delay_seconds; ?> seconds</span></p>
-                            </div>
-                        </div>
+<body>
+    <div class="container mt-4">
+        <div class='row'>
+            <div class="alert-box" style="float: none; margin: 0 auto;">
+                <div class="alert alert-success">
+                    <div class="alert-icon text-center">
+                        <i class="fa fa-check-square-o  fa-3x" aria-hidden="true"></i>
+                    </div>
+                    <div class="alert-message text-center">
+                        <strong>Success!</strong> Your Data is submited successfully .
+                        <p>Redirecting in <span id="timer"><?php echo $delay_seconds; ?> seconds</span></p>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
     <?php
     }
 }
@@ -311,11 +312,11 @@ function addUnderscoreBeforeCapital($str)
 
     ?>
     <script>
-        setTimeout(function() {
-            window.location.href = "http://prp-referrals.code4each.com";
-        }, <?php echo $delay_seconds * 1000;
+    setTimeout(function() {
+        window.location.href = "http://prp-referrals.code4each.com";
+    }, <?php echo $delay_seconds * 1000;
             ?>);
     </script>
-        </body>
+</body>
 
-        </html>
+</html>
