@@ -418,7 +418,8 @@ function createPDF($filePath, $submit_form_data, $submitted_impairment_questionn
         $minor_2_addtional = isset($submit_form_data['minor_2_addtional']) ? $submit_form_data['minor_2_addtional'] : '';
         $minor_3_addtional = isset($submit_form_data['minor_3_addtional']) ? $submit_form_data['minor_3_addtional'] : '';
         $minor_4_addtional = isset($submit_form_data['minor_4_addtional']) ? $submit_form_data['minor_4_addtional'] : '';
-        $minor_1_addtional = isset($submit_form_data['minor_5_addtional']) ? $submit_form_data['minor_5_addtional'] : '';
+        $minor_5_addtional = isset($submit_form_data['minor_5_addtional']) ? $submit_form_data['minor_5_addtional'] : '';
+        $minor_question_3_yes = isset($submit_form_data['minor_question_3_yes']) ? $submit_form_data['minor_question_3_yes'] : '';
         
         if($minor_question_1 != '' || $minor_1_addtional != ''){
             $pdf->SetFont('helvetica', '', 10);
@@ -435,10 +436,16 @@ function createPDF($filePath, $submit_form_data, $submitted_impairment_questionn
             $pdf->MultiCell(0, 10,$minor_2_addtional, 0, 'L');
         }
         if($minor_question_3 != '' || $minor_3_addtional != ''){
+            $select = '';
+           
             $pdf->SetFont('helvetica', '', 10);
             $pdf->MultiCell(0, 6,'Has the youth made progress toward age appropriate development, more independent functioning and independent living skills?', 0, 'L');
             $pdf->SetFont('helvetica', 'B', 10);
             $pdf->MultiCell(0, 6,$minor_question_3, 0, 'L');
+            if(isset($submit_form_data['minor_question_3_yes'])){
+                $select = $submittedData['minor_question_3_yes'];
+                 $pdf->MultiCell(0, 6,$select, 0, 'L');
+            }
             $pdf->MultiCell(0, 10,$minor_3_addtional, 0, 'L');
         }
         if($minor_question_4 != '' || $minor_4_addtional != ''){

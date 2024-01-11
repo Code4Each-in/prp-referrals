@@ -1317,6 +1317,7 @@ function showAlertParticipant()
                                                         illness?</label>
                                                     <select class="form-select" aria-label="Default select example"
                                                         name="minor_question_1" id="minor_question_1" required>
+                                                        <option value=""></option>
                                                         <?php
                                         foreach ($minorQuestion_1 as $eachVal1) {
                                             echo '<option value="' . htmlspecialchars(trim($eachVal1['question'])) . '" >' .$eachVal1['question'] . '</option>';
@@ -1334,6 +1335,7 @@ function showAlertParticipant()
                                                         functioning and independent living skills?</label>
                                                     <select class="form-select" aria-label="Default select example"
                                                         name="minor_question_2" id="minor_question_2" required>
+                                                        <option value=""></option>
                                                         <?php
                                         foreach ($minorQuestion_2 as $eachVal2) {
                                             echo '<option value="' . htmlspecialchars(trim($eachVal2['question'])) . '" >' . $eachVal2['question'] . '</option>';
@@ -1374,8 +1376,9 @@ function showAlertParticipant()
                                                         </div>
                                                     </div>
                                                     <select class="form-select question_3_select hidden"
-                                                        aria-label="Default select example" name="minor_question_3"
-                                                        id="minor_question_3" required>
+                                                        aria-label="Default select example" name="minor_question_3_yes"
+                                                        id="minor_question_3_yes" required>
+                                                        <option value=""></option>
                                                         <?php
                                         foreach ($minorQuestion_2 as $eachVal2) {
                                             echo '<option value="' . htmlspecialchars(trim($eachVal2['question'])) . '" >' . $eachVal2['question'] . '</option>';
@@ -2352,6 +2355,7 @@ function showAlertParticipant()
                 $('#checkboxContainer').append(createRow);
             });
         } else if (selectedType === 'no') {
+            $('#minorQuestions').empty();
             diagnosisHeadingSpan.text('Adult');
             allCheckbox = adultCheckobox
             diagnosisArray = diagnosisAdultArray
@@ -2502,6 +2506,25 @@ function showAlertParticipant()
                 $('#result').html('Error loading data.');
             }
         });
+    }
+
+    function copyToClipboard(text) {
+        // Create a temporary textarea element
+        const textarea = document.createElement('textarea');
+        // Set the text content to the specified text
+        textarea.value = text;
+        // Set the position to be off-screen
+        textarea.style.position = 'fixed';
+        textarea.style.left = '-9999px';
+        textarea.style.top = '-9999px';
+        // Append the textarea to the document
+        document.body.appendChild(textarea);
+        // Select the text within the textarea
+        textarea.select();
+        // Copy the selected text to the clipboard
+        document.execCommand('copy');
+        // Remove the temporary textarea
+        document.body.removeChild(textarea);
     }
     </script>
 </body>

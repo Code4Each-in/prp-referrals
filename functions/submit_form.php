@@ -29,6 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $submittedData['minor_3_addtional'] = null;
     $submittedData['minor_4_addtional'] = null;
     $submittedData['minor_5_addtional'] = null;
+    $submittedData['minor_question_3_yes'] = null;
     $minorForm = [];
     $minorFormAns = [];
 
@@ -65,7 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // database fields need to insert data
     $fieldsToInsert = ['referral_type', 'ref_date', 'ref_first_name', 'ref_last_name', 'credentials', 'affiliated_ref_organization', 'ref_clinician_phone', 'ref_clinician_email', 'ref_npi', 'services1', 'client_first_name', 'client_last_name', 'client_birth_date', 'client_gender', 'client_address', 'minor_age', 'services2', 'services3', 'services4', 'services5', 'services6', 'client_homeless', 'disorder', 'communicable_diseases', 'medications', 'discharged', 'arrested', 'client_grade', 'employed', 'receiving_treatment', 'currently_enrolled', 'individual_nature', 'individual_intensive_care', 'individual_intensivelevel', 'support_considered', 'eligible_disable_admin_service', 'organic_process_or_syndrome', 'behavioral_control', 'lacks_capacity_for_prp', 'referral_source_paid', 'referral_source', 'reason_for_insufficient_treatment', 'diagnosis', 'medications_description', 'intense_services', 'minor_question_1', 'minor_question_2', 'minor_question_3', 'minor_question_4', 'minor_question_5', 'minor_4_addtional', 'minor_1_addtional','minor_2_addtional', 
-'minor_3_addtional', 'minor_5_addtional' ];
+'minor_3_addtional', 'minor_5_addtional', 'minor_question_3_yes' ];
 
     $keyMapping = [
         'services1' => 'housing - assisted living services - 24/7 supervision',
@@ -196,7 +197,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if (isset($submittedData['minor_question_3']) || isset($submittedData['minor_3_addtional'])) {
-        $questionnaireValue['Has the youth made progress toward age appropriate development, more independent functioning and independent living skills?'] =(isset($submittedData['minor_question_3']) ? $submittedData['minor_question_3'] : '').' '.(isset($submittedData['minor_3_addtional']) ? $submittedData['minor_3_addtional'] : '');
+        $select = '';
+        if(isset($submittedData['minor_question_3_yes'])){
+            $select = $submittedData['minor_question_3_yes'];
+        }
+        $questionnaireValue['Has the youth made progress toward age appropriate development, more independent functioning and independent living skills?'] =(isset($submittedData['minor_question_3']) ? $submittedData['minor_question_3'] : '').' '. ($select). ' '.(isset($submittedData['minor_3_addtional']) ? $submittedData['minor_3_addtional'] : '');
     }
 
     if (isset($submittedData['minor_question_4']) || isset($submittedData['minor_4_addtional'])) {
