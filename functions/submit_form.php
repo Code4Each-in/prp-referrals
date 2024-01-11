@@ -183,24 +183,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
-    if (isset($submittedData['minor_question_1']) || isset($submittedData['minor_1_addtional'])) {
-        $questionnaireValue['What evidence exists to show that the current intensity of outpatient treatment for this individual is insufficient to reduce the youth’s symptoms and functional behavioral impairments resulting from mental illness?'] =isset($submittedData['minor_question_1']) ? $submittedData['minor_question_1'] : ''.' '.isset($submittedData['minor_1_addtional']) ? $submittedData['minor_1_addtional'] : '';
-    }
+  if (isset($submittedData['minor_question_1']) || isset($submittedData['minor_1_addtional'])) {
+    $questionnaireValue['What evidence exists to show that the current intensity of outpatient treatment for this individual is insufficient to reduce the youth’s symptoms and functional behavioral impairments resulting from mental illness?'] =
+        (isset($submittedData['minor_question_1']) ? $submittedData['minor_question_1'] : '')
+        . ' ' .
+        (isset($submittedData['minor_1_addtional']) ? $submittedData['minor_1_addtional'] : '');
+}
+
 
     if (isset($submittedData['minor_question_2']) || isset($submittedData['minor_2_addtional'])) {
-        $questionnaireValue['How will PRP serve to help this youth to age-appropriate development, more independent functioning and independent living skills?'] =isset($submittedData['minor_question_2']) ? $submittedData['minor_question_2'] : ''.' '.isset($submittedData['minor_2_addtional']) ? $submittedData['minor_2_addtional'] : '';
+        $questionnaireValue['How will PRP serve to help this youth to age-appropriate development, more independent functioning and independent living skills?'] =(isset($submittedData['minor_question_2']) ? $submittedData['minor_question_2'] : '').' '.(isset($submittedData['minor_2_addtional']) ? $submittedData['minor_2_addtional'] : '');
     }
 
     if (isset($submittedData['minor_question_3']) || isset($submittedData['minor_3_addtional'])) {
-        $questionnaireValue['Has the youth made progress toward age appropriate development, more independent functioning and independent living skills?'] =isset($submittedData['minor_question_3']) ? $submittedData['minor_question_3'] : ''.' '.isset($submittedData['minor_3_addtional']) ? $submittedData['minor_3_addtional'] : '';
+        $questionnaireValue['Has the youth made progress toward age appropriate development, more independent functioning and independent living skills?'] =(isset($submittedData['minor_question_3']) ? $submittedData['minor_question_3'] : '').' '.(isset($submittedData['minor_3_addtional']) ? $submittedData['minor_3_addtional'] : '');
     }
 
     if (isset($submittedData['minor_question_4']) || isset($submittedData['minor_4_addtional'])) {
-        $questionnaireValue['Is a documented crisis response plan in progress or completed?'] =isset($submittedData['minor_question_4']) ? $submittedData['minor_question_4'] : ''.' '.isset($submittedData['minor_4_addtional']) ? $submittedData['minor_4_addtional'] : '';
+        $questionnaireValue['Is a documented crisis response plan in progress or completed?'] =(isset($submittedData['minor_question_4']) ? $submittedData['minor_question_4'] : '').' '.(isset($submittedData['minor_4_addtional']) ? $submittedData['minor_4_addtional'] : '');
     }
 
     if (isset($submittedData['minor_question_5']) || isset($submittedData['minor_5_addtional'])) {
-        $questionnaireValue['As an individual treatment plan/individual rehabilitation plan been completed?'] =isset($submittedData['minor_question_5']) ? $submittedData['minor_question_5'] : ''.' '.isset($submittedData['minor_5_addtional']) ? $submittedData['minor_5_addtional'] : '';
+        $questionnaireValue['As an individual treatment plan/individual rehabilitation plan been completed?'] =(isset($submittedData['minor_question_5']) ? $submittedData['minor_question_5'] : '').' '.(isset($submittedData['minor_5_addtional']) ? $submittedData['minor_5_addtional'] : '');
     }
     
     $medicationFormDataSheet = [];
