@@ -4,7 +4,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 require_once  'databseConnection/db_connection.php';
 require_once  'insertData.php';
-// require_once  'new.php';
+require_once  'new.php';
 require_once  'config.php';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   
