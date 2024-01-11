@@ -2311,6 +2311,7 @@ function showAlertParticipant()
         var allCheckbox = [];
         var diagnosisArray = []
         if (selectedType === 'yes') {
+            $('#minorQuestions').removeClass('hidden');
             diagnosisHeadingSpan.text('Minor');
             allCheckbox = minorCheckobox
             diagnosisArray = diagnosisMinorArray
@@ -2355,7 +2356,7 @@ function showAlertParticipant()
                 $('#checkboxContainer').append(createRow);
             });
         } else if (selectedType === 'no') {
-            $('#minorQuestions').empty();
+            $('#minorQuestions').addClass('hidden');
             diagnosisHeadingSpan.text('Adult');
             allCheckbox = adultCheckobox
             diagnosisArray = diagnosisAdultArray
