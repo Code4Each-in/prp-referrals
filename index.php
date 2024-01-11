@@ -1307,7 +1307,7 @@ function showAlertParticipant()
                                                 complete this form. <span class="text-danger">*</span></label>
                                             <div id="checkboxWarning"> </div>
                                             <div id="checkboxContainer"> </div>
-                                            <div id="minorQuestions">
+                                            <div id="minorQuestions" class="test hidden">
                                                 <div class="mb-3 row row-age">
                                                     <label class="form-label col-sm-8 col-form-label">1) What evidence
                                                         exists
@@ -1317,7 +1317,7 @@ function showAlertParticipant()
                                                         illness?</label>
                                                     <select class="form-select" aria-label="Default select example"
                                                         name="minor_question_1" id="minor_question_1" required>
-                                                        <option value=""></option>
+                                                        <option value="">--Select--</option>
                                                         <?php
                                         foreach ($minorQuestion_1 as $eachVal1) {
                                             echo '<option value="' . htmlspecialchars(trim($eachVal1['question'])) . '" >' .$eachVal1['question'] . '</option>';
@@ -1335,7 +1335,7 @@ function showAlertParticipant()
                                                         functioning and independent living skills?</label>
                                                     <select class="form-select" aria-label="Default select example"
                                                         name="minor_question_2" id="minor_question_2" required>
-                                                        <option value=""></option>
+                                                        <option value="">--Select--</option>
                                                         <?php
                                         foreach ($minorQuestion_2 as $eachVal2) {
                                             echo '<option value="' . htmlspecialchars(trim($eachVal2['question'])) . '" >' . $eachVal2['question'] . '</option>';
@@ -1378,7 +1378,7 @@ function showAlertParticipant()
                                                     <select class="form-select question_3_select hidden"
                                                         aria-label="Default select example" name="minor_question_3_yes"
                                                         id="minor_question_3_yes" required>
-                                                        <option value=""></option>
+                                                        <option value="">--Select--</option>
                                                         <?php
                                         foreach ($minorQuestion_2 as $eachVal2) {
                                             echo '<option value="' . htmlspecialchars(trim($eachVal2['question'])) . '" >' . $eachVal2['question'] . '</option>';
