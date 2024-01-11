@@ -422,38 +422,38 @@ function createPDF($filePath, $submit_form_data, $submitted_impairment_questionn
         
         if($minor_question_1 != ''){
             $pdf->SetFont('helvetica', '', 10);
-            $pdf->MultiCell(0, 20,'How will PRP serve to help this youth to age-appropriate development, more independent functioning and independent living skills?', 0, 'L');
+            $pdf->MultiCell(0, 5,'What evidence exists to show that the current intensity of outpatient treatment for this individual is insufficient to reduce the youth’s symptoms and functional behavioral impairments resulting from mental illness?', 0, 'L');
             $pdf->SetFont('helvetica', 'B', 10);
-            $pdf->MultiCell(0, 20,$minor_question_1, 0, 'L');
-            $pdf->MultiCell(0, 20,$minor_1_addtional, 0, 'L');
+            $pdf->MultiCell(0, 5,$minor_question_1, 0, 'L');
+            $pdf->MultiCell(0, 10,$minor_1_addtional, 0, 'L');
         }
         if($minor_question_2 != ''){
             $pdf->SetFont('helvetica', '', 10);
-            $pdf->MultiCell(0, 20,'How will PRP serve to help this youth to age-appropriate development, more independent functioning and independent living skills?', 0, 'L');
+            $pdf->MultiCell(0, 5,'How will PRP serve to help this youth to age-appropriate development, more independent functioning and independent living skills?', 0, 'L');
             $pdf->SetFont('helvetica', 'B', 10);
-            $pdf->MultiCell(0, 20,$minor_question_2, 0, 'L');
-            $pdf->MultiCell(0, 20,$minor_2_addtional, 0, 'L');
+            $pdf->MultiCell(0, 5,$minor_question_2, 0, 'L');
+            $pdf->MultiCell(0, 10,$minor_2_addtional, 0, 'L');
         }
         if($minor_question_3 != ''){
             $pdf->SetFont('helvetica', '', 10);
-            $pdf->MultiCell(0, 20,'How will PRP serve to help this youth to age-appropriate development, more independent functioning and independent living skills?', 0, 'L');
+            $pdf->MultiCell(0, 5,'Has the youth made progress toward age appropriate development, more independent functioning and independent living skills?', 0, 'L');
             $pdf->SetFont('helvetica', 'B', 10);
-            $pdf->MultiCell(0, 20,$minor_question_3, 0, 'L');
-            $pdf->MultiCell(0, 20,$minor_3_addtional, 0, 'L');
+            $pdf->MultiCell(0, 5,$minor_question_3, 0, 'L');
+            $pdf->MultiCell(0, 10,$minor_3_addtional, 0, 'L');
         }
         if($minor_question_4 != ''){
             $pdf->SetFont('helvetica', '', 10);
-            $pdf->MultiCell(0, 20,'How will PRP serve to help this youth to age-appropriate development, more independent functioning and independent living skills?', 0, 'L');
+            $pdf->MultiCell(0, 5,'Is a documented crisis response plan in progress or completed?', 0, 'L');
             $pdf->SetFont('helvetica', 'B', 10);
-            $pdf->MultiCell(0, 20,$minor_question_4, 0, 'L');
-            $pdf->MultiCell(0, 20,$minor_4_addtional, 0, 'L');
+            $pdf->MultiCell(0, 5,$minor_question_4, 0, 'L');
+            $pdf->MultiCell(0, 10,$minor_4_addtional, 0, 'L');
         }
         if($minor_question_5 != ''){
             $pdf->SetFont('helvetica', '', 10);
-            $pdf->MultiCell(0, 20,'How will PRP serve to help this youth to age-appropriate development, more independent functioning and independent living skills?', 0, 'L');
+            $pdf->MultiCell(0, 5,'As an individual treatment plan/individual rehabilitation plan been completed?', 0, 'L');
             $pdf->SetFont('helvetica', 'B', 10);
-            $pdf->MultiCell(0, 20,$minor_question_5, 0, 'L');
-            $pdf->MultiCell(0, 20,$minor_5_addtional, 0, 'L');
+            $pdf->MultiCell(0, 5,$minor_question_5, 0, 'L');
+            $pdf->MultiCell(0, 10,$minor_5_addtional, 0, 'L');
         }
     }
     // show service
