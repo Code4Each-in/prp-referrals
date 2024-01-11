@@ -233,10 +233,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
-    echo '<pre>';
-    print_r($_POST);
-    echo '</pre>';
-    die;
+    // echo '<pre>';
+    // print_r($_POST);
+    // echo '</pre>';
+    // die;
     // insert in sheet 
     $googleSheetsHandler = new GoogleSheetsHandler();
     $result = $googleSheetsHandler->insertData($newArray);
