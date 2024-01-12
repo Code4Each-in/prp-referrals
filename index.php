@@ -2383,7 +2383,7 @@ function showAlertParticipant()
             templateContainer.empty();
             $.each(minorCheckobox, function(index, item) {
                 var createRow = ` <div class="mb-3 row row-age">
-                                    <label class="col-sm-8 col-form-label">${item.name}</label>
+                                    <label class="col-sm-8 col-form-label"> ${index + 1}) ${item.name}</label>
                                     <div class="col-sm-4 form-check">
                                         <div class="row row-cols">
                                             <div class="col-sm-4 form-check mt-2">
@@ -2416,7 +2416,7 @@ function showAlertParticipant()
                     optionsHtml += '<option value="' + option + '">' + option + '</option>';
                 });
                 createRow += `<div class="mb-3 row hidden selectDivminor${item.id}">
-                <label for="minorFormAns-minor${item.id}" class="form-label">Possible Answers for above?</label>
+                <label for="minorFormAns-minor${item.id}" class="form-label"> Possible Answers for above?</label>
                 <div class="selectDiv">
                 <select class="form-select symptom" aria-label="Default select example" name="minorFormAns[${item.id}]" id="minorFormAns-minor${item.id}">
                 </select>
@@ -2432,7 +2432,7 @@ function showAlertParticipant()
 
             let minorHtml = `  <div id="minorQuestions">
                                                 <div class="mb-3 row row-age">
-                                                    <label class="form-label col-sm-8 col-form-label">1) What
+                                                    <label class="form-label col-sm-8 col-form-label">4) What
                                                         evidence
                                                         exists
                                                         to show that the current intensity of outpatient
@@ -2463,7 +2463,7 @@ function showAlertParticipant()
                                                 </div>
                                                 <div class="mb-3 row row-age">
                                                     <label for="credentials"
-                                                        class="form-label col-sm-8 col-form-label">2) How will
+                                                        class="form-label col-sm-8 col-form-label">5) How will
                                                         PRP serve
                                                         to
                                                         help this youth to age-appropriate development, more
@@ -2489,7 +2489,7 @@ function showAlertParticipant()
 
                                                 <div class="mb-3 row row-age">
                                                     <label for="credentials"
-                                                        class="form-label col-sm-8 col-form-label">3) How will
+                                                        class="form-label col-sm-8 col-form-label">6) How will
                                                         PRP serve
                                                         to
                                                         help this youth to age-appropriate development, more
@@ -2540,7 +2540,7 @@ function showAlertParticipant()
 
                                                 <div class="mb-3 row row-age">
                                                     <label for="credentials"
-                                                        class="form-label col-sm-8 col-form-label">4) How will
+                                                        class="form-label col-sm-8 col-form-label">7) How will
                                                         PRP serve
                                                         to
                                                         help this youth to age-appropriate development, more
@@ -2573,7 +2573,7 @@ function showAlertParticipant()
 
                                                 <div class="mb-3 row row-age">
                                                     <label for="credentials"
-                                                        class="form-label col-sm-8 col-form-label">5) How will
+                                                        class="form-label col-sm-8 col-form-label">8) How will
                                                         PRP serve
                                                         to
                                                         help this youth to age-appropriate development, more
