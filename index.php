@@ -101,6 +101,28 @@ function showAlertParticipant()
         float: right;
         top: 20px;
     }
+
+    .copyButton {
+        font-size: 24px;
+        /* Adjust the font size as needed */
+        color: #007bff;
+        margin-left: 6px;
+        /* Set the desired color */
+        /* Add more styles as needed */
+    }
+
+    .notification {
+        position: absolute;
+        background-color: #007bff;
+        color: #fff;
+        padding: 10px;
+        border-radius: 5px;
+        display: none;
+    }
+
+    .selectDiv {
+        display: flex;
+    }
     </style>
 </head>
 
@@ -1279,9 +1301,12 @@ function showAlertParticipant()
                                 <div class="card-body">
                                     <label for="diagnosis" class="form-label">What is the client's primary mental health
                                         diagnosis? <span class="text-danger">*</span></label>
+
                                     <select class="form-select emptySelect" aria-label="Default select example"
                                         name="diagnosis" id="diagnosis" required>
                                     </select>
+
+
                                     <div class="invalid-feedback">Please enter the lient's primary mental health
                                         diagnosis.
                                     </div>
@@ -1300,57 +1325,77 @@ function showAlertParticipant()
 
                                         <div class="mb-3 row row-radio">
                                             <label class="col-sm-12 col-form-label">To be considered evidence of
-                                                impaired role functioning at least three of the following must have been
-                                                present on a continuing or intermittent basis. If to your knowledge, the
-                                                individual demonstrates impaired role functioning in the specified areas
-                                                for at least two years, select the areas below. If not, stop, and do not
+                                                impaired role functioning at least three of the following must
+                                                have been
+                                                present on a continuing or intermittent basis. If to your
+                                                knowledge, the
+                                                individual demonstrates impaired role functioning in the
+                                                specified areas
+                                                for at least two years, select the areas below. If not, stop,
+                                                and do not
                                                 complete this form. <span class="text-danger">*</span></label>
                                             <div id="checkboxWarning"> </div>
                                             <div id="checkboxContainer"> </div>
-                                            <div id="minorQuestions" class="test hidden">
+                                            <!-- <div id="minorQuestions" class="test hidden">
                                                 <div class="mb-3 row row-age">
-                                                    <label class="form-label col-sm-8 col-form-label">1) What evidence
+                                                    <label class="form-label col-sm-8 col-form-label">1) What
+                                                        evidence
                                                         exists
-                                                        to show that the current intensity of outpatient treatment for
-                                                        this individual is insufficient to reduce the youth's symptoms
-                                                        and functional behavioral impairments resulting from mental
+                                                        to show that the current intensity of outpatient
+                                                        treatment for
+                                                        this individual is insufficient to reduce the youth's
+                                                        symptoms
+                                                        and functional behavioral impairments resulting from
+                                                        mental
                                                         illness?</label>
-                                                    <select class="form-select" aria-label="Default select example"
-                                                        name="minor_question_1" id="minor_question_1" required>
-                                                        <option value="">--Select--</option>
-                                                        <?php
+                                                    <div class="selectDiv">
+                                                        <select class="form-select" aria-label="Default select example"
+                                                            name="minor_question_1" id="minor_question_1">
+                                                            <option value="">--Select--</option>
+                                                            <?php
                                         foreach ($minorQuestion_1 as $eachVal1) {
                                             echo '<option value="' . htmlspecialchars(trim($eachVal1['question'])) . '" >' .$eachVal1['question'] . '</option>';
                                         }
                                         ?>
-                                                    </select>
+                                                        </select>
+                                                        <i class="fa fa-copy copyButton"
+                                                            onclick="callCoptyToClipBoard(this)"></i>
+                                                    </div>
                                                     <textarea class="form-control mt-3" rows="3"
                                                         name="minor_1_addtional"></textarea>
                                                 </div>
                                                 <div class="mb-3 row row-age">
                                                     <label for="credentials"
-                                                        class="form-label col-sm-8 col-form-label">2) How will PRP serve
+                                                        class="form-label col-sm-8 col-form-label">2) How will
+                                                        PRP serve
                                                         to
-                                                        help this youth to age-appropriate development, more independent
+                                                        help this youth to age-appropriate development, more
+                                                        independent
                                                         functioning and independent living skills?</label>
-                                                    <select class="form-select" aria-label="Default select example"
-                                                        name="minor_question_2" id="minor_question_2" required>
-                                                        <option value="">--Select--</option>
-                                                        <?php
+                                                    <div class="selectDiv">
+                                                        <select class="form-select" aria-label="Default select example"
+                                                            name="minor_question_2" id="minor_question_2">
+                                                            <option value="">--Select--</option>
+                                                            <?php
                                         foreach ($minorQuestion_2 as $eachVal2) {
                                             echo '<option value="' . htmlspecialchars(trim($eachVal2['question'])) . '" >' . $eachVal2['question'] . '</option>';
                                         }
                                         ?>
-                                                    </select>
+                                                        </select>
+                                                        <i class="fa fa-copy copyButton"
+                                                            onclick="callCoptyToClipBoard(this)"></i>
+                                                    </div>
                                                     <textarea class="form-control mt-3" rows="3"
                                                         name="minor_2_addtional"></textarea>
                                                 </div>
 
                                                 <div class="mb-3 row row-age">
                                                     <label for="credentials"
-                                                        class="form-label col-sm-8 col-form-label">3) How will PRP serve
+                                                        class="form-label col-sm-8 col-form-label">3) How will
+                                                        PRP serve
                                                         to
-                                                        help this youth to age-appropriate development, more independent
+                                                        help this youth to age-appropriate development, more
+                                                        independent
                                                         functioning and independent living skills?</label>
                                                     <div class="col-sm-4 form-check">
                                                         <div class="row row-cols">
@@ -1375,16 +1420,20 @@ function showAlertParticipant()
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <select class="form-select question_3_select hidden"
-                                                        aria-label="Default select example" name="minor_question_3_yes"
-                                                        id="minor_question_3_yes" required>
-                                                        <option value="">--Select--</option>
-                                                        <?php
+                                                    <div class="selectDiv">
+                                                        <select class="form-select question_3_select hidden"
+                                                            aria-label="Default select example"
+                                                            name="minor_question_3_yes" id="minor_question_3_yes">
+                                                            <option value="">--Select--</option>
+                                                            <?php
                                         foreach ($minorQuestion_2 as $eachVal2) {
                                             echo '<option value="' . htmlspecialchars(trim($eachVal2['question'])) . '" >' . $eachVal2['question'] . '</option>';
                                         }
                                         ?>
-                                                    </select>
+                                                        </select>
+                                                        <i class="fa fa-copy copyButton question_3_select hidden"
+                                                            onclick="callCoptyToClipBoard(this)"></i>
+                                                    </div>
                                                     <textarea class="form-control mt-3" rows="3"
                                                         name="minor_3_addtional"></textarea>
                                                 </div>
@@ -1392,9 +1441,11 @@ function showAlertParticipant()
 
                                                 <div class="mb-3 row row-age">
                                                     <label for="credentials"
-                                                        class="form-label col-sm-8 col-form-label">4) How will PRP serve
+                                                        class="form-label col-sm-8 col-form-label">4) How will
+                                                        PRP serve
                                                         to
-                                                        help this youth to age-appropriate development, more independent
+                                                        help this youth to age-appropriate development, more
+                                                        independent
                                                         functioning and independent living skills?</label>
                                                     <div class="col-sm-4 form-check">
                                                         <div class="row row-cols">
@@ -1423,9 +1474,11 @@ function showAlertParticipant()
 
                                                 <div class="mb-3 row row-age">
                                                     <label for="credentials"
-                                                        class="form-label col-sm-8 col-form-label">5) How will PRP serve
+                                                        class="form-label col-sm-8 col-form-label">5) How will
+                                                        PRP serve
                                                         to
-                                                        help this youth to age-appropriate development, more independent
+                                                        help this youth to age-appropriate development, more
+                                                        independent
                                                         functioning and independent living skills?</label>
                                                     <div class="col-sm-4 form-check">
                                                         <div class="row row-cols">
@@ -1452,7 +1505,7 @@ function showAlertParticipant()
                                                         name="minor_5_addtional"></textarea>
 
                                                 </div>
-                                            </div>
+                                            </div>-->
 
                                         </div>
                                         <div id="templateContainer"> </div>
@@ -1491,6 +1544,9 @@ function showAlertParticipant()
     var clientIssue = <?php echo json_encode($clientIssue); ?>;
     var consumerInformation = <?php echo json_encode($consumerInformation); ?>;
     var minorCheckobox = <?php echo json_encode($minorCheckBox); ?>;
+    var minorQuestion_1 = <?php echo json_encode($minorQuestion_1); ?>;
+    var minorQuestion_2 = <?php echo json_encode($minorQuestion_2); ?>;
+    var minorQuestion_3 = <?php echo json_encode($minorQuestion_3); ?>;
 
     var submitButton = $('#submitButton');
     var diagnosisHeadingSpan = $('.diagnosisHeadingSpan');
@@ -2066,9 +2122,14 @@ function showAlertParticipant()
 
                         <div class="mb-3 row">
                             <label for="clientAdditionalInformation-${templateId}" class="form-label">10. Additional information on the client's need in this area:<span class="text-danger"> *</span</label>
+                            <div class="selectDiv">
                             <select class="form-select" aria-label="Default select example"  name="questionnaire[${templateId}][clientAdditionalInformation]" id="clientAdditionalInformation-${templateId}">
+                            
                                 <option value="">--Select--</option>
                             </select>
+                            <i class="fa fa-copy copyButton"
+                                                            onclick="callCoptyToClipBoard(this)"></i>
+                                                    </div>
                             <div class="invalid-feedback">Please Select Value.</div>
 
                         </div>
@@ -2097,9 +2158,13 @@ function showAlertParticipant()
 
                         <div class="mb-3 row">
                             <label for="serviceAdditionalInformation-${templateId}" class="form-label">13. Additional information on services to address this specific need area:<span class="text-danger"> *</span</label>
+                            <div class="selectDiv">
                             <select class="form-select" aria-label="Default select example"  name="questionnaire[${templateId}][serviceAdditionalInformation]" id="serviceAdditionalInformation-${templateId}">
                                 <option value="">--Select--</option>
                             </select>
+                            <i class="fa fa-copy copyButton"
+                                                            onclick="callCoptyToClipBoard(this)"></i>
+                                                    </div>
                             <div class="invalid-feedback">Please Select Value.</div>
 
                         </div>
@@ -2311,7 +2376,7 @@ function showAlertParticipant()
         var allCheckbox = [];
         var diagnosisArray = []
         if (selectedType === 'yes') {
-            $('#minorQuestions').removeClass('hidden');
+            // $('#minorQuestions').removeClass('hidden');
             diagnosisHeadingSpan.text('Minor');
             allCheckbox = minorCheckobox
             diagnosisArray = diagnosisMinorArray
@@ -2329,8 +2394,11 @@ function showAlertParticipant()
                                                 <label for="minorNo-${item.id}" class="col-form-label">No</label>
                                                 <input class="form-check-input mt-2 functionalImpairment" type="radio" id="minorNo-${item.id}" name="minorForm[${item.id}]"  value="no" onchange="handleMinorRadioYes(this, '${item.id}')">
 
-                                            </div></div>
-                                </div>`;
+                                            </div>
+                                           </div>  
+                                </div>
+                                `;
+
                 // if (index != 'minor1') {
                 var optionsHtml = firstOption;
                 if (index == 'minor2') {
@@ -2349,14 +2417,199 @@ function showAlertParticipant()
                 });
                 createRow += `<div class="mb-3 row hidden selectDivminor${item.id}">
                 <label for="minorFormAns-minor${item.id}" class="form-label">Possible Answers for above?</label>
+                <div class="selectDiv">
                 <select class="form-select symptom" aria-label="Default select example" name="minorFormAns[${item.id}]" id="minorFormAns-minor${item.id}">
                 </select>
+                <i class="fa fa-copy copyButton"
+                                                            onclick="callCoptyToClipBoard(this)"></i>
+                                                    </div>
+                <textarea class="form-control mt-3" rows="3"
+                name="minorFormAnsAddtional[${item.id}]"></textarea>
             </div>`;
                 // }
                 $('#checkboxContainer').append(createRow);
             });
+
+            let minorHtml = `  <div id="minorQuestions">
+                                                <div class="mb-3 row row-age">
+                                                    <label class="form-label col-sm-8 col-form-label">1) What
+                                                        evidence
+                                                        exists
+                                                        to show that the current intensity of outpatient
+                                                        treatment for
+                                                        this individual is insufficient to reduce the youth's
+                                                        symptoms
+                                                        and functional behavioral impairments resulting from
+                                                        mental
+                                                        illness?</label>
+                                                    <div class="selectDiv">
+                                                        <select class="form-select" aria-label="Default select example"
+                                                            name="minor_question_1" id="minor_question_1">
+                                                            <option value="">--Select--</option>`;
+
+            $.each(minorQuestion_1, function(index, option1) {
+                minorHtml += '<option value="' + option1.question + '">' + option1.question +
+                    '</option> ';
+
+            });
+
+
+            minorHtml += `</select>
+                                                        <i class="fa fa-copy copyButton"
+                                                            onclick="callCoptyToClipBoard(this)"></i>
+                                                    </div>
+                                                    <textarea class="form-control mt-3" rows="3"
+                                                        name="minor_1_addtional"></textarea>
+                                                </div>
+                                                <div class="mb-3 row row-age">
+                                                    <label for="credentials"
+                                                        class="form-label col-sm-8 col-form-label">2) How will
+                                                        PRP serve
+                                                        to
+                                                        help this youth to age-appropriate development, more
+                                                        independent
+                                                        functioning and independent living skills?</label>
+                                                    <div class="selectDiv">
+                                                        <select class="form-select" aria-label="Default select example"
+                                                            name="minor_question_2" id="minor_question_2">
+                                                            <option value="">--Select--</option>`;
+
+            $.each(minorQuestion_1, function(index, option1) {
+                minorHtml += '<option value="' + option1.question + '">' + option1.question +
+                    '</option> ';
+
+            });
+            minorHtml += `</select>
+                                                        <i class="fa fa-copy copyButton"
+                                                            onclick="callCoptyToClipBoard(this)"></i>
+                                                    </div>
+                                                    <textarea class="form-control mt-3" rows="3"
+                                                        name="minor_2_addtional"></textarea>
+                                                </div>
+
+                                                <div class="mb-3 row row-age">
+                                                    <label for="credentials"
+                                                        class="form-label col-sm-8 col-form-label">3) How will
+                                                        PRP serve
+                                                        to
+                                                        help this youth to age-appropriate development, more
+                                                        independent
+                                                        functioning and independent living skills?</label>
+                                                    <div class="col-sm-4 form-check">
+                                                        <div class="row row-cols">
+                                                            <div class="col-sm-4 form-check mt-2">
+                                                                <label for="minor_question_3_1"
+                                                                    class="col-form-label">Yes</label>
+                                                                <input
+                                                                    class="form-check-input mt-2 functionalImpairment"
+                                                                    type="radio" id="minor_question_3_1"
+                                                                    name="minor_question_3" value="yes"
+                                                                    onchange="handleMinorRadioQuestion(this)">
+                                                            </div>
+                                                            <div class="col-sm-8 form-check mt-2">
+                                                                <label for="minor_question_3_2"
+                                                                    class="col-form-label">No</label>
+                                                                <input
+                                                                    class="form-check-input mt-2 functionalImpairment"
+                                                                    type="radio" id="minor_question_3_2"
+                                                                    name="minor_question_3" value="no"
+                                                                    onchange="handleMinorRadioQuestion(this)">
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="selectDiv">
+                                                        <select class="form-select question_3_select hidden"
+                                                            aria-label="Default select example"
+                                                            name="minor_question_3_yes" id="minor_question_3_yes">
+                                                            <option value="">--Select--</option>`;
+
+            $.each(minorQuestion_3, function(index, option3) {
+                minorHtml += '<option value="' + option3.question + '">' + option3.question +
+                    '</option> ';
+
+            });
+            minorHtml += `</select>
+                                                        <i class="fa fa-copy copyButton question_3_select hidden"
+                                                            onclick="callCoptyToClipBoard(this)"></i>
+                                                    </div>
+                                                    <textarea class="form-control mt-3" rows="3"
+                                                        name="minor_3_addtional"></textarea>
+                                                </div>
+
+
+                                                <div class="mb-3 row row-age">
+                                                    <label for="credentials"
+                                                        class="form-label col-sm-8 col-form-label">4) How will
+                                                        PRP serve
+                                                        to
+                                                        help this youth to age-appropriate development, more
+                                                        independent
+                                                        functioning and independent living skills?</label>
+                                                    <div class="col-sm-4 form-check">
+                                                        <div class="row row-cols">
+                                                            <div class="col-sm-4 form-check mt-2">
+                                                                <label for="minor_question_4_1"
+                                                                    class="col-form-label">Yes</label>
+                                                                <input
+                                                                    class="form-check-input mt-2 functionalImpairment"
+                                                                    type="radio" id="minor_question_4_1"
+                                                                    name="minor_question_4" value="yes">
+                                                            </div>
+                                                            <div class="col-sm-8 form-check mt-2">
+                                                                <label for="minor_question_4_2"
+                                                                    class="col-form-label">No</label>
+                                                                <input
+                                                                    class="form-check-input mt-2 functionalImpairment"
+                                                                    type="radio" id="minor_question_4_2"
+                                                                    name="minor_question_4" value="no">
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <textarea class="form-control" rows="3"
+                                                        name="minor_4_addtional"></textarea>
+                                                </div>
+
+                                                <div class="mb-3 row row-age">
+                                                    <label for="credentials"
+                                                        class="form-label col-sm-8 col-form-label">5) How will
+                                                        PRP serve
+                                                        to
+                                                        help this youth to age-appropriate development, more
+                                                        independent
+                                                        functioning and independent living skills?</label>
+                                                    <div class="col-sm-4 form-check">
+                                                        <div class="row row-cols">
+                                                            <div class="col-sm-4 form-check mt-2">
+                                                                <label for="minor_question_5_1"
+                                                                    class="col-form-label">Yes</label>
+                                                                <input
+                                                                    class="form-check-input mt-2 functionalImpairment"
+                                                                    type="radio" id="minor_question_5_1"
+                                                                    name="minor_question_5" value="yes">
+                                                            </div>
+                                                            <div class="col-sm-8 form-check mt-2">
+                                                                <label for="minor_question_5_2"
+                                                                    class="col-form-label">No</label>
+                                                                <input
+                                                                    class="form-check-input mt-2 functionalImpairment"
+                                                                    type="radio" id="minor_question_5_2"
+                                                                    name="minor_question_5" value="no">
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <textarea class="form-control" rows="3"
+                                                        name="minor_5_addtional"></textarea>
+
+                                                </div>
+                                            </div>`;
+
+            $('#checkboxContainer').append(minorHtml);
+
         } else if (selectedType === 'no') {
-            $('#minorQuestions').addClass('hidden');
+            // $('#minorQuestions').addClass('hidden');
             diagnosisHeadingSpan.text('Adult');
             allCheckbox = adultCheckobox
             diagnosisArray = diagnosisAdultArray
@@ -2509,23 +2762,40 @@ function showAlertParticipant()
         });
     }
 
-    function copyToClipboard(text) {
-        // Create a temporary textarea element
-        const textarea = document.createElement('textarea');
-        // Set the text content to the specified text
-        textarea.value = text;
-        // Set the position to be off-screen
-        textarea.style.position = 'fixed';
-        textarea.style.left = '-9999px';
-        textarea.style.top = '-9999px';
-        // Append the textarea to the document
-        document.body.appendChild(textarea);
-        // Select the text within the textarea
-        textarea.select();
-        // Copy the selected text to the clipboard
+    function callCoptyToClipBoard(clickedElement) {
+        var nearestSelectValue = $(clickedElement).siblings('select').val();
+        copyToClipboard(nearestSelectValue);
+        showNotification(clickedElement, "Copied!", 3000);
+    };
+
+    // Function to copy a value to the clipboard
+    function copyToClipboard(value) {
+        var tempInput = $('<input>');
+        $('body').append(tempInput);
+        tempInput.val(value);
+        tempInput.select();
         document.execCommand('copy');
-        // Remove the temporary textarea
-        document.body.removeChild(textarea);
+        tempInput.remove();
+    }
+
+    function showNotification(triggerElement, message, duration) {
+        var iconPosition = $(triggerElement).offset();
+        var notification = $('<div>', {
+            class: 'notification',
+            text: message
+        });
+        notification.css({
+            top: iconPosition.top - notification.outerHeight(),
+            left: iconPosition.left + 30
+        });
+        $('body').append(notification);
+        notification.fadeIn(200, function() {
+            setTimeout(function() {
+                notification.fadeOut(200, function() {
+                    notification.remove();
+                });
+            }, duration);
+        });
     }
     </script>
 </body>

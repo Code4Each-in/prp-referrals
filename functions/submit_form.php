@@ -7,7 +7,10 @@ require_once  'insertData.php';
 require_once  'new.php';
 require_once  'config.php';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  
+//       echo '<pre>';
+//     print_r($_POST);
+//     echo '</pre>';
+// die;
     $submittedData = [];
     $questionnaireData = [];
     $medicationFormData = [];
@@ -32,7 +35,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $submittedData['minor_question_3_yes'] = null;
     $minorForm = [];
     $minorFormAns = [];
-
+    $minorFormAnsAddtional = [];
+    
     foreach ($_POST as $key => $value) {
         if ($value == '') {
             $value = null;
@@ -43,6 +47,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $minorForm[] = $value;
         } elseif ($key === 'minorFormAns') {
             $minorFormAns[] = $value;
+        }elseif ($key === 'minorFormAnsAddtional') {
+            $minorFormAnsAddtional[] = $value;
         } elseif (is_array($value)) {
             if (isset($submittedData['medications']) && $submittedData['medications'] === 'yes' && $key === 'medication') {
 
@@ -178,9 +184,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 foreach ($minorFormAns as $key3 => $value3) {
                     $minorValue =  $value3[$key2];
                 }
+                $minorAddtionalValue = null;
+                foreach ($minorFormAnsAddtional as $key3 => $value3) {
+                    if(isset($value3[$key2])){
+                        $minorAddtionalValue =  $value3[$key2];
+                    }
+                }
             }
-            $questionnaireValue[$minor] = $minorValue;
-            $db->query('UPDATE submit_form_data SET minor' . $key2 . ' =? WHERE id = ?', $minorValue, $submit_fromId);
+            $db->query('UPDATE submit_form_data SET minor' . $key2 . ' =? , minor_addtional' . $key2 . '=?  WHERE id = ?', $minorValue, $minorAddtionalValue, $submit_fromId);
+            $questionnaireValue[$minor] = $minorValue.isset($minorAddtionalValue) ? $minorAddtionalValue : '';
         }
     }
 

@@ -367,6 +367,9 @@ function createPDF($filePath, $submit_form_data, $submitted_impairment_questionn
             $pdf->MultiCell(0, 20, $clientFirstName . "'s short term goal to address this impairment is  " . $short_term_goal . ".", 0, 'L');
         }
     } else {
+        $minor_addtional1 = isset($submit_form_data['minor_addtional1']) ? $submit_form_data['minor_addtional1'] : '';
+        $minor_addtional2 = isset($submit_form_data['minor_addtional2']) ? $submit_form_data['minor_addtional2'] : '';
+        $minor_addtional3 = isset($submit_form_data['minor_addtional3']) ? $submit_form_data['minor_addtional3'] : '';
         $pdf->SetFont('helvetica', 'B', 13);
         $pdf->Cell(0, 10, 'Minor', 0, 1);
         $pdf->SetFont('helvetica', '', 10);
@@ -376,6 +379,9 @@ function createPDF($filePath, $submit_form_data, $submitted_impairment_questionn
                 $pdf->SetFont('helvetica', 'B', 10);
                 if ($submit_form_data['minor1'] != 'no') {
                     $pdf->MultiCell(0, 5, 'Yes', 0, 'L');
+                    if($minor_addtional1 != ''){
+                        $pdf->MultiCell(0, 5, $minor_addtional1, 0, 'L');
+                    }
                 }
                 $pdf->MultiCell(0, 10, $submit_form_data['minor1'], 0, 'L');
                 $pdf->SetFont('helvetica', '', 10);
@@ -388,6 +394,9 @@ function createPDF($filePath, $submit_form_data, $submitted_impairment_questionn
                 $pdf->SetFont('helvetica', 'B', 10);
                 if ($submit_form_data['minor2'] != 'no') {
                     $pdf->MultiCell(0, 5, 'Yes', 0, 'L');
+                    if($minor_addtional2 != ''){
+                        $pdf->MultiCell(0, 5, $minor_addtional2, 0, 'L');
+                    }
                 }
                 $pdf->MultiCell(0, 20, $submit_form_data['minor2'], 0, 'L');
 
@@ -402,6 +411,9 @@ function createPDF($filePath, $submit_form_data, $submitted_impairment_questionn
                 $pdf->SetFont('helvetica', 'B', 10);
                 if ($submit_form_data['minor3'] != 'no') {
                     $pdf->MultiCell(0, 5, 'Yes', 0, 'L');
+                    if($minor_addtional3 != ''){
+                        $pdf->MultiCell(0, 5, $minor_addtional3, 0, 'L');
+                    }
                 }
                 $pdf->MultiCell(0, 20, $submit_form_data['minor3'], 0, 'L');
 
