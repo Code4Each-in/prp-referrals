@@ -379,11 +379,11 @@ function createPDF($filePath, $submit_form_data, $submitted_impairment_questionn
                 $pdf->SetFont('helvetica', 'B', 10);
                 if ($submit_form_data['minor1'] != 'no') {
                     $pdf->MultiCell(0, 5, 'Yes', 0, 'L');
-                    if($minor_addtional1 != ''){
-                        $pdf->MultiCell(0, 5, $minor_addtional1, 0, 'L');
-                    }
                 }
                 $pdf->MultiCell(0, 10, $submit_form_data['minor1'], 0, 'L');
+                if($minor_addtional1 != ''){
+                    $pdf->MultiCell(0, 5, $minor_addtional1, 0, 'L');
+                }
                 $pdf->SetFont('helvetica', '', 10);
             }
         }
@@ -394,12 +394,11 @@ function createPDF($filePath, $submit_form_data, $submitted_impairment_questionn
                 $pdf->SetFont('helvetica', 'B', 10);
                 if ($submit_form_data['minor2'] != 'no') {
                     $pdf->MultiCell(0, 5, 'Yes', 0, 'L');
-                    if($minor_addtional2 != ''){
-                        $pdf->MultiCell(0, 5, $minor_addtional2, 0, 'L');
-                    }
                 }
                 $pdf->MultiCell(0, 20, $submit_form_data['minor2'], 0, 'L');
-
+                if($minor_addtional2 != ''){
+                    $pdf->MultiCell(0, 5, $minor_addtional2, 0, 'L');
+                }
                 $pdf->SetFont('helvetica', '', 10);
 
                 $pdf->Ln(1);
@@ -411,11 +410,11 @@ function createPDF($filePath, $submit_form_data, $submitted_impairment_questionn
                 $pdf->SetFont('helvetica', 'B', 10);
                 if ($submit_form_data['minor3'] != 'no') {
                     $pdf->MultiCell(0, 5, 'Yes', 0, 'L');
-                    if($minor_addtional3 != ''){
-                        $pdf->MultiCell(0, 5, $minor_addtional3, 0, 'L');
-                    }
                 }
                 $pdf->MultiCell(0, 20, $submit_form_data['minor3'], 0, 'L');
+                if($minor_addtional3 != ''){
+                    $pdf->MultiCell(0, 5, $minor_addtional3, 0, 'L');
+                }
 
                 $pdf->SetFont('helvetica', '', 10);
             }
