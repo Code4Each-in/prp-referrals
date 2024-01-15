@@ -251,10 +251,12 @@ function createPDF($filePath, $submit_form_data, $submitted_impairment_questionn
 
     if (count($getMedications) > 0) {
         foreach ($getMedications as $key => $eachMedication) {
+            if($eachMedication['name'] != '' || $eachMedication['name'] != null){
             $pdf->MultiCell(0, 5, 'Medications-' . ($key + 1) . ': ', 0, 'L');
             $pdf->SetFont('helvetica', 'B', 10);
             $pdf->MultiCell(0, 10, $eachMedication['name'] . ', ' . $eachMedication['dosage'] . ', ' . $eachMedication['frequency'], 0, 'L');
             $pdf->SetFont('helvetica', '', 10);
+            }
         }
     }
     $pdf->Cell(0, 5, "5. Has the client within the past year been discharged from an inpatient psychiatric facility or hospital? ", 0, 1);
@@ -372,10 +374,12 @@ function createPDF($filePath, $submit_form_data, $submitted_impairment_questionn
         $minor_addtional3 = isset($submit_form_data['minor_addtional3']) ? $submit_form_data['minor_addtional3'] : '';
         $pdf->SetFont('helvetica', 'B', 13);
         $pdf->Cell(0, 10, 'Minor', 0, 1);
+        $pdf->MultiCell(0, 10, 'Functional Criteria', 0, 'L');
+        $pdf->MultiCell(0, 5, 'Please select all that apply', 0, 'L');
         $pdf->SetFont('helvetica', '', 10);
         if (isset($submit_form_data['minor1'])) {
             if (isset($checkboxMinor['minor1'])) {
-                $pdf->MultiCell(0, 5, $checkboxMinor['minor3'], 0, 'L');
+                $pdf->MultiCell(0, 5, $checkboxMinor['minor1'], 0, 'L');
                 $pdf->SetFont('helvetica', 'B', 10);
                 if ($submit_form_data['minor1'] != 'no') {
                     $pdf->MultiCell(0, 5, 'Yes', 0, 'L');
@@ -474,7 +478,35 @@ function createPDF($filePath, $submit_form_data, $submitted_impairment_questionn
             $pdf->MultiCell(0, 10,$minor_5_addtional, 0, 'L');
         }
     }
-    
+
+      // diagnosis
+      $pdf->Ln(3);
+      $pdf->MultiCell(0, 5, 'Name of Referrer and Credentials:'. $ref_first_name . " " . $ref_last_name.', '.$credentials.', '. $refDate, 0, 'L');
+      $pdf->MultiCell(0, 5, "Name of Referrer's Agency: Changing Lives at Home Inc", 0, 'L');
+      
+     // diagnosis
+     $pdf->Ln(3);
+     $pdf->SetFont('helvetica', 'B', 10);
+     $pdf->MultiCell(0, 5, 'DIAGNOSES: The following Diagnoses are based on currently available information and may
+     change as additional information becomes available.', 0, 'L');
+     $pdf->SetFont('helvetica', '', 10);
+     $pdf->MultiCell(0, 10, $diagnosis, 0, 'L');
+
+     // medications
+     if (count($getMedications) > 0) {
+        $pdf->Ln(3);
+        $pdf->SetFont('helvetica', 'B', 10);
+        $pdf->MultiCell(0, 5, 'DIAGNOSES: The following Diagnoses are based on currently available information and may
+        change as additional information becomes available.', 0, 'L');
+        $pdf->SetFont('helvetica', '', 10);
+        foreach ($getMedications as $key => $eachMedication) {
+            if($eachMedication['name'] != '' || $eachMedication['name'] != null){
+            $pdf->MultiCell(0, 5, '#' . ($key + 1) . ') '.$eachMedication['name'] . ', ' . $eachMedication['dosage'] . ', ' . $eachMedication['frequency'].'', 0, 'L');
+        }
+
+        }
+    }
+     
     // show service
     $pdf->Ln(3);
     $pdf->SetFont('helvetica', 'B', 10);
