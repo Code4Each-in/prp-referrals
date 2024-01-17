@@ -2489,12 +2489,7 @@ function showAlertParticipant()
 
                                                 <div class="mb-3 row row-age">
                                                     <label for="credentials"
-                                                        class="form-label col-sm-8 col-form-label">6) How will
-                                                        PRP serve
-                                                        to
-                                                        help this youth to age-appropriate development, more
-                                                        independent
-                                                        functioning and independent living skills?</label>
+                                                        class="form-label col-sm-8 col-form-label">6) Has the youth made progress toward age appropriate development, more independent functioning and independent living skills?</label>
                                                     <div class="col-sm-4 form-check">
                                                         <div class="row row-cols">
                                                             <div class="col-sm-4 form-check mt-2">
@@ -2540,12 +2535,7 @@ function showAlertParticipant()
 
                                                 <div class="mb-3 row row-age">
                                                     <label for="credentials"
-                                                        class="form-label col-sm-8 col-form-label">7) How will
-                                                        PRP serve
-                                                        to
-                                                        help this youth to age-appropriate development, more
-                                                        independent
-                                                        functioning and independent living skills?</label>
+                                                        class="form-label col-sm-8 col-form-label">7) Is a documented crisis response plan in progress or completed?</label>
                                                     <div class="col-sm-4 form-check">
                                                         <div class="row row-cols">
                                                             <div class="col-sm-4 form-check mt-2">
@@ -2573,12 +2563,7 @@ function showAlertParticipant()
 
                                                 <div class="mb-3 row row-age">
                                                     <label for="credentials"
-                                                        class="form-label col-sm-8 col-form-label">8) How will
-                                                        PRP serve
-                                                        to
-                                                        help this youth to age-appropriate development, more
-                                                        independent
-                                                        functioning and independent living skills?</label>
+                                                        class="form-label col-sm-8 col-form-label">8) As an individual treatment plan/individual rehabilitation plan been completed?</label>
                                                     <div class="col-sm-4 form-check">
                                                         <div class="row row-cols">
                                                             <div class="col-sm-4 form-check mt-2">
