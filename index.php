@@ -346,8 +346,8 @@ function showAlertParticipant()
                                         name="clientFirstName">
                                     <datalist id="clientName">
                                         <?php
-                                        foreach ($getClientSheetData as $val) {
-                                            echo '<option value="' . htmlspecialchars(trim($val['firstName']) . ' ' . trim($val['lastName'])) . '" />';
+                                        foreach ($consumerInformation as $val) {
+                                            echo '<option value="' . htmlspecialchars(trim($val['client_first_name']) . ' ' . trim($val['client_last_name'])) . '" />';
                                         }
                                         ?>
                                     </datalist>
