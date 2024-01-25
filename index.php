@@ -2474,7 +2474,7 @@ function showAlertParticipant()
                                                             name="minor_question_2" id="minor_question_2">
                                                             <option value="">--Select--</option>`;
 
-            $.each(minorQuestion_1, function(index, option1) {
+            $.each(minorQuestion_2, function(index, option1) {
                 minorHtml += '<option value="' + option1.question + '">' + option1.question +
                     '</option> ';
 
